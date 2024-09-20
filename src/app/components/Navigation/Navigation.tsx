@@ -9,7 +9,7 @@ export default function Navigation() {
   const pathname = usePathname()
 
   return (
-    <div className={styles.Container}>
+    <div className={`${styles.Container} navigation-container`}>
       {NAV_ITEMS.map(({ Icon, text, path }) => (
         <Link key={text} href={path} className={styles.ButtonWrapper}>
           <Icon color={pathname === path ? 'white' : 'black'} />
