@@ -61,7 +61,8 @@ const processSubtitle = (text: string, isSmall: boolean): React.ReactNode[] => {
   }
 }
 
-type DynamicCardProps = CardType & RecipeVariants<typeof styles.cardRecipe>
+export type DynamicCardProps = CardType &
+  RecipeVariants<typeof styles.cardRecipe>
 
 export default function Card({
   size,
