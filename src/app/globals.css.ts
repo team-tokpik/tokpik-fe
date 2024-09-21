@@ -1,22 +1,5 @@
 import { createGlobalTheme, globalStyle } from '@vanilla-extract/css'
-globalStyle('*', {
-  textDecoration: 'none',
-  boxSizing: 'border-box',
-})
-
-globalStyle('body', {
-  padding: '0 24px',
-  margin: '0',
-})
-
-globalStyle('.navigation-container', {
-  margin: '0 -24px',
-})
-
-globalStyle('h1, h2, h3, h4, h5, h6, p', {
-  margin: '0',
-  padding: '0',
-})
+import { style } from '@vanilla-extract/css'
 
 export const vars = createGlobalTheme(':root', {
   color: {
@@ -44,4 +27,36 @@ export const vars = createGlobalTheme(':root', {
     pimento: '#42a121',
     pimentoFont: '#0F3A00',
   },
+})
+globalStyle('*', {
+  textDecoration: 'none',
+  boxSizing: 'border-box',
+})
+globalStyle('html', {
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  overflow: 'hidden',
+  backgroundColor: vars.color.gray1,
+})
+
+globalStyle('body', {
+  width: '100%',
+  maxWidth: '467px',
+  height: '100%',
+  padding: '0 24px',
+  margin: '0',
+  position: 'relative',
+  backgroundColor: 'white',
+})
+
+globalStyle('.navigation-container', {
+  margin: '0 -24px',
+})
+
+globalStyle('h1, h2, h3, h4, h5, h6, p', {
+  margin: '0',
+  padding: '0',
 })

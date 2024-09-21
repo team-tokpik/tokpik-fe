@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css'
 export const Container = style({
   position: 'absolute',
   top: 'calc(100% - 60px)',
-  width: '100vw',
+  width: '100%',
   display: 'flex',
   justifyContent: 'space-around',
   alignItems: 'center',
