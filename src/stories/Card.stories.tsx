@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Card, { DynamicCardProps } from '../app/components/Card/Card'
+import Card, { DynamicCardProps } from '../components/Card/Card'
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -40,20 +40,12 @@ export const AllCardTypes: Story = {
         'ice-breaker',
         'self-development',
       ].map((type) => (
-        <>
-          <Card
-            key={type}
-            size="small"
-            type={type as DynamicCardProps['type']}
-            title={`${type} 카드`}
-          />
-          <Card
-            key={type}
-            size="large"
-            type={type as DynamicCardProps['type']}
-            title={`${type} 카드`}
-          />
-        </>
+        <Card
+          key={type}
+          size="small"
+          type={type as DynamicCardProps['type']}
+          title={`${type} 카드`}
+        />
       ))}
     </div>
   ),

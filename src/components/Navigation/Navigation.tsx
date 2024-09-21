@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import * as styles from './Navigation.css'
 import { usePathname } from 'next/navigation'
-import { NAV_ITEMS } from '@/constants/navigation'
+import { NAV_ITEMS } from '../../constants/navigation'
 
 export default function Navigation() {
   const pathname = usePathname()
