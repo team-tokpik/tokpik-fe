@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Card, { DynamicCardProps } from '../components/Card/Card'
+import Card, { DynamicCardProps } from '@/components/Card/Card'
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',

@@ -1,4 +1,4 @@
-import { vars } from '@/globals.css'
+import { vars } from '@/app/globals.css'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 
