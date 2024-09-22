@@ -15,7 +15,7 @@ export default function GenderBirth() {
   const router = useRouter()
 
   const handleNext = () => {
-    router.push('/survey/place')
+    router.push('/survey/location')
   }
 
   useEffect(() => {
