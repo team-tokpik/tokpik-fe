@@ -34,7 +34,6 @@ export const HeaderText2 = style({
 export const FilterBox = style({ display: 'flex' })
 
 export const FilterButton = style({
-  all: 'unset' /* 모든 스타일 초기화 */,
   width: '1.9375rem',
   aspectRatio: '1',
   border: `0.5px ${vars.color.gray2} solid`,
