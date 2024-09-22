@@ -1,7 +1,7 @@
 'use client'
-import Navigation from './components/Navigation/Navigation'
+import Navigation from '@/components/Navigation/Navigation'
 import * as styles from './page.css'
-import Card from './components/Card/Card'
+import Card from '@/components/Card/Card'
 export default function Home() {
   return (
     <>
