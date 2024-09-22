@@ -5,12 +5,8 @@ globalStyle('*', {
 })
 
 globalStyle('body', {
-  padding: '0 24px',
+  padding: '0',
   margin: '0',
-})
-
-globalStyle('.navigation-container', {
-  margin: '0 -24px',
 })
 
 globalStyle('h1, h2, h3, h4, h5, h6, p', {
