@@ -12,7 +12,7 @@ export const Header = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '1.5rem',
-  padding: '1.88rem 0rem 1.56rem',
+  padding: '1.88rem 1.5rem 1.56rem',
 })
 
 export const HeaderText = style({
