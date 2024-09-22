@@ -13,6 +13,9 @@ globalStyle('h1, h2, h3, h4, h5, h6, p', {
   margin: '0',
   padding: '0',
 })
+globalStyle('button', {
+  all: 'unset' /* 모든 스타일 초기화 - 버튼의 원래 스타일 없애기! */,
+})
 
 export const vars = createGlobalTheme(':root', {
   color: {
