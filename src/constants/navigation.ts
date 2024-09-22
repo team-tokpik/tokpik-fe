@@ -1,7 +1,7 @@
 import Home from '/public/images/Home.svg'
 import Scrap from '/public/images/Scrap.svg'
 import My from '/public/images/My.svg'
-import { NavItemType } from '@/types/navigation'
+import { NavItemType } from '../types/navigation'
 
 export const NAV_ITEMS: NavItemType[] = [
   { Icon: Home, text: 'Home', path: '/' },

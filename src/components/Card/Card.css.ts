@@ -1,4 +1,4 @@
-import { vars } from '@/globals.css'
+import { vars } from '@/app/globals.css'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 
@@ -96,4 +96,8 @@ export const smallContentWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   gap: 6,
+})
+
+export const cardImage = style({
+  margin: '0 0 0 -24px',
 })

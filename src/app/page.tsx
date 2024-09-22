@@ -1,7 +1,7 @@
 'use client'
-import Navigation from './components/Navigation/Navigation'
+import Navigation from '@/components/Navigation/Navigation'
 import * as styles from './page.css'
-import Card from './components/Card/Card'
+import Card from '@/components/Card/Card'
 import Filter from './components/Filter/Filter'
 import { useState } from 'react'
 export default function Home() {

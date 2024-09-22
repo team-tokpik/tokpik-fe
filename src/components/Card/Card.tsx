@@ -79,7 +79,7 @@ export default function Card({
         <p className={styles.subtitle}>
           {processSubtitle(cardSubtitle, false)}
         </p>
-        <CardImage />
+        <CardImage className={styles.cardImage} />
         <div className={styles.largeContentWrapper}>
           <h3 className={styles.title}>{title}</h3>
           <p className={styles.description}>{description}</p>
