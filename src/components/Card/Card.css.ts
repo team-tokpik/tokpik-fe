@@ -97,3 +97,7 @@ export const smallContentWrapper = style({
   flexDirection: 'column',
   gap: 6,
 })
+
+export const cardImage = style({
+  margin: '0 0 0 -24px',
+})
