@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { vars } from '../../globals.css'
+import { vars } from '../../app/globals.css'
 
 export const OuterContainer = style({
   width: '100%',

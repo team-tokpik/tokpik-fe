@@ -2,7 +2,7 @@
 import Navigation from '@/components/Navigation/Navigation'
 import * as styles from './page.css'
 import Card from '@/components/Card/Card'
-import Filter from './components/Filter/Filter'
+import Filter from '@/components/Filter/Filter'
 import { useState } from 'react'
 export default function Home() {
   // 필터 열림 여부
