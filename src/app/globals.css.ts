@@ -49,7 +49,7 @@ globalStyle('body', {
   padding: '0 24px',
   margin: '0',
   position: 'relative',
-  backgroundColor: 'white',
+  backgroundColor: vars.color.black,
 })
 
 globalStyle('.navigation-container', {
