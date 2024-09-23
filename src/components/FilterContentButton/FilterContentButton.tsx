@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import * as styles from './FilterContentButton.css'
 import FilterCheckButtonOff from '@/../public/images/FilterCheckButtonOff.svg'
 interface fcbProps {
@@ -7,7 +6,7 @@ interface fcbProps {
 }
 const FilterContentButton = ({ size, content }: fcbProps) => {
   return (
-    <div className={styles.OuterContainer} style={{ width: `${size}%` }}>
+    <div className={styles.OuterContainer({ size })}>
       <FilterCheckButtonOff />
       {content}
     </div>
