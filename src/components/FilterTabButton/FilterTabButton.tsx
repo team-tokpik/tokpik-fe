@@ -13,7 +13,7 @@ const FilterTabButton = ({ text, onSelect, selectedTab }: filterTabButton) => {
 
   return (
     <button
-      className={`${styles.OuterContainer} ${isSelected && styles.Selected}`}
+      className={`${styles.OuterContainer({ isSelected })}`}
       onClick={() => {
         onSelect(text)
       }}
