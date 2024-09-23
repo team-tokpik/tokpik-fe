@@ -1,6 +1,6 @@
 'use client'
 import * as styles from './Filter.css'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import FilterTabButton from '../FilterTabButton/FilterTabButton'
 import FilterInput from '../FilterInput/FilterInput'
 import FilterContentButton from '../FilterContentButton/FilterContentButton'
