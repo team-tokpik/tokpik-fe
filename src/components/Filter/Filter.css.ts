@@ -1,27 +1,49 @@
 import { style } from '@vanilla-extract/css'
 import { vars } from '../../app/globals.css'
-
-export const OuterContainer = style({
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-end',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  zIndex: '2',
-  position: 'absolute',
-  top: 0,
-  left: 0,
+import { recipe } from '@vanilla-extract/recipes'
+export const OuterContainer = recipe({
+  base: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: '2',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    transition: 'backgroundColor 0.3s ease-in-out',
+  },
+  variants: {
+    isOn: {
+      true: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+      false: { backgroundColor: 'rgba(0, 0, 0, 0)', zIndex: '-1' },
+    },
+  },
 })
-export const MiddleContainer = style({
-  width: '100%',
-  height: '83.5%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  zIndex: '2',
-  backgroundColor: vars.color.black,
-  borderRadius: '0.9375rem 0.9375rem 0rem 0rem',
+export const MiddleContainer = recipe({
+  base: {
+    width: '100%',
+    // height: '83.5%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    zIndex: '2',
+    backgroundColor: vars.color.black,
+    borderRadius: '0.9375rem 0.9375rem 0rem 0rem',
+    transition: 'height 0.3s ease-in-out',
+  },
+  variants: {
+    isOn: {
+      true: {
+        height: '83.5%',
+      },
+      false: {
+        height: '0%',
+      },
+    },
+  },
 })
 
 export const InnerContainer = style({
