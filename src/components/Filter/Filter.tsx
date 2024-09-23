@@ -1,7 +1,7 @@
 'use client'
 import * as styles from './Filter.css'
 import { useEffect, useState } from 'react'
-import FilterTabButton from '../FilterTabButton.css.ts/FilterTabButton'
+import FilterTabButton from '../FilterTabButton/FilterTabButton'
 import FilterInput from '../FilterInput/FilterInput'
 import FilterContentButton from '../FilterContentButton/FilterContentButton'
 import FilterRefresh from '@/../public/images/FilterRefresh.svg'
@@ -12,8 +12,10 @@ export default function Home() {
   const handleTabSelect = (text: string) => {
     setSelectedTab(text) // 클릭된 버튼의 텍스트를 상태로 저장
   }
-  // 각 탭에 해당하는 콘텐츠
+
   const renderContent = () => {
+    //각 탭을 클릭하면 탭에 따른 내용으로 바뀝니다!
+    // 각 탭에 해당하는 콘텐츠
     const renderButtons = (contents: string[], size: 50 | 100) =>
       contents.map((content) => (
         <FilterContentButton key={content} size={size} content={content} />
