@@ -65,7 +65,7 @@ export default function Home() {
           ></Card>
         </div>
       </main>
-      {isFilterOn && <Filter></Filter>}
+      <Filter isOn={isFilterOn}></Filter>
     </>
   )
 }

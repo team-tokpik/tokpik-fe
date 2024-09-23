@@ -6,7 +6,9 @@ import FilterInput from '../FilterInput/FilterInput'
 import FilterContentButton from '../FilterContentButton/FilterContentButton'
 import FilterRefresh from '@/../public/images/FilterRefresh.svg'
 import { filterContant } from '@/constants/filterContant'
-export default function Home() {
+import { filter } from '../../types/filter'
+import { filterTabTexts } from '@/constants/filterTabTexts'
+const Filter = ({ isOn }: filter) => {
   const [selectedTab, setSelectedTab] = useState<string>('목적')
 
   const handleTabSelect = (text: string) => {
@@ -59,8 +61,8 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.OuterContainer}>
-      <div className={styles.MiddleContainer}>
+    <div className={styles.OuterContainer({ isOn })}>
+      <div className={styles.MiddleContainer({ isOn })}>
         <div className={styles.InnerContainer}>
           {/* handle section - 편의성을 위해서 터치되는 영역은 손잡이x 손잡이 영역o */}
           <div className={styles.HandleBox}>
@@ -69,26 +71,14 @@ export default function Home() {
           </div>
           {/* tab section - 목적 상황 분위기 상대 */}
           <div className={styles.TabBox}>
-            <FilterTabButton
-              text="목적"
-              onSelect={handleTabSelect}
-              selectedTab={selectedTab}
-            />
-            <FilterTabButton
-              text="상황"
-              onSelect={handleTabSelect}
-              selectedTab={selectedTab}
-            />
-            <FilterTabButton
-              text="분위기"
-              onSelect={handleTabSelect}
-              selectedTab={selectedTab}
-            />
-            <FilterTabButton
-              text="상대"
-              onSelect={handleTabSelect}
-              selectedTab={selectedTab}
-            />
+            {filterTabTexts.map((text, index) => (
+              <FilterTabButton
+                key={index}
+                text={text}
+                onSelect={handleTabSelect}
+                selectedTab={selectedTab}
+              />
+            ))}
           </div>
           {/* selected section */}
           <div className={styles.SelectedBox}>선택없음</div>
@@ -108,3 +98,4 @@ export default function Home() {
     </div>
   )
 }
+export default Filter
