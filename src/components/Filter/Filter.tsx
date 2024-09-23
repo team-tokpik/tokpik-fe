@@ -5,6 +5,7 @@ import FilterTabButton from '../FilterTabButton.css.ts/FilterTabButton'
 import FilterInput from '../FilterInput/FilterInput'
 import FilterContentButton from '../FilterContentButton/FilterContentButton'
 import FilterRefresh from '@/../public/images/FilterRefresh.svg'
+import { filterContant } from '@/constants/filterContant'
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState<string>('목적')
 
@@ -13,26 +14,6 @@ export default function Home() {
   }
   // 각 탭에 해당하는 콘텐츠
   const renderContent = () => {
-    const contentMap = {
-      목적: ['친목', '소개팅', '비즈니스', '일상'],
-      상황: ['첫만남', '1 : 1', '집단', '상사', '동료', '친구'],
-      분위기: [
-        '어색하지 않고 편했으면 좋겠다',
-        '유익하면 좋겠다',
-        '즐겁고 재밌으면 좋겠다',
-        '상대에 대해 알아가면 좋겠다',
-      ],
-      상대성별: ['남성', '여성'],
-      상대연령대: [
-        '20대 초반',
-        '20대 중반',
-        '30대 초반',
-        '30대 중반',
-        '40대 초반',
-        '40대 중반',
-      ],
-    }
-
     const renderButtons = (contents: string[], size: 50 | 100) =>
       contents.map((content) => (
         <FilterContentButton key={content} size={size} content={content} />
@@ -42,19 +23,19 @@ export default function Home() {
       case '목적':
         return (
           <div className={styles.ContentBox}>
-            {renderButtons(contentMap.목적, 50)}
+            {renderButtons(filterContant.purpose, 50)}
           </div>
         )
       case '상황':
         return (
           <div className={styles.ContentBox}>
-            {renderButtons(contentMap.상황, 50)}
+            {renderButtons(filterContant.situation, 50)}
           </div>
         )
       case '분위기':
         return (
           <div className={styles.ContentBox}>
-            {renderButtons(contentMap.분위기, 100)}
+            {renderButtons(filterContant.mood, 100)}
           </div>
         )
       case '상대':
@@ -62,11 +43,11 @@ export default function Home() {
           <div className={styles.ContentBox}>
             <div className={styles.SubHead}>성별</div>
             <div className={styles.SubBody}>
-              {renderButtons(contentMap.상대성별, 50)}
+              {renderButtons(filterContant.partnerGender, 50)}
             </div>
             <div className={styles.SubHead}>연령대</div>
             <div className={styles.SubBody}>
-              {renderButtons(contentMap.상대연령대, 50)}
+              {renderButtons(filterContant.partnerAge, 50)}
             </div>
           </div>
         )
