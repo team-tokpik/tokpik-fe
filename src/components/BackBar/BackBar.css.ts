@@ -2,6 +2,8 @@ import { vars } from '@/app/globals.css'
 import { style } from '@vanilla-extract/css'
 
 export const wrapper = style({
+  position: 'fixed',
+  maxWidth: '467px',
   display: 'flex',
   alignItems: 'center',
   width: '100%',
