@@ -19,7 +19,7 @@ export default function Home() {
         </div>
         {/* button section */}
         {myTabs.map((tab, index) => (
-          <MyTabs key={index} head={tab.head} sub={tab.sub} />
+          <MyTabs key={index} head={tab.head} sub={tab.sub} to={tab.to} />
         ))}
       </main>
     </>
