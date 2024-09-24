@@ -1,9 +1,10 @@
 import { style } from '@vanilla-extract/css'
 
 export const Container = style({
-  position: 'absolute',
-  top: 'calc(100% - 60px)',
+  position: 'fixed',
+  bottom: '0',
   width: '100%',
+  maxWidth: '467px',
   display: 'flex',
   justifyContent: 'space-around',
   alignItems: 'center',
