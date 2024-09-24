@@ -96,25 +96,27 @@ export const ButtonBox = style({
   gap: '5px',
   justifyContent: 'space-around',
   alignItems: 'center',
-  padding: '0.94rem 1.5rem',
+  padding: '0.94rem 1rem',
   borderTop: `1px solid ${vars.color.gray4}`,
 })
 export const RefleshButton = style({
+  width: '25%',
   display: 'inline-flex',
   gap: '1px',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '0.94rem 0.8rem',
+  padding: '0.94rem 0rem',
   color: vars.color.gray3,
   ':hover': {
     cursor: 'pointer',
   },
 })
 export const SubmitButton = style({
+  width: '70%',
   display: 'inline-flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '0.94rem 7.4rem',
+  padding: '0.94rem 0rem',
   color: vars.color.white,
   backgroundColor: vars.color.primary,
   borderRadius: '9px',
