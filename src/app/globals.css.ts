@@ -51,11 +51,11 @@ globalStyle('*', {
 globalStyle('html', {
   width: '100%',
   height: '100%',
-
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: vars.color.gray1,
+  fontSize: '16px', // rem 기준
 })
 
 globalStyle('body', {
