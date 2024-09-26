@@ -34,12 +34,14 @@ export default function Card({
   type,
   title,
   description,
+  now,
+  prev,
 }: DynamicCardProps) {
   const CardImage = cardImages[type]
 
   if (size === 'large') {
     return (
-      <div className={styles.cardRecipe({ size, type })}>
+      <div className={styles.cardRecipe({ size, type, now, prev })}>
         <Subtitle type={type} isSmall={false} isCard={true} />
 
         <CardImage className={styles.cardImage} />

@@ -15,9 +15,11 @@ export const cardRecipe = recipe({
     size: {
       large: {
         width: '345px',
-
         height: '483px',
         padding: '0 24px',
+
+        position: 'absolute',
+        transition: 'transform 0.1s ease-in-out',
       },
       small: {
         width: '165px',
@@ -59,7 +61,41 @@ export const cardRecipe = recipe({
         color: vars.color.pimentoFont,
       },
     },
+    now: {
+      true: {
+        transform: 'scale(1)', // 현재 보여지고 있는 카드
+        opacity: 1,
+        zIndex: 10,
+      },
+      false: {
+        opacity: 1,
+      },
+    },
+    prev: {
+      true: {},
+      false: {},
+    },
   },
+  compoundVariants: [
+    {
+      variants: {
+        now: false,
+        prev: false, // now와 prev가 모두 false일 때
+      },
+      style: {
+        transform: 'scale(0.8) translateY(20%)',
+      },
+    },
+    {
+      variants: {
+        now: false,
+        prev: true, // now가 false, prev는 true일 때
+      },
+      style: {
+        transform: 'scale(0.8) translateY(-20%)',
+      },
+    },
+  ],
 })
 
 export const title = style({
