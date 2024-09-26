@@ -5,9 +5,6 @@ export const subHeaderContainer = style({
   width: '100%',
   display: 'flex',
   height: '10%',
-  ':hover': {
-    cursor: 'pointer',
-  },
 })
 export const subHeader = style({
   flex: 4,
@@ -31,4 +28,7 @@ export const modifyButton = style({
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
+  ':hover': {
+    cursor: 'pointer',
+  },
 })
