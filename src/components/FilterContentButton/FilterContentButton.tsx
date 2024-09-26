@@ -1,16 +1,17 @@
 import * as styles from './FilterContentButton.css'
 import FilterCheckButtonOff from '@/../public/images/FilterCheckButtonOff.svg'
 import FilterCheckButtonOn from '@/../public/images/FilterCheckButtonOn.svg'
+import { filterContentButton } from '@/types/filterContentButton'
 
-interface fcbProps {
-  size: 50 | 100
-  content: string
-}
-const FilterContentButton = ({ size, content }: fcbProps) => {
+const FilterContentButton = ({
+  size,
+  content,
+  isOn,
+  onClick,
+}: filterContentButton) => {
   return (
-    <div className={styles.OuterContainer({ size })}>
-      <FilterCheckButtonOff />
-      <FilterCheckButtonOn />
+    <div className={styles.OuterContainer({ size, isOn })} onClick={onClick}>
+      {isOn ? <FilterCheckButtonOn /> : <FilterCheckButtonOff />}
       {content}
     </div>
   )

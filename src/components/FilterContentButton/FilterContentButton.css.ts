@@ -15,5 +15,9 @@ export const OuterContainer = recipe({
   },
   variants: {
     size: { 50: { width: '50%' }, 100: { width: '100%' } },
+    isOn: {
+      true: { backgroundColor: '#2C2321', color: vars.color.white },
+      false: {},
+    },
   },
 })

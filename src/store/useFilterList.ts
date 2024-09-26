@@ -13,6 +13,7 @@ type FilterListActions = {
     pushList: (item: string) => void
     findList: (item: string) => boolean
     popList: (item: string) => void
+    refleshList: () => void
   }
 }
 const useFilterListStore = create<FilterListState & FilterListActions>(
@@ -38,7 +39,13 @@ const useFilterListStore = create<FilterListState & FilterListActions>(
         set((state) => {
           const tmpSet = new Set(state.list)
           tmpSet.delete(item)
+
           return { list: tmpSet }
+        }),
+      refleshList: () =>
+        set(() => {
+          // Set 객체를 초기화합니다.
+          return { list: new Set() }
         }),
     },
   })

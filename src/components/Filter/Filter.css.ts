@@ -1,35 +1,37 @@
 import { style } from '@vanilla-extract/css'
 import { vars } from '../../app/globals.css'
 import { recipe } from '@vanilla-extract/recipes'
-export const OuterContainer = recipe({
-  base: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    zIndex: '2',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    transition: 'backgroundColor 0.3s ease-in-out',
-  },
-  variants: {
-    isOn: {
-      true: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
-      false: { backgroundColor: 'rgba(0, 0, 0, 0)', zIndex: '-1' },
-    },
-  },
-})
+// export const OuterContainer = recipe({
+//   base: {
+//     width: '100%',
+//     height: '100%',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     justifyContent: 'flex-end',
+//     // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+//     zIndex: '2',
+//     position: 'absolute',
+//     top: 0,
+//     left: 0,
+//     transition: 'backgroundColor 0.3s ease-in-out',
+//   },
+//   variants: {
+//     isOn: {
+//       true: { backgroundColor: 'rgba(0, 0, 0, 0)' },
+//       false: { backgroundColor: 'rgba(0, 0, 0, 0)', zIndex: '-1' },
+//     },
+//   },
+// })
 export const MiddleContainer = recipe({
   base: {
+    position: 'absolute',
+    left: 0,
+    overflow: 'hidden',
     width: '100%',
-    // height: '83.5%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    zIndex: '2',
+    zIndex: '100',
     backgroundColor: vars.color.black,
     borderRadius: '0.9375rem 0.9375rem 0rem 0rem',
     transition: 'height 0.3s ease-in-out',
@@ -38,9 +40,11 @@ export const MiddleContainer = recipe({
     isOn: {
       true: {
         height: '83.5%',
+        bottom: '0',
       },
       false: {
         height: '0%',
+        bottom: '0%',
       },
     },
   },
@@ -77,17 +81,22 @@ export const TabBox = style({
 })
 export const SelectedBox = style({
   width: '100%',
-
+  height: '4rem',
   display: 'flex',
+  flexWrap: 'nowrap',
   alignItems: 'center',
   padding: '1.5rem 1.69rem',
   color: vars.color.gray3,
+  overflowY: 'hidden',
+  overflowX: 'scroll',
+  gap: '0.625rem',
 })
+
 export const ContentBox = style({
   width: '100%',
   flexWrap: 'wrap',
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   alignItems: 'center',
 })
 export const ButtonBox = style({
@@ -102,7 +111,7 @@ export const ButtonBox = style({
 export const RefleshButton = style({
   width: '25%',
   display: 'inline-flex',
-  gap: '1px',
+  gap: '0.3rem',
   justifyContent: 'center',
   alignItems: 'center',
   padding: '0.94rem 0rem',
