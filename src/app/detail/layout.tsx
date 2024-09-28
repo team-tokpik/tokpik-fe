@@ -1,4 +1,5 @@
 import React from 'react'
+import * as styles from './layout.css'
 import BackBar from '@/components/BackBar/BackBar'
 import Navigation from '@/components/Navigation/Navigation'
 
