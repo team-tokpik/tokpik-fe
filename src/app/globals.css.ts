@@ -47,6 +47,11 @@ export const vars = createGlobalTheme(':root', {
 globalStyle('*', {
   textDecoration: 'none',
   boxSizing: 'border-box',
+  scrollbarWidth: 'none', // Firefox에서 스크롤바 숨기기
+})
+
+globalStyle('::-webkit-scrollbar', {
+  display: 'none', // Chrome, Safari에서 스크롤바 숨기기
 })
 globalStyle('html', {
   width: '100%',
@@ -54,6 +59,7 @@ globalStyle('html', {
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: vars.color.gray1,
+  fontSize: '16px', // rem 기준
 })
 
 globalStyle('body', {

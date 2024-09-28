@@ -15,9 +15,10 @@ export const cardRecipe = recipe({
     size: {
       large: {
         width: '345px',
-
         height: '483px',
         padding: '0 24px',
+        position: 'absolute',
+        transition: 'transform 0.1s ease-in-out',
       },
       small: {
         width: '165px',
@@ -26,42 +27,31 @@ export const cardRecipe = recipe({
       },
     },
     type: {
-      relation: {
-        background: vars.color.egg,
-        color: vars.color.eggFont,
+      relation: { background: vars.color.egg, color: vars.color.eggFont },
+      issue: { background: vars.color.tomato, color: vars.color.tomatoFont },
+      love: { background: vars.color.sweet, color: vars.color.sweetFont },
+      business: { background: vars.color.ham, color: vars.color.hamFont },
+      hobby: { background: vars.color.cheese, color: vars.color.cheeseFont },
+      humor: { background: vars.color.lettuce, color: vars.color.lettuceFont },
+      'ice-breaker': { background: vars.color.avocado, color: vars.color.avocadoFont },
+      'self-development': { background: vars.color.pimento, color: vars.color.pimentoFont },
+    },
+    relativePosition: {
+      '0': {zIndex: 1},
+      '1': {
+        opacity: 0.3,
+        transform: 'scale(0.8) translateY(25%)',
       },
-      issue: {
-        background: vars.color.tomato,
-        color: vars.color.tomatoFont,
+      '-1': {
+        opacity: 0.3,
+        transform: 'scale(0.8) translateY(-25%)',
       },
-      love: {
-        background: vars.color.sweet,
-        color: vars.color.sweetFont,
-      },
-      business: {
-        background: vars.color.ham,
-        color: vars.color.hamFont,
-      },
-      hobby: {
-        background: vars.color.cheese,
-        color: vars.color.cheeseFont,
-      },
-      humor: {
-        background: vars.color.lettuce,
-        color: vars.color.lettuceFont,
-      },
-      'ice-breaker': {
-        background: vars.color.avocado,
-        color: vars.color.avocadoFont,
-      },
-      'self-development': {
-        background: vars.color.pimento,
-        color: vars.color.pimentoFont,
+      'more': {
+        opacity: 0, // 투명하게
       },
     },
   },
-})
-
+});
 export const title = style({
   fontSize: 28,
   fontWeight: 'bold',

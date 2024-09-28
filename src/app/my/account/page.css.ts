@@ -6,6 +6,7 @@ export const Main = style({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
+  // paddingTop: '55px',
 })
 export const Button = style({
   width: '100%',

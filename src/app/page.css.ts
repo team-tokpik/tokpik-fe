@@ -1,10 +1,29 @@
 import { style } from '@vanilla-extract/css'
 import { vars } from './globals.css'
-export const Main = style({
-  width: '100%',
-  height: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
+import { recipe } from '@vanilla-extract/recipes'
+export const Main = recipe({
+  base: {
+    width: '100%',
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  variants: {
+    isFilterOn: {
+      true: {
+        ':before': {
+          content: '""', // 필수 content 속성
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        },
+      },
+      false: {},
+    },
+  },
 })
 
 export const Header = style({
@@ -12,7 +31,7 @@ export const Header = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '1.5rem',
-  padding: '1.88rem 1.5rem 1.56rem',
+  padding: '1.88rem 1.5rem',
 })
 
 export const HeaderText = style({
@@ -31,20 +50,30 @@ export const HeaderText2 = style({
   lineHeight: '140%' /* 2.45rem */,
   letterSpacing: '-0.0175rem',
 })
-export const FilterBox = style({ display: 'flex' })
+export const FilterBox = style({ display: 'flex', gap: '0.625rem' })
 
-export const FilterButton = style({
-  width: '1.9375rem',
-  aspectRatio: '1',
-  border: `0.5px ${vars.color.gray2} solid`,
-  backgroundColor: vars.color.gray4,
-  borderRadius: '25px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-
-  ':hover': {
-    cursor: 'pointer', // 커서를 포인터로 변경
+export const FilterButton = recipe({
+  base: {
+    width: '1.9375rem',
+    aspectRatio: '1',
+    border: `0.5px ${vars.color.gray2} solid`,
+    backgroundColor: vars.color.gray4,
+    borderRadius: '25px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    ':hover': {
+      cursor: 'pointer', // 커서를 포인터로 변경
+    },
+  },
+  variants: {
+    isFilterListEmpty: {
+      true: {
+        border: `0.5px ${vars.color.primary} solid`,
+        backgroundColor: vars.color.primary,
+      },
+      false: {},
+    },
   },
 })
 export const CardBox = style({
@@ -52,5 +81,18 @@ export const CardBox = style({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  overflow: 'hidden',
+  paddingInline: '1.5rem',
+  width: '100%',
+  height: '65%',
+})
+
+export const FilterList = style({
+  width: '100%',
+  display: 'flex',
+  flexWrap: 'nowrap',
+  alignItems: 'center',
+  color: vars.color.gray3,
+  overflowY: 'hidden',
+  overflowX: 'scroll',
+  gap: '0.625rem',
 })
