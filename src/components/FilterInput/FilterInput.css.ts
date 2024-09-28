@@ -30,7 +30,7 @@ export const Input = recipe({
   },
   variants: {
     size: {
-      50: { width: '7rem' },
+      50: { width: '5.8rem' },
       100: { width: '20rem' },
     },
   },
