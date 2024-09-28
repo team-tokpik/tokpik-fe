@@ -1,16 +1,24 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as styles from './page.css'
-import { location } from '@/constants/location'
+import { EMOJI_MAP } from '@/constants/location'
 import CheckBox from '@/components/CheckBox/CheckBox'
 import Button from '@/components/Button/Button'
 import { useRouter } from 'next/navigation'
+import { placeTags } from '@/types/survey'
+import { getPlace } from '@/api/survey/getPlace'
 
 export default function Location() {
   const [selectedLocation, setSelectedLocation] = useState<string[]>([])
-
+  const [placeList, setPlaceList] = useState<placeTags[]>([])
   const router = useRouter()
+
+  useEffect(() => {
+    getPlace().then((res) => {
+      setPlaceList(res.placeTags)
+    })
+  }, [])
 
   const toggleLocation = (label: string) => {
     setSelectedLocation((prev) =>
@@ -34,19 +42,16 @@ export default function Location() {
         <p className={styles.subTitle}>주로 생활하는 공간을 모두 알려주세요</p>
       </div>
       <div className={styles.locationBox}>
-        {location.map((item) => (
+        {placeList.map((item) => (
           <div
             className={styles.locationItem}
-            key={item.label}
-            onClick={() => {
-              toggleLocation(item.label)
-            }}
+            key={item.placeTagId}
+            onClick={() => toggleLocation(item.content)}
           >
             <CheckBox
-              key={item.label}
-              label={item.label}
-              emoji={item.emoji}
-              checked={selectedLocation.includes(item.label)}
+              label={item.content}
+              emoji={EMOJI_MAP[item.content]}
+              checked={selectedLocation.includes(item.content)}
             />
           </div>
         ))}
