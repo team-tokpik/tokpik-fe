@@ -28,21 +28,28 @@ const Carousel = ({ items }: carousel) => {
           top: 0,
         }}
       >
+        {/* 테스트 코드 - 케루셀 넘기기 */}
         <button onClick={handlePrev}>이전</button>
         {currentIndex}
         <button onClick={handleNext}>다음</button>
       </div>
       {items.map((data, index) => (
-        <Card
-          key={index}
-          size="large"
-          type={data.type}
-          title={data.title}
-          description={data.description}
-          now={index === currentIndex}
-          prev={index < currentIndex}
-        />
+      <Card
+        key={index}
+        size="large"
+        type={data.type}
+        title={data.title}
+        description={data.description}
+        relativePosition={(() => {
+          const diff = index - currentIndex;
+          if (diff === 0) return "0";
+          if (diff === 1) return "1";
+          if (diff === -1) return "-1";
+          return "more";
+        })()}
+      />
       ))}
+
     </div>
   )
 }

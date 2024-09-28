@@ -11,10 +11,9 @@ export interface CardType {
     | 'self-development'
   title: string
   description?: string
-  now: boolean
-  prev: boolean
+  relativePosition: '0' | '1' | '-1' | 'more';
 }
-export interface itemType {
+export interface ItemType {
   type:
     | 'relation'
     | 'issue'

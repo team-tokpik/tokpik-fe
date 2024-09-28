@@ -34,14 +34,21 @@ export default function Card({
   type,
   title,
   description,
-  now,
-  prev,
+
+  relativePosition,
 }: DynamicCardProps) {
-  const CardImage = cardImages[type]
+  const CardImage = cardImages[type]as React.FC<React.SVGProps<SVGSVGElement>>
 
   if (size === 'large') {
     return (
-      <div className={styles.cardRecipe({ size, type, now, prev })}>
+      <div
+        className={styles.cardRecipe({
+          size,
+          type,
+       
+          relativePosition,
+        })}
+      >
         <Subtitle type={type} isSmall={false} isCard={true} />
 
         <CardImage className={styles.cardImage} />
