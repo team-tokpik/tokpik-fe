@@ -6,8 +6,8 @@ import { create } from 'zustand'
 type FilterListState = {
   list: Set<string>
 }
-// 액션은 3가지입니다.
-// push:추가 , find:찾기 ,pop:삭제
+// 액션은 4가지입니다.
+// push:추가 , find:찾기 ,pop:삭제, reflesh:초기화
 type FilterListActions = {
   actions: {
     pushList: (item: string) => void
@@ -52,6 +52,7 @@ const useFilterListStore = create<FilterListState & FilterListActions>(
 )
 
 // list와 action을 따로 export해서 따로 import 가져올 수 있게 합니다.
+
 export const useFilterListState = () =>
   useFilterListStore((state) => state.list)
 
