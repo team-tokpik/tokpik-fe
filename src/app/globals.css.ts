@@ -1,4 +1,21 @@
 import { createGlobalTheme, globalStyle } from '@vanilla-extract/css'
+globalStyle('*', {
+  textDecoration: 'none',
+  boxSizing: 'border-box',
+})
+
+globalStyle('body', {
+  padding: '0',
+  margin: '0',
+})
+
+globalStyle('h1, h2, h3, h4, h5, h6, p', {
+  margin: '0',
+  padding: '0',
+})
+globalStyle('button', {
+  all: 'unset' /* 모든 스타일 초기화 - 버튼의 원래 스타일 없애기! */,
+})
 
 export const vars = createGlobalTheme(':root', {
   color: {
@@ -32,6 +49,7 @@ globalStyle('*', {
   boxSizing: 'border-box',
 })
 globalStyle('html', {
+  width: '100%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -41,18 +59,18 @@ globalStyle('html', {
 globalStyle('body', {
   width: '100%',
   maxWidth: '467px',
-  minHeight: '100%',
+  height: '100%',
   padding: '0',
   margin: '0',
   position: 'relative',
   backgroundColor: vars.color.black,
 })
 
+globalStyle('.navigation-container', {
+  margin: '0 -24px',
+})
+
 globalStyle('h1, h2, h3, h4, h5, h6, p', {
   margin: '0',
   padding: '0',
-})
-
-globalStyle('button', {
-  all: 'unset',
 })
