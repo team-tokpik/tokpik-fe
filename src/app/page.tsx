@@ -9,14 +9,14 @@ import FilterWhite from '/public/images/FilterWhite.svg'
 import { useFilterListState, useFilterListActions } from '@/store/useFilterList'
 import { useMemo } from 'react'
 import SelectedFilter from '@/components/SelectedFilter/SelectedFilter'
-import { itemType } from '@/types/card'
+import { ItemType } from '@/types/card'
 export default function Home() {
   const filterList = useFilterListState() // 전역 상태: 필터 리스트
   const { popList } = useFilterListActions() // 전역 액션
   const [isFilterListEmpty, setIsFilterListEmpty] = useState(false) //필터 리스트 비었는지 여부
   const [isFilterOn, setIsFilterOn] = useState(false) // 필터 열림 여부
 
-  const [cardContents, setCardContents] = useState<itemType[]>([
+  const [cardContents, setCardContents] = useState<ItemType[]>([
     { type: 'business', title: '카드 1', description: '내용 1' },
     { type: 'issue', title: '카드 2', description: '내용 2' },
     { type: 'love', title: '카드 3', description: '내용 3' },
@@ -30,9 +30,51 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/topics') // API 엔드포인트를 적어주세요.
+        interface Params {
+          includeFilterCondition: boolean
+          talkPurposes: string
+          talkSituations: string
+          talkMoods: string
+          talkPartnerGender: boolean
+          talkPartnerAgeLowerBound: number
+          talkPartnerAgeUpperBound: number
+        }
+
+        const params: Params = {
+          includeFilterCondition: true,
+          talkPurposes: '친목',
+          talkSituations: '첫만남',
+          talkMoods: '유익한 분위기',
+          talkPartnerGender: true,
+          talkPartnerAgeLowerBound: 20,
+          talkPartnerAgeUpperBound: 25,
+        }
+
+        // 쿼리 문자열을 생성하는 함수 정의
+        const toQueryString = (params: Params) => {
+          return Object.keys(params)
+            .map(
+              (key) =>
+                `${encodeURIComponent(key)}=${encodeURIComponent(
+                  (params as any)[key]
+                )}`
+            )
+            .join('&')
+        }
+
+        // 쿼리 문자열 생성
+        const queryString = toQueryString(params)
+        const response = await fetch(
+          `http://tokpik.co.kr/topics?${queryString}`
+        )
+
+        // HTTP 응답 검사
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
 
         const data = await response.json()
+        console.log(data)
 
         // API 응답 데이터 변환 - 키 이름이 달라서 변환
         const transformedData = data.map((item: any) => ({
@@ -40,7 +82,8 @@ export default function Home() {
           title: item.title, // title은 그대로
           description: item.subtitle, // subtitle을 description으로
         }))
-        // 데이터 저장!
+
+        // 데이터 저장
         setCardContents(transformedData)
       } catch (error) {
         console.error('Fetch error:', error)
