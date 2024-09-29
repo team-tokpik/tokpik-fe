@@ -4,10 +4,10 @@ import BackBar from '@/components/BackBar/BackBar'
 import InterestTabButton from '@/components/InterestTabButton/InterestTabButton'
 import { interestTabButton } from '@/constants/interestTabButton'
 import { useInterestListState } from '@/store/useInterestList'
-import {getEmoji} from '@/constants/location'
+import {EMOJI_MAP} from '@/constants/location'
 const listContents = (loc:string,text:string)=>{
 return (<div className={styles.ListContainer}>
-  {loc === 'place' && <p>{getEmoji(text)}</p>}
+  {loc === 'place' && <p>{EMOJI_MAP[text]}</p>}
   <p>{text}</p>
  
 </div>)
