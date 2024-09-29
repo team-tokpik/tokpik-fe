@@ -33,3 +33,10 @@ export const isValidBirth = (birthdate: string) => {
 
   return true
 }
+
+export const formatBirth = (birth: string) => {
+  const year = birth.slice(0, 4)
+  const month = birth.slice(4, 6)
+  const day = birth.slice(6, 8)
+  return `${year}-${month}-${day}`
+}
