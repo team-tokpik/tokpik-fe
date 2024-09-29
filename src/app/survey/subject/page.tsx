@@ -1,14 +1,22 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as styles from './page.css'
-import { subject } from '@/constants/subject'
 import CheckBox from '@/components/CheckBox/CheckBox'
 import Button from '@/components/Button/Button'
 import { useRouter } from 'next/navigation'
+import { topicTags } from '@/types/survey'
+import { getTopic } from '@/api/survey/getTopic'
 
 export default function Subject() {
   const [selectedSubject, setSelectedSubject] = useState<string[]>([])
+  const [topicList, setTopicList] = useState<topicTags[]>([])
   const router = useRouter()
+
+  useEffect(() => {
+    getTopic().then((res) => {
+      setTopicList(res.topicTags)
+    })
+  }, [])
 
   const toggleSubject = (label: string) => {
     setSelectedSubject((prev) =>
@@ -37,16 +45,15 @@ export default function Subject() {
         </p>
       </div>
       <div className={styles.subjectBox}>
-        {subject.map((item) => (
+        {topicList.map((item) => (
           <div
             className={styles.subjectItem}
-            key={item.label}
-            onClick={() => toggleSubject(item.label)}
+            key={item.topicTagId}
+            onClick={() => toggleSubject(item.content)}
           >
             <CheckBox
-              key={item.label}
-              label={item.label}
-              checked={selectedSubject.includes(item.label)}
+              label={item.content}
+              checked={selectedSubject.includes(item.content)}
             />
           </div>
         ))}
