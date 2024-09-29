@@ -3,10 +3,10 @@ import { vars } from '@/app/globals.css'
 import { recipe } from '@vanilla-extract/recipes'
 export const Main = style({
   width: '100%',
-  height: '100%',
+  height: '100vh',
   display: 'flex',
   flexDirection: 'column',
-  // paddingTop: '55px',
+  paddingTop: '55px',
 })
 export const Button = style({
   width: '100%',

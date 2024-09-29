@@ -2,8 +2,11 @@
 import BackBar from '@/components/BackBar/BackBar'
 import * as styles from './page.css'
 import Button from '@/components/Button/Button'
-import FilterContentButton from '@/components/FilterContentButton/FilterContentButton'
+import FilterCheckButtonOff from '@/../public/images/FilterCheckButtonOff.svg'
+import FilterCheckButtonOn from '@/../public/images/FilterCheckButtonOn.svg'
+import { useState } from 'react'
 const App = () => {
+  const [isReady, setIsReady] = useState(false)
   return (
     <>
       <BackBar />
@@ -29,17 +32,20 @@ const App = () => {
         </div>
         {/* button section */}
         <div className={styles.ButtonContainer}>
-          <FilterContentButton
-            size={100}
-            content="회원 탈퇴 유의사항을 확인했습니다"
-          />
-          <Button
-            size="large"
-            label="회원 탈퇴하고 계정 삭제하기"
-            active={false}
+          {/* 회원 탈퇴 유의사항을 확인했습니다. */}
+        <div className={styles.FilterContentButton({isReady})} onClick={() => setIsReady(!isReady)}>
+            {isReady ? <FilterCheckButtonOn /> : <FilterCheckButtonOff />}
+            회원 탈퇴 유의사항을 확인했습니다.
+        </div>
+          {/* submit button */}
+          
+          <button
+            className={styles.SubmitButton({ isReady })}
+            disabled={isReady}
             onClick={() => {}}
-            disabled={false}
-          />
+          >
+            회원 탈퇴하고 계정 삭제하기
+          </button>
         </div>
       </main>
     </>
