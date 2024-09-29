@@ -31,7 +31,7 @@ const App = () => {
           sub={interestTabButton.subject.sub}
           to={interestTabButton.subject.to}
         />
-                {Array.from(subjectList).map((subject) => listContents('subject',subject))}
+        {Array.from(subjectList).map((subject) => listContents('subject',subject))}
 
       </main>
     </>

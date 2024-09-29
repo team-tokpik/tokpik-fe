@@ -8,7 +8,6 @@ export const Main = style({
   alignItems: 'center',
   paddingTop: '55px',
   overflow: 'auto',
-  border: `1px solid ${vars.color.gray2}`,
 })
 export const ListContainer = style({
   width: '100%',
