@@ -30,8 +30,8 @@ export const Header = style({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: '1.5rem',
-  padding: '1.88rem 1.5rem',
+  gap: '2rem',
+  padding: '4rem 1.5rem 2rem',
 })
 
 export const HeaderText = style({

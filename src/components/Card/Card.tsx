@@ -45,7 +45,6 @@ export default function Card({
         className={styles.cardRecipe({
           size,
           type,
-       
           relativePosition,
         })}
       >

@@ -37,14 +37,14 @@ export const cardRecipe = recipe({
       'self-development': { background: vars.color.pimento, color: vars.color.pimentoFont },
     },
     relativePosition: {
-      '0': {zIndex: 1},
+      '0': {zIndex: 1,transform: 'scale(1.1)'},
       '1': {
         opacity: 0.3,
-        transform: 'scale(0.8) translateY(25%)',
+        transform: 'scale(1) translateY(11%)',
       },
       '-1': {
         opacity: 0.3,
-        transform: 'scale(0.8) translateY(-25%)',
+        transform: 'scale(1) translateY(-11%)',
       },
       'more': {
         opacity: 0, // 투명하게

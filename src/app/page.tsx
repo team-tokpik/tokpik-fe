@@ -90,7 +90,7 @@ export default function Home() {
       }
     }
 
-    fetchData()
+    //fetchData()
   }, [])
 
   // 메모이제이션을 이용해서 selectedFilter들을 렌더링!
