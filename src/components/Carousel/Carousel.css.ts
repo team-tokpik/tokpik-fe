@@ -6,4 +6,5 @@ export const OuterContainer = style({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
+  padding: '1.5rem',
 })
