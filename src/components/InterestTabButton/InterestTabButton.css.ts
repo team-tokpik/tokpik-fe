@@ -4,7 +4,9 @@ import { vars } from '@/app/globals.css'
 export const subHeaderContainer = style({
   width: '100%',
   display: 'flex',
-  height: '10%',
+  height: '9%',
+  borderTop: `1px solid ${vars.color.gray2}`,
+
 })
 export const subHeader = style({
   flex: 4,
