@@ -11,7 +11,7 @@ export interface CardType {
     | 'self-development'
   title: string
   description?: string
-  relativePosition: '0' | '1' | '-1' | 'more';
+  relativePosition?: '0' | '1' | '-1' | 'more'
 }
 export interface ItemType {
   type:
