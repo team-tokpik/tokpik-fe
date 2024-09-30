@@ -6,12 +6,12 @@ export const container = style({
   flexDirection: 'column',
   backgroundColor: vars.color.black,
   padding: '0 24px',
-  height: `calc(100vh - 55px)`,
+  height: `100vh`,
   width: '100%',
 })
 
 export const title = style({
-  marginTop: '50px',
+  marginTop: '74px',
   marginLeft: '4px',
   fontSize: '28px',
   fontWeight: 'normal',
