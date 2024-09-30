@@ -31,7 +31,7 @@ const Filter = ({ isOn, filterHandler }: filter) => {
 
   // 필터 내용 클릭하면 전역상태에 저장~
   const FilterContentButtonCLickHandler = (item: string) => {
-    findList(item) ? popList(item) : pushList(item)
+    findList({tab:selectedTab,value:item}) ? popList({tab:selectedTab,value:item}) : pushList({tab:selectedTab,value:item})
   }
 
   //각 탭을 클릭하면 탭에 따른 내용으로 바뀝니다!
@@ -43,7 +43,7 @@ const Filter = ({ isOn, filterHandler }: filter) => {
           key={content[1]}
           size={size}
           content={content[0]}
-          isOn={findList(content[1])}
+          isOn={findList({tab:selectedTab,value:content[1]})}
           onClick={() => {
             FilterContentButtonCLickHandler(content[1])
           }}
@@ -122,10 +122,10 @@ const Filter = ({ isOn, filterHandler }: filter) => {
           ) : (
             Array.from(filterList).map((value) => (
               <SelectedFilter
-                key={value}
-                text={value}
+                key={value.value}
+                text={value.value}
                 onClick={() => {
-                  FilterContentButtonCLickHandler(value)
+                  FilterContentButtonCLickHandler(value.value)
                 }}
               />
             ))
