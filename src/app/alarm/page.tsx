@@ -1,16 +1,39 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as styles from './page.css'
 import BackBar from '@/components/BackBar/BackBar'
 import NormalInputField from '@/components/NormalInputField/NormalInputField'
 import { vars } from '../globals.css'
+import Button from '@/components/Button/Button'
 
 export default function Alarm() {
   const [date, setDate] = useState('')
+  const [displayDate, setDisplayDate] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [term, setTerm] = useState('')
   const [focusedInput, setFocusedInput] = useState('')
+  const [isActive, setIsActive] = useState(false)
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = e.target.value
+    setDate(newDate)
+    if (newDate) {
+      const date = new Date(newDate)
+      const formattedDate = `${date.getMonth() + 1}월 ${date.getDate()}일`
+      setDisplayDate(formattedDate)
+    } else {
+      setDisplayDate('')
+    }
+  }
+
+  useEffect(() => {
+    if (date && startTime && endTime && term) {
+      setIsActive(true)
+    } else {
+      setIsActive(false)
+    }
+  }, [date, startTime, endTime, term])
 
   const handleInputFocus = (input: string) => {
     setFocusedInput(input)
@@ -34,9 +57,10 @@ export default function Alarm() {
           <NormalInputField
             type="date"
             value={date}
-            onChange={(e) => setDate(e.target.value)}
+            onChange={handleDateChange}
             onFocus={() => handleInputFocus('date')}
             onBlur={handleInputBlur}
+            displayValue={displayDate}
           />
           <p style={getLabelStyle('date')}>에</p>
         </div>
@@ -73,6 +97,15 @@ export default function Alarm() {
             onBlur={handleInputBlur}
           />
           <p style={getLabelStyle('term')}>분 간격으로 보내줄게요!</p>
+        </div>
+        <div className={styles.buttonWrapper}>
+          <Button
+            size="large"
+            label="완료"
+            onClick={() => {}}
+            active={isActive}
+            disabled={!isActive}
+          />
         </div>
       </div>
     </div>

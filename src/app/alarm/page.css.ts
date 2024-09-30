@@ -10,7 +10,7 @@ export const container = style({
 export const wrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  marginTop: 'calc(55px + 2.81rem)',
+  marginTop: 'calc(2.81rem + 55px)',
   gap: '3rem',
   color: vars.color.white,
   padding: '0 24px',
@@ -28,4 +28,10 @@ export const inputWrapper = style({
   alignItems: 'center',
   gap: '0.63rem',
   height: '1.4rem',
+})
+
+export const buttonWrapper = style({
+  position: 'absolute',
+  bottom: '56px',
+  width: 'calc(100% - 48px)',
 })
