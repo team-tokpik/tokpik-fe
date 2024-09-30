@@ -56,6 +56,7 @@ export const InnerContainer = style({
   display: 'flex',
   flexDirection: 'column',
   zIndex: '3',
+  alignItems: 'center',
 })
 
 export const HandleBox = style({
@@ -73,7 +74,7 @@ export const Handle = style({
   background: '#555',
 })
 export const TabBox = style({
-  width: '100%',
+  width: '90%',
   height: '3.76rem',
   display: 'flex',
   justifyContent: 'center',
