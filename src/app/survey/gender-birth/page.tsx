@@ -5,26 +5,31 @@ import InputField from '@/components/InputField/InputField'
 import Button from '@/components/Button/Button'
 import CheckBox from '@/components/CheckBox/CheckBox'
 import { gender } from '@/constants/gender'
-import { isValidBirth } from '@/utils/birth'
+import { formatBirth, isValidBirth } from '@/utils/birth'
 import { useRouter } from 'next/navigation'
+import { useProfileStore } from '@/store/useProfile'
 
 export default function GenderBirth() {
-  const [birth, setBirth] = useState('')
+  const [localBirth, setLocalBirth] = useState('')
   const [selectedGender, setSelectedGender] = useState('')
+  const setGender = useProfileStore((state) => state.actions.setGender)
+  const setBirth = useProfileStore((state) => state.actions.setBirth)
   const [isActive, setIsActive] = useState(false)
   const router = useRouter()
 
   const handleNext = () => {
+    setGender(selectedGender === '남성')
+    setBirth(formatBirth(localBirth))
     router.push('/survey/location')
   }
 
   useEffect(() => {
-    if (isValidBirth(birth) && selectedGender) {
+    if (isValidBirth(localBirth) && selectedGender) {
       setIsActive(true)
     } else {
       setIsActive(false)
     }
-  }, [birth, selectedGender])
+  }, [localBirth, selectedGender])
 
   return (
     <div className={styles.container}>
@@ -36,8 +41,8 @@ export default function GenderBirth() {
           label="생년월일"
           placeholder="생년월일 8자리 (YYYYMMDD)"
           type="text"
-          value={birth}
-          onChange={(e) => setBirth(e.target.value)}
+          value={localBirth}
+          onChange={(e) => setLocalBirth(e.target.value)}
         />
       </div>
       <div className={styles.checkBoxWrapper}>

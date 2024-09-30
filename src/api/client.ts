@@ -26,7 +26,7 @@ client.interceptors.response.use(
         return
       }
     } else {
-      throw new Error(error.response.data.message)
+      throw new Error(error.response)
     }
     throw error
   }
