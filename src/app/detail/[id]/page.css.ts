@@ -10,6 +10,8 @@ export const container = style({
 })
 
 export const titleSection = style({
+  marginTop: '55px',
+
   display: 'flex',
   flexDirection: 'column',
   gap: '17px',
