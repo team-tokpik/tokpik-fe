@@ -7,6 +7,7 @@ type NormalInputFieldProps = {
   onFocus?: () => void
   onBlur?: () => void
   style?: React.CSSProperties
+  displayValue?: string
 }
 
 export default function NormalInputField({
@@ -16,19 +17,9 @@ export default function NormalInputField({
   onFocus,
   onBlur,
   style,
+  displayValue,
 }: NormalInputFieldProps) {
-  const [displayValue, setDisplayValue] = useState('')
   const [isFocused, setIsFocused] = useState(false)
-
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value) {
-      const date = new Date(e.target.value)
-      const formattedDate = `${date.getMonth() + 1}월 ${date.getDate()}일`
-      setDisplayValue(formattedDate)
-    } else {
-      setDisplayValue('')
-    }
-  }
 
   const handleFocus = () => {
     setIsFocused(true)
@@ -41,7 +32,7 @@ export default function NormalInputField({
   }
 
   const renderInput = (inputType: string) => {
-    const inputValue = inputType === 'date' ? displayValue : value
+    const inputValue = inputType === 'date' ? displayValue || '' : value
     const hasValue = inputValue.trim() !== ''
 
     return (
@@ -49,7 +40,7 @@ export default function NormalInputField({
         <input
           type={inputType}
           value={value}
-          onChange={inputType === 'date' ? handleDateChange : onChange}
+          onChange={onChange}
           placeholder=""
           className={styles.nativeInput}
           onFocus={handleFocus}
