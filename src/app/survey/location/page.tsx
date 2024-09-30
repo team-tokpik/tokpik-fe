@@ -8,10 +8,12 @@ import Button from '@/components/Button/Button'
 import { useRouter } from 'next/navigation'
 import { placeTags } from '@/types/survey'
 import { getPlace } from '@/api/survey/getPlace'
+import { useProfileStore } from '@/store/useProfile'
 
 export default function Location() {
-  const [selectedLocation, setSelectedLocation] = useState<string[]>([])
+  const [selectedLocation, setSelectedLocation] = useState<number[]>([])
   const [placeList, setPlaceList] = useState<placeTags[]>([])
+  const setPlaceTags = useProfileStore((state) => state.actions.setPlaceTags)
   const router = useRouter()
 
   useEffect(() => {
@@ -20,15 +22,17 @@ export default function Location() {
     })
   }, [])
 
-  const toggleLocation = (label: string) => {
+  const toggleLocation = (placeTagId: number) => {
     setSelectedLocation((prev) =>
-      prev.includes(label)
-        ? prev.filter((item) => item !== label)
-        : [...prev, label]
+      prev.includes(placeTagId)
+        ? prev.filter((item) => item !== placeTagId)
+        : [...prev, placeTagId]
     )
   }
 
   const handleNext = () => {
+    setPlaceTags(selectedLocation.map((placeTagId) => placeTagId))
+
     router.push('/survey/subject')
   }
 
@@ -46,12 +50,12 @@ export default function Location() {
           <div
             className={styles.locationItem}
             key={item.placeTagId}
-            onClick={() => toggleLocation(item.content)}
+            onClick={() => toggleLocation(item.placeTagId)}
           >
             <CheckBox
               label={item.content}
               emoji={EMOJI_MAP[item.content]}
-              checked={selectedLocation.includes(item.content)}
+              checked={selectedLocation.includes(item.placeTagId)}
             />
           </div>
         ))}
