@@ -11,7 +11,7 @@ import { useMemo } from 'react'
 import SelectedFilter from '@/components/SelectedFilter/SelectedFilter'
 import { ItemType } from '@/types/card'
 import { postTopics } from '@/api/main/postTopics'
-import { TopicRequestBody } from '@/api/main/postTopics'  
+import { TopicRequestBody } from '@/types/topicRequestBody'
 import Spinner from '@/components/Spinner/Spinner'
 export default function Home() {
   const filterList = useFilterListState() // 전역 상태: 필터 리스트
@@ -32,7 +32,7 @@ export default function Home() {
 
   //처음 렌더시 대화주제를 가져온다.
   useEffect(() => {
-    if(isFilterOn) return
+    if(isFilterOn) return //필터가 닫혀있을때만 아래 함수 실행
     setIsLoading(true); // API 요청 시작 전 로딩 상태 설정
     const requestBody: TopicRequestBody = {
       includeFilterCondition: filterList.size > 0,
@@ -40,8 +40,8 @@ export default function Home() {
       talkSituations: [],
       talkMoods: [],
       talkPartnerGender: false,
-      talkPartnerAgeLowerBound: 0,
-      talkPartnerAgeUpperBound: 100,
+      talkPartnerAgeLowerBound: 20,
+      talkPartnerAgeUpperBound: 60,
     }
 
     filterList.forEach(item => {
@@ -59,6 +59,7 @@ export default function Home() {
           if (item.value === '남성') {
             requestBody.talkPartnerGender = true
           }
+          break
         case '나이':
           const [lowerBound, upperBound] = item.value.split('-');
           requestBody.talkPartnerAgeLowerBound = parseInt(lowerBound);
@@ -66,6 +67,13 @@ export default function Home() {
           break
       }
     })
+    // requestBody에서 빈 배열 제거
+    Object.keys(requestBody).forEach((key) => {
+      if (Array.isArray((requestBody as any)[key]) && (requestBody as any)[key].length === 0) {
+        delete (requestBody as any)[key];
+      }
+    });
+    console.log('@@',requestBody)
 
     postTopics(requestBody)
       .then(response => {
