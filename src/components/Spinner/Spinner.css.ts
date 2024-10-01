@@ -1,6 +1,7 @@
 import { style, keyframes } from '@vanilla-extract/css'
 import { vars } from '@/app/globals.css'
 import { Square } from '../Square/Square.css'
+
 export const OuterContainer = style({
   width: '100vw',
   height: '100vh',

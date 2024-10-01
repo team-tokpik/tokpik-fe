@@ -118,7 +118,7 @@ export default function Home() {
 
   return (
     <>
-    {/* <Spinner/> */}
+
       {isLoading && <Spinner text={'내게 꼭 맞는 대화 주제\n톡픽이 만들어지고 있어요!'} />}
       <Navigation />
       <main className={styles.Main({ isFilterOn })}>
