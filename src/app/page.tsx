@@ -10,95 +10,87 @@ import { useFilterListState, useFilterListActions } from '@/store/useFilterList'
 import { useMemo } from 'react'
 import SelectedFilter from '@/components/SelectedFilter/SelectedFilter'
 import { ItemType } from '@/types/card'
+import { postTopics } from '@/api/main/postTopics'
+import { TopicRequestBody } from '@/api/main/postTopics'  
+import Spinner from '@/components/Spinner/Spinner'
 export default function Home() {
   const filterList = useFilterListState() // 전역 상태: 필터 리스트
   const { popList } = useFilterListActions() // 전역 액션
   const [isFilterListEmpty, setIsFilterListEmpty] = useState(false) //필터 리스트 비었는지 여부
   const [isFilterOn, setIsFilterOn] = useState(false) // 필터 열림 여부
+  const [isLoading, setIsLoading] = useState(false);
 
   const [cardContents, setCardContents] = useState<ItemType[]>([
-    { type: 'business', title: '카드 1', description: '내용 1' },
-    { type: 'issue', title: '카드 2', description: '내용 2' },
-    { type: 'love', title: '카드 3', description: '내용 3' },
-    { type: 'hobby', title: '카드 4', description: '내용 4' },
-    { type: 'humor', title: '카드 5', description: '내용 5' },
-    { type: 'ice-breaker', title: '카드 6', description: '내용 6' },
-    { type: 'self-development', title: '카드 7', description: '내용 7' },
+    // { type: 'business', title: '카드 1', description: '내용 1' },
+    // { type: 'issue', title: '카드 2', description: '내용 2' },
+    // { type: 'love', title: '카드 3', description: '내용 3' },
+    // { type: 'hobby', title: '카드 4', description: '내용 4' },
+    // { type: 'humor', title: '카드 5', description: '내용 5' },
+    // { type: 'ice-breaker', title: '카드 6', description: '내용 6' },
+    // { type: 'self-development', title: '카드 7', description: '내용 7' },
   ])
 
   //처음 렌더시 대화주제를 가져온다.
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        interface Params {
-          includeFilterCondition: boolean
-          talkPurposes: string
-          talkSituations: string
-          talkMoods: string
-          talkPartnerGender: boolean
-          talkPartnerAgeLowerBound: number
-          talkPartnerAgeUpperBound: number
-        }
-
-        const params: Params = {
-          includeFilterCondition: true,
-          talkPurposes: '친목',
-          talkSituations: '첫만남',
-          talkMoods: '유익한 분위기',
-          talkPartnerGender: true,
-          talkPartnerAgeLowerBound: 20,
-          talkPartnerAgeUpperBound: 25,
-        }
-
-        // 쿼리 문자열을 생성하는 함수 정의
-        const toQueryString = (params: Params) => {
-          return Object.keys(params)
-            .map(
-              (key) =>
-                `${encodeURIComponent(key)}=${encodeURIComponent(
-                  (params as any)[key]
-                )}`
-            )
-            .join('&')
-        }
-
-        // 쿼리 문자열 생성
-        const queryString = toQueryString(params)
-        const response = await fetch(
-          `http://tokpik.co.kr/topics?${queryString}`
-        )
-
-        // HTTP 응답 검사
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-
-        const data = await response.json()
-        console.log(data)
-
-        // API 응답 데이터 변환 - 키 이름이 달라서 변환
-        const transformedData = data.map((item: any) => ({
-          type: item.topicTag, // topicTag를 type으로
-          title: item.title, // title은 그대로
-          description: item.subtitle, // subtitle을 description으로
-        }))
-
-        // 데이터 저장
-        setCardContents(transformedData)
-      } catch (error) {
-        console.error('Fetch error:', error)
-      }
+    if(isFilterOn) return
+    setIsLoading(true); // API 요청 시작 전 로딩 상태 설정
+    const requestBody: TopicRequestBody = {
+      includeFilterCondition: filterList.size > 0,
+      talkPurposes: [],
+      talkSituations: [],
+      talkMoods: [],
+      talkPartnerGender: false,
+      talkPartnerAgeLowerBound: 0,
+      talkPartnerAgeUpperBound: 100,
     }
 
-    fetchData()
-  }, [])
+    filterList.forEach(item => {
+      switch (item.tab) {
+        case '목적':
+          requestBody.talkPurposes.push(item.value)
+          break
+        case '상황':
+          requestBody.talkSituations.push(item.value)
+          break
+        case '분위기':
+          requestBody.talkMoods.push(item.value)
+          break
+        case '상대':
+          if (item.value === '남성') {
+            requestBody.talkPartnerGender = true
+          }
+        case '나이':
+          const [lowerBound, upperBound] = item.value.split('-');
+          requestBody.talkPartnerAgeLowerBound = parseInt(lowerBound);
+          requestBody.talkPartnerAgeUpperBound = parseInt(upperBound);
+          break
+      }
+    })
+
+    postTopics(requestBody)
+      .then(response => {
+        // 여기서 응답 처리
+        setCardContents(response.topics.map(topic => ({
+          type: topic.topicTag as ItemType['type'],
+          title: topic.title,
+          description: topic.subtitle
+        })))
+      })
+      .catch(error => {
+        console.error('토픽 가져오기 오류:', error)
+      })
+      .finally(() => {
+        setIsLoading(false); // API 요청 완료 후 로딩 상태 해제
+      });
+  }, [filterList])
+
 
   // 메모이제이션을 이용해서 selectedFilter들을 렌더링!
   const selectedFilterList = useMemo(() => {
     return Array.from(filterList).map((value) => (
       <SelectedFilter
-        key={value}
-        text={value}
+        key={value.value}
+        text={value.value}
         onClick={() => {
           popList(value)
         }}
@@ -122,6 +114,7 @@ export default function Home() {
 
   return (
     <>
+      {isLoading && <Spinner text={'내게 꼭 맞는 대화 주제\n톡픽이 만들어지고 있어요!'} />}
       <Navigation />
       <main className={styles.Main({ isFilterOn })}>
         {/* header section */}

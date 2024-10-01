@@ -1,10 +1,10 @@
 import Home from '/public/images/Home.svg'
-import Scrap from '/public/images/Scrap.svg'
-import My from '/public/images/My.svg'
+import MyTokpik from '/public/images/MyTokpik.svg'
+import System from '/public/images/System.svg'
 import { NavItemType } from '../types/navigation'
 
 export const NAV_ITEMS: NavItemType[] = [
   { Icon: Home, text: 'Home', path: '/' },
-  { Icon: Scrap, text: 'Scrap', path: '/scrap' },
-  { Icon: My, text: 'My', path: '/my' },
+  { Icon: MyTokpik, text: 'MyTokpik', path: '/scrap' },
+  { Icon: System, text: 'System', path: '/my' },
 ]

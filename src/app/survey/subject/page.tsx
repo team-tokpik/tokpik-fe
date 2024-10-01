@@ -6,11 +6,14 @@ import Button from '@/components/Button/Button'
 import { useRouter } from 'next/navigation'
 import { topicTags } from '@/types/survey'
 import { getTopic } from '@/api/survey/getTopic'
+import { useProfileStore } from '@/store/useProfile'
 
 export default function Subject() {
-  const [selectedSubject, setSelectedSubject] = useState<string[]>([])
+  const [selectedSubject, setSelectedSubject] = useState<number[]>([])
   const [topicList, setTopicList] = useState<topicTags[]>([])
   const router = useRouter()
+  const setTopicTags = useProfileStore((state) => state.actions.setTopicTags)
+  const postProfile = useProfileStore((state) => state.actions.postProfile)
 
   useEffect(() => {
     getTopic().then((res) => {
@@ -18,7 +21,7 @@ export default function Subject() {
     })
   }, [])
 
-  const toggleSubject = (label: string) => {
+  const toggleSubject = (label: number) => {
     setSelectedSubject((prev) =>
       prev.includes(label)
         ? prev.filter((item) => item !== label)
@@ -27,6 +30,8 @@ export default function Subject() {
   }
 
   const handleNext = () => {
+    setTopicTags(selectedSubject)
+    postProfile()
     router.push('/survey/location')
   }
 
@@ -49,11 +54,11 @@ export default function Subject() {
           <div
             className={styles.subjectItem}
             key={item.topicTagId}
-            onClick={() => toggleSubject(item.content)}
+            onClick={() => toggleSubject(item.topicTagId)}
           >
             <CheckBox
               label={item.content}
-              checked={selectedSubject.includes(item.content)}
+              checked={selectedSubject.includes(item.topicTagId)}
             />
           </div>
         ))}

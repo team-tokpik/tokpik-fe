@@ -11,7 +11,6 @@ import * as styles from './Card.css'
 import { CardType } from '@/types/card'
 import { RecipeVariants } from '@vanilla-extract/recipes'
 import Subtitle from '../Subtitle/Subtitle'
-
 const cardImages: Record<
   CardType['type'],
   React.FC<React.SVGProps<SVGSVGElement>>
@@ -34,10 +33,13 @@ export default function Card({
   type,
   title,
   description,
-
   relativePosition,
 }: DynamicCardProps) {
-  const CardImage = cardImages[type]as React.FC<React.SVGProps<SVGSVGElement>>
+  const CardImage = cardImages[type] as React.FC<React.SVGProps<SVGSVGElement>>
+
+  const handleClick = () => {
+    console.log('click')
+  }
 
   if (size === 'large') {
     return (
@@ -45,9 +47,9 @@ export default function Card({
         className={styles.cardRecipe({
           size,
           type,
-       
           relativePosition,
         })}
+        onClick={handleClick}
       >
         <Subtitle type={type} isSmall={false} isCard={true} />
 
