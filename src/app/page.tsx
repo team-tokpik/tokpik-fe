@@ -58,15 +58,11 @@ export default function Home() {
         case '상대':
           if (item.value === '남성') {
             requestBody.talkPartnerGender = true
-          } else if (item.value.includes('대')) {
-            const age = parseInt(item.value)
-            if (age < requestBody.talkPartnerAgeLowerBound || requestBody.talkPartnerAgeLowerBound === 0) {
-              requestBody.talkPartnerAgeLowerBound = age
-            }
-            if (age > requestBody.talkPartnerAgeUpperBound) {
-              requestBody.talkPartnerAgeUpperBound = age + 9
-            }
           }
+        case '나이':
+          const [lowerBound, upperBound] = item.value.split('-');
+          requestBody.talkPartnerAgeLowerBound = parseInt(lowerBound);
+          requestBody.talkPartnerAgeUpperBound = parseInt(upperBound);
           break
       }
     })
