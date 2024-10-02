@@ -7,12 +7,10 @@ const meta: Meta<typeof BackBar> = {
   tags: ['autodocs'],
 }
 
+export default meta
+
 type Story = StoryObj<typeof BackBar>
 
 export const Default: Story = {
-  args: {
-    title: 'BackBar',
-  },
+  args: {},
 }
-
-export default meta

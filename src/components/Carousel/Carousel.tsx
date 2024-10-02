@@ -7,17 +7,25 @@ const Carousel = ({ items }: carousel) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const carouselRef = useRef<HTMLDivElement>(null);
   const dragPointRef = useRef<number>(0);
-
   
+  
+  useEffect(() => {
+    console.log('아이템:\n',typeof items.length,'\n',items.length,'\n',items)
+    
+  },[items])
 
   useEffect(() => {
+    setCurrentIndex(0)
      // 케루셀 컨테이너 가져오기
      const carouselDiv = carouselRef.current;
     //케루셀 넘기기 함수
     const handleNext = () => {
+      console.log(typeof items.length,items.length)
       setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
     }
     const handlePrev = () => {
+      console.log(typeof items.length,items.length)
+
       setCurrentIndex(
         (prevIndex) => (prevIndex - 1 + items.length) % items.length
       )
@@ -56,11 +64,14 @@ const Carousel = ({ items }: carousel) => {
         carouselDiv.removeEventListener('touchend', handleDragEnd);
       }
     };
-  }, []);
+  }, [items]);
+  //items를 의존성에 두지 않으면 케루셀 넘기기 이벤트가 작동하지 않는다!
+  //items를 받아오기 전에 함수가 실행되어서 items.length가 0이 되어버린다!
 
   return (
     <div className={styles.OuterContainer} ref={carouselRef}>
-     
+      <p style={{color:'white',position:'absolute',top:0,left:0}}>     {currentIndex}
+      </p>
       {items.map((data, index) => (
       <Card
         key={index}

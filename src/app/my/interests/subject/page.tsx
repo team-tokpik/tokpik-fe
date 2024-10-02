@@ -2,11 +2,11 @@
 import * as styles from './page.css'
 import BackBar from '@/components/BackBar/BackBar'
 import InterestButton from '@/components/InterestButton/InterestButton'
-import { useInterestListState,useInterestListActions } from '@/store/useInterestList'
+import { useInterestListActions } from '@/store/useInterestList'
 import { subject } from '@/constants/subject'
 const App = () => {
   const { findList, pushList, popList } = useInterestListActions()
-  const {subjectList} = useInterestListState()
+
   return (
     <>
       <BackBar />

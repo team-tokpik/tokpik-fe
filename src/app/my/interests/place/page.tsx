@@ -2,16 +2,16 @@
 import * as styles from './page.css'
 import BackBar from '@/components/BackBar/BackBar'
 import InterestButton from '@/components/InterestButton/InterestButton'
-import { useInterestListActions,useInterestListState} from '@/store/useInterestList'
+import { useInterestListActions } from '@/store/useInterestList'
 import { location } from '@/constants/location'
+
 const App = () => {
     const {findList,pushList,popList} = useInterestListActions()
-    const {placeList} = useInterestListState()
   return (
     <>
       <BackBar />
       <main className={styles.Main}> 
-        {/* header section*/}
+        {/* 헤더 섹션 */}
         <div className={styles.HeadContainer}>
           <p>어떤 장소에서</p>
           <p>톡픽이 필요한가요?</p>
@@ -19,20 +19,28 @@ const App = () => {
         </div>
         <div className={styles.InterestContainer}>
           {location.map((item)=>(
-            <InterestButton size='large' text={item.label} isOn={findList('place',item.label)} onClick={()=>{findList('place',item.label)?popList('place',item.label):pushList('place',item.label)}}/>
+            <InterestButton 
+              key={item.label}
+              size='large' 
+              text={item.label} 
+              isOn={findList('place',item.label)} 
+              onClick={()=>{findList('place',item.label) ? popList('place',item.label) : pushList('place',item.label)}}
+            />
           ))}
-           </div>
+        </div>
          
         {/* submit button */}
           
         <button
-            className={styles.SubmitButton}
-            disabled={false}
-            onClick={() => {}}
-          >완료
-          </button>
-        </main>
+          className={styles.SubmitButton}
+          disabled={false}
+          onClick={() => {}}
+        >
+          완료
+        </button>
+      </main>
     </>
   )
 }
+
 export default App

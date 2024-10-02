@@ -15,12 +15,12 @@ const cardImages: Record<
   CardType['type'],
   React.FC<React.SVGProps<SVGSVGElement>>
 > = {
-  relation: Egg,
-  issue: Tomato,
-  love: Sweet,
-  business: Ham,
-  hobby: Cheese,
-  humor: Lettuce,
+  'relation': Egg,
+  'issue': Tomato,
+  'love': Sweet,
+  'business': Ham,
+  'hobby': Cheese,
+  'humor': Lettuce,
   'ice-breaker': Avocado,
   'self-development': Pimento,
 }

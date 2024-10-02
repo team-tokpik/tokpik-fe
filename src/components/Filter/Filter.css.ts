@@ -147,3 +147,55 @@ export const SubBody = style({
   display: 'flex',
   flexWrap: 'wrap',
 })
+
+export const AgeSlider = style({
+  width: '100%',
+  padding: '0 1.5rem',
+  marginBottom: '1rem',
+  position: 'relative',
+})
+
+export const AgeSliderContainer = style({
+  position: 'relative',
+  width: '100%',
+  height: '4px',
+  paddingBlock:'1.25rem'
+})
+
+export const AgeSliderInput = style({
+  position: 'absolute',
+  width: '100%',
+  appearance: 'none',
+  background: 'transparent',
+  pointerEvents: 'none',
+  zIndex: 2, // 슬라이더 입력을 트랙 위에 배치
+  '::-webkit-slider-thumb': {
+    appearance: 'none',
+    width: '0.85rem',
+    height: '0.85rem',
+    background: vars.color.white,
+    cursor: 'pointer',
+    borderRadius: '50%',
+    pointerEvents: 'auto',
+    transform: 'translateY(-61%)',
+    zIndex: 3, // 슬라이더 썸을 가장 위에 배치
+  },
+})
+
+export const AgeSliderTrack = style({
+  position: 'absolute',
+  height: '0.125rem',
+  background: vars.color.primary,
+  top: '50%',
+  transform: 'translateY(-50%)',
+  zIndex: 1, // 트랙을 슬라이더 입력 아래에 배치
+})
+
+export const AgeSliderLabels = style({
+  display: 'flex',
+  justifyContent: 'flex-start',
+  marginTop: '1rem',
+  color: vars.color.white,
+  fontSize: '0.9375rem',
+  gap:'0.3rem'
+})

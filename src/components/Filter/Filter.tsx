@@ -11,15 +11,19 @@ import { filterTabTexts } from '@/constants/filterTabTexts'
 import { useFilterListState, useFilterListActions } from '@/store/useFilterList'
 import SelectedFilter from '../SelectedFilter/SelectedFilter'
 const Filter = ({ isOn, filterHandler }: filter) => {
+  const [minAge, setMinAge] = useState(20);
+  const [maxAge, setMaxAge] = useState(60);
+  useEffect(() => {
+    pushList({ tab: '나이', value: `${minAge}-${maxAge}` });
+  }, [minAge, maxAge]);
+ 
   const filterList = useFilterListState() //전역상태: 선택된 필터 리스트
+  const { pushList, findList, popList, refleshList } = useFilterListActions()  // 전역상태 액션들
 
   // 테스트코드: 필터리스트가 콘솔에 나옴
   useEffect(() => {
     console.log(filterList)
   }, [filterList])
-
-  // 전역상태 액션들
-  const { pushList, findList, popList, refleshList } = useFilterListActions()
 
   // 선택된 탭
   const [selectedTab, setSelectedTab] = useState<string>('목적')
@@ -31,7 +35,11 @@ const Filter = ({ isOn, filterHandler }: filter) => {
 
   // 필터 내용 클릭하면 전역상태에 저장~
   const FilterContentButtonCLickHandler = (item: string) => {
-    findList({tab:selectedTab,value:item}) ? popList({tab:selectedTab,value:item}) : pushList({tab:selectedTab,value:item})
+    if(item.includes('-')) popList({ tab: '나이', value: item })
+    else{findList({ tab: selectedTab, value: item })
+      ? popList({ tab: selectedTab, value: item })
+      : pushList({ tab: selectedTab, value: item })
+    }
   }
 
   //각 탭을 클릭하면 탭에 따른 내용으로 바뀝니다!
@@ -43,7 +51,7 @@ const Filter = ({ isOn, filterHandler }: filter) => {
           key={content[1]}
           size={size}
           content={content[0]}
-          isOn={findList({tab:selectedTab,value:content[1]})}
+          isOn={findList({ tab: selectedTab, value: content[1] })}
           onClick={() => {
             FilterContentButtonCLickHandler(content[1])
           }}
@@ -55,21 +63,21 @@ const Filter = ({ isOn, filterHandler }: filter) => {
         return (
           <div className={styles.ContentBox}>
             {renderButtons(filterContant.purpose, 50)}
-            <FilterInput size={50} />
+            <FilterInput size={50} tab={selectedTab}/>
           </div>
         )
       case '상황':
         return (
           <div className={styles.ContentBox}>
             {renderButtons(filterContant.situation, 50)}
-            <FilterInput size={50} />
+            <FilterInput size={50} tab={selectedTab} />
           </div>
         )
       case '분위기':
         return (
           <div className={styles.ContentBox}>
             {renderButtons(filterContant.mood, 100)}
-            <FilterInput size={100} />
+            <FilterInput size={100} tab={selectedTab}/>
           </div>
         )
       case '상대':
@@ -81,9 +89,50 @@ const Filter = ({ isOn, filterHandler }: filter) => {
             </div>
             <div className={styles.SubHead}>연령대</div>
             <div className={styles.SubBody}>
-              {renderButtons(filterContant.partnerAge, 50)}
+              {/* 슬라이더 */}
+              <div className={styles.AgeSlider}>
+              <div className={styles.AgeSliderLabels}>
+                  <span>{minAge}세</span>
+                  <span>~</span>
+                  <span>{maxAge}세</span>
+                </div>
+                <div className={styles.AgeSliderContainer}>
+                  <input
+                    type="range"
+                    min="20"
+                    max="60"
+                    step="1"
+                    className={styles.AgeSliderInput}
+                    value={minAge}
+                    onChange={(e) => {
+                      const newMinAge = Number(e.target.value);
+                      setMinAge(Math.min(newMinAge, maxAge));
+                    }}
+                  />
+                  <input
+                    type="range"
+                    min="20"
+                    max="60"
+                    step="1"
+                    className={styles.AgeSliderInput}
+                    value={maxAge}
+                    onChange={(e) => {
+                      const newMaxAge = Number(e.target.value);
+                      setMaxAge(Math.max(newMaxAge, minAge));
+                    }}
+                  />
+                  <div
+                    className={styles.AgeSliderTrack}
+                    style={{
+                      left: `${((minAge - 20) / 40) * 100}%`,
+                      width: `${((maxAge - minAge) / 40) * 100}%`,
+                    }}
+                  />
+                </div>
+               
+              </div>
+              {/* {renderButtons(filterContant.partnerAge, 50)} */}
             </div>
-            <FilterInput size={50} />
           </div>
         )
       default:
@@ -91,6 +140,12 @@ const Filter = ({ isOn, filterHandler }: filter) => {
     }
   }
 
+  const refleshHandler=()=>{
+    setMaxAge(60);
+    setMinAge(20);
+    refleshList();
+
+  }
   // 적용하기 버튼 핸들러
   const submitHandler = () => {
     // api연결 예정!
@@ -136,7 +191,7 @@ const Filter = ({ isOn, filterHandler }: filter) => {
       </div>
       {/* button section */}
       <div className={styles.ButtonBox}>
-        <button className={styles.RefleshButton} onClick={refleshList}>
+        <button className={styles.RefleshButton} onClick={refleshHandler}>
           <FilterRefresh />
           초기화
         </button>

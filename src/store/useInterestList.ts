@@ -36,7 +36,7 @@ const useInterestListStore = create<InterestListState & InterestListActions>(
           return loc === 'place' ? { placeList: newSet } : { subjectList: newSet }
         }),
       refreshList: (loc) =>
-        set((state) => {
+        set(() => {
           return loc === 'place' ? { placeList: new Set() } : { subjectList: new Set() }
         }),
     },

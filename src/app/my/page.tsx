@@ -4,8 +4,19 @@ import * as styles from './page.css'
 import MyMan from '/public/images/MyMan.svg'
 import MyTabs from '@/components/MyTabs/MyTabs'
 import { myTabs } from '@/constants/myTabs'
-
+import { getUserProfile } from '@/api/my/getUserProfile'
+import { useEffect, useState } from 'react'
 export default function Home() {
+  const [userEmail, setUserEmail] = useState<string>('');
+  const [profilePhotoUrl, setProfilePhotoUrl] = useState<string>('');
+  useEffect(() => {
+    (async () => {    
+      const data = await getUserProfile();
+      setUserEmail(data.maskedEmail);
+      setProfilePhotoUrl(data.profilePhotoUrl);
+    })()
+    console.log(profilePhotoUrl)
+  }, []);
   return (
     <>
       <Navigation />
@@ -14,7 +25,7 @@ export default function Home() {
         <div className={styles.EmailOuterBox}>
           <div className={styles.EmailInnerBox}>
             <MyMan />
-            *******@kakao.net
+            {userEmail}
           </div>
         </div>
         {/* button section */}

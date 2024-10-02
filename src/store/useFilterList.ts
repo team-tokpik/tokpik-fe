@@ -36,6 +36,15 @@ const useFilterListStore = create<FilterListState & FilterListActions>(
           } else if (Array.from(state.list).some(i => i.tab === item.tab && i.value === '남성') && item.value === '여성') {
             tmpSet.delete(Array.from(state.list).find(i => i.tab === item.tab && i.value === '남성')!)
           }
+          // '상대' 탭의 기존 항목 삭제 후 새 항목 추가
+          if (item.tab === '나이') {
+            Array.from(tmpSet).forEach(existingItem => {
+              if (existingItem.tab === '나이') {
+                tmpSet.delete(existingItem);
+                tmpSet.add(item)
+              }
+            });
+          }
           return { list: tmpSet }
         }),
       findList: (item) => {
