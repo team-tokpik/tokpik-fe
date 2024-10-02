@@ -1,5 +1,4 @@
 'use client'
-import Navigation from '@/components/Navigation/Navigation'
 import * as styles from './page.css'
 import { useState,useEffect } from 'react'
 import { getTerms,Term } from '@/api/my/getTerms'

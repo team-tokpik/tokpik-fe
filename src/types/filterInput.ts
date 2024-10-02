@@ -1,3 +1,5 @@
 export interface filterInput {
-  size: 50 | 100
+  size: 50 | 100,
+  tab:string
+
 }

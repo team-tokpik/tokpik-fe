@@ -1,4 +1,4 @@
-import { itemType } from './card'
+import { ItemType } from './card'
 export interface carousel {
-  items: itemType[]
+  items: ItemType[]
 }

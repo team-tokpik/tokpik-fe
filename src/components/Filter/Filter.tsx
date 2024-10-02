@@ -63,21 +63,21 @@ const Filter = ({ isOn, filterHandler }: filter) => {
         return (
           <div className={styles.ContentBox}>
             {renderButtons(filterContant.purpose, 50)}
-            <FilterInput size={50} />
+            <FilterInput size={50} tab={selectedTab}/>
           </div>
         )
       case '상황':
         return (
           <div className={styles.ContentBox}>
             {renderButtons(filterContant.situation, 50)}
-            <FilterInput size={50} />
+            <FilterInput size={50} tab={selectedTab} />
           </div>
         )
       case '분위기':
         return (
           <div className={styles.ContentBox}>
             {renderButtons(filterContant.mood, 100)}
-            <FilterInput size={100} />
+            <FilterInput size={100} tab={selectedTab}/>
           </div>
         )
       case '상대':

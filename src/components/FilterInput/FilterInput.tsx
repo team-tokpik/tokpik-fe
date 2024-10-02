@@ -5,7 +5,7 @@ import { filterInput } from '@/types/filterInput'
 import OrangeO from '/public/images/OrangeO.svg'
 import GrayX from '/public/images/GrayX.svg'
 import { useFilterListActions } from '@/store/useFilterList'
-const FilterInput = ({ size }: filterInput) => {
+const FilterInput = ({ size,tab }: filterInput) => {
   const [istouched, setIstouched] = useState<boolean>(false) // 컴포넌트 on/off 여부
   const inputRef = useRef<HTMLInputElement | null>(null) // input을 감지할 ref
   const containerRef = useRef<HTMLDivElement>(null) // 컴포넌트 바깥을 감지할 ref
@@ -25,7 +25,7 @@ const FilterInput = ({ size }: filterInput) => {
         // input의 내용을 가져옵니다.
         const inputValue = inputRef.current.value
         // 전역상태 리스트에 값추가
-        pushList(inputValue)
+        pushList({tab:tab,value:inputValue})
         // 입력 버튼 off하기
         setIstouched(false)
       }

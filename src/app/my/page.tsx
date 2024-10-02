@@ -15,6 +15,7 @@ export default function Home() {
       setUserEmail(data.maskedEmail);
       setProfilePhotoUrl(data.profilePhotoUrl);
     })()
+    console.log(profilePhotoUrl)
   }, []);
   return (
     <>
