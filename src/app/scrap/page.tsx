@@ -3,19 +3,35 @@ import Navigation from '@/components/Navigation/Navigation'
 import * as styles from './page.css'
 import {scrapTabTexts} from '@/constants/scrapTabTexts'
 import FilterTabButton from '@/components/FilterTabButton/FilterTabButton'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import ScrapTitle from '@/components/ScrapTitle/ScrapTitle'
 import { vars } from '../globals.css'
 import Plus from '/public/images/FilterInputPlus.svg'
 import Minus from '/public/images/Minus.svg'
+import { getUsersScraps } from '@/api/scrap/getUsersScraps'
+import { Scrap } from '@/api/scrap/getUsersScraps'
+import { subject } from '@/constants/subject'
+import { useRouter } from 'next/navigation'
 export default function Home() {
     // 선택된 탭
     const [selectedTab, setSelectedTab] = useState<string>('스크랩')
+    const [scraps,setScraps] = useState<Scrap[]>([])
+
+    const router = useRouter() //라우터
+
 
     // 탭 클릭시 클릭된 버튼의 텍스트를 상태로 저장
     const handleTabSelect = (text: string) => {
       setSelectedTab(text)
     }
+
+    //화면이 마운트될 때, 스크랩 리스트 들을 가져옵니다!
+    useEffect(()=>{
+      getUsersScraps().then((res)=>{
+        setScraps(res.scraps)
+        console.log(res.scraps)
+      })
+    },[])
   return (
     <>
       <Navigation />
@@ -42,10 +58,20 @@ export default function Home() {
         </div>
         {/* scrap title section */}
         <div className={styles.ScrapTitleContainer}>
-          <ScrapTitle title="스크랩 제목" onClick={()=>{}} count={8} colorSet={[vars.color.avocado,vars.color.cheese,vars.color.egg,undefined]}/>
-          <ScrapTitle title="스크랩 제목" onClick={()=>{}} count={8} colorSet={[vars.color.avocado,vars.color.cheese,vars.color.egg,undefined]}/>
-          <ScrapTitle title="스크랩 제목" onClick={()=>{}} count={8} colorSet={[vars.color.avocado,vars.color.cheese,vars.color.egg,undefined]}/>
-
+          {scraps.map((scrap)=>{
+            return <ScrapTitle 
+              key={scrap.scrapId}
+              title={scrap.scrapName} 
+              onClick={() => {
+                router.push(`/scrap/${scrap.scrapId}?scrapName=${scrap.scrapName}&length=${scrap.recentTopicTypes.length}`);
+              }}
+              count={scrap.recentTopicTypes.length} 
+              colorSet={scrap.recentTopicTypes.slice(0, 4).map((topic) => {
+                const matchedSubject = subject.find(s => s.label === topic.topicTypeContent);
+                return matchedSubject ? `${matchedSubject.eng}` : undefined;
+              }).concat(Array(4).fill(undefined)).slice(0, 4) as [string | undefined, string | undefined, string | undefined, string | undefined]}
+            />
+          })}
         </div>
       </main>
     </>

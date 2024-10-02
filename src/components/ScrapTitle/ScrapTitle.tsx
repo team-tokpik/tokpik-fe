@@ -1,6 +1,7 @@
 import * as styles from './ScrapTitle.css'
 import RightArrow from '/public/images/MyRightArrow.svg'
 import Square from '../Square/Square'
+import { useEffect } from 'react'
 interface ScrapTitleProps {
   title: string
   colorSet: [string|undefined, string|undefined, string|undefined, string|undefined] 
@@ -8,6 +9,7 @@ interface ScrapTitleProps {
   onClick: () => void
 }
 const ScrapTitle = ({title, colorSet, count, onClick}: ScrapTitleProps) => {
+
   return (
     <div className={styles.OuterContainer} onClick={onClick}>
       <div className={styles.TextContainer}>

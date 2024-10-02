@@ -68,5 +68,6 @@ export const ScrapTitleContainer = style({
   display:'flex',
   flexDirection:'column',
   gap:'0.94rem',
-  overflowY:'auto'
+  overflowY:'auto',
+  paddingBottom:'70px'
 })
