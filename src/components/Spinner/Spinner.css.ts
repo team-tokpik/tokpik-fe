@@ -1,5 +1,6 @@
-import {style, keyframes} from '@vanilla-extract/css'
+import { style, keyframes } from '@vanilla-extract/css'
 import { vars } from '@/app/globals.css'
+import { Square } from '../Square/Square.css'
 
 export const OuterContainer = style({
   width: '100vw',
@@ -16,24 +17,16 @@ export const OuterContainer = style({
 })
 
 export const SpinnerContainer = style({
-
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   marginBottom: '3.63rem',
-  gap:'0.65rem'
-
+  gap: '0.65rem',
 })
 
-export const Rectangle = style({
-    width: '1.1875rem',
-    aspectRatio:'1/1',
-    flexShrink: 0,
-    borderRadius: '0.21875rem',
-    backgroundColor: vars.color.primary,
-})
 
-// Rectangle1,3,4 을 위한 애니메이션
+
+// Square1,3,4 을 위한 애니메이션
 const bounceKeyframes = keyframes({
   '0%, 100%': { transform: 'translateY(0)' },
   '50%': { transform: 'translateY(-20px)' },
@@ -43,14 +36,14 @@ const bounce = style({
   animation: `${bounceKeyframes} 1s ease-in-out infinite`,
 })
 
-export const Rectangle1 = style([
-  Rectangle,
+export const Square1 = style([
+  Square,
   bounce,
   {
     animationDelay: '0s',
-  }
+  },
 ])
-// Rectangle2 를 위한 애니메이션
+// Square2 를 위한 애니메이션
 const bounceRotateKeyframes = keyframes({
   '0%, 100%': { transform: 'rotate(45deg) translateY(0)' },
   '50%': { transform: 'rotate(45deg) translate(-14.14px, -14.14px)' },
@@ -60,42 +53,42 @@ const bounceRotate = style({
   animation: `${bounceRotateKeyframes} 1s ease-in-out infinite`,
 })
 
-export const Rectangle2 = style([
-  Rectangle,
+export const Square2 = style([
+  Square,
   bounceRotate,
   {
     animationDelay: '0.25s',
     transform: 'rotate(45deg)',
-  }
+  },
 ])
 
-export const Rectangle3 = style([
-  Rectangle,
+export const Square3 = style([
+  Square,
   bounce,
   {
     animationDelay: '0.5s',
-  }
+  },
 ])
 
-export const Rectangle4 = style([
-  Rectangle,
+export const Square4 = style([
+  Square,
   bounce,
   {
     animationDelay: '0.75s',
-  }
+  },
 ])
 
 export const LoadingText = style({
-    color: vars.color.gray1,
-    fontSize: '1.125rem',
-    marginBottom: '1.81rem',
+  color: vars.color.gray1,
+  fontSize: '1.125rem',
+  marginBottom: '1.81rem',
 })
 
 export const Text = style({
-    color: vars.color.white,
-    fontSize: '1.75rem',
-    width:'18rem',
-    whiteSpace: 'pre-line',
-    textAlign: 'center',
-    fontWeight: 'bold',
+  color: vars.color.white,
+  fontSize: '1.75rem',
+  width: '18rem',
+  whiteSpace: 'pre-line',
+  textAlign: 'center',
+  fontWeight: 'bold',
 })

@@ -3,7 +3,8 @@ import { vars } from '../../app/globals.css'
 
 export const OuterContainer = recipe({
   base: {
-    padding: '1.19rem 1.8rem',
+    flex: '1',
+    padding: '1.19rem 0rem',
     lineHeight: '1rem',
     fontSize: '1rem',
     display: 'inline-flex',
@@ -17,7 +18,7 @@ export const OuterContainer = recipe({
     isSelected: {
       true: {
         color: vars.color.white,
-        borderBottom: `1px ${vars.color.white} solid`,
+        borderBottom: `1.5px ${vars.color.white} solid`,
       },
       false: {
         color: vars.color.gray2,
