@@ -2,13 +2,15 @@ import * as styles from './ScrapTitle.css'
 import RightArrow from '/public/images/MyRightArrow.svg'
 import Square from '../Square/Square'
 import { useEffect } from 'react'
+import Minus from '/public/images/Minus.svg'
 interface ScrapTitleProps {
   title: string
   colorSet: [string|undefined, string|undefined, string|undefined, string|undefined] 
   count: number
   onClick: () => void
+  isEdit: boolean
 }
-const ScrapTitle = ({title, colorSet, count, onClick}: ScrapTitleProps) => {
+const ScrapTitle = ({title, colorSet, count, onClick,isEdit}: ScrapTitleProps) => {
 
   return (
     <div className={styles.OuterContainer} onClick={onClick}>
@@ -25,7 +27,7 @@ const ScrapTitle = ({title, colorSet, count, onClick}: ScrapTitleProps) => {
           <p>+{count}</p>
         </div>
       </div>
-      <RightArrow color='white'/>
+      {isEdit ? <Minus color='white'/> : <RightArrow color='white'/>}
     </div>
   )
 }

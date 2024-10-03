@@ -17,8 +17,8 @@ export const TextContainer = style({
     display:'flex',
     flexDirection:'column',
     gap:'0.55rem',
-    width: '100%',
-    paddingInline: '1.3rem'
+    width: '80%',
+    paddingLeft: '1.3rem'
 })
 
 export const TimeText = style({

@@ -2,6 +2,7 @@ import * as styles from './ScrapAlarmTitle.css'
 import RightArrow from '/public/images/MyRightArrow.svg'
 import Square from '../Square/Square'
 import DateSlash from '../DateSlash/DateSlash'
+import Minus from '/public/images/Minus.svg'
 interface ScrapAlarmTitleProps {
     month: string,
     day: string,
@@ -12,8 +13,9 @@ interface ScrapAlarmTitleProps {
   endTime: string
   gaptime: string
   onClick: () => void
+  isEdit: boolean
 }
-const ScrapAlarmTitle = ({month,day,title, startTime, endTime, gaptime,colorSet, count, onClick}: ScrapAlarmTitleProps) => {
+const ScrapAlarmTitle = ({month,day,title, startTime, endTime, gaptime,colorSet, count, onClick,isEdit}: ScrapAlarmTitleProps) => {
 
   return (
     <div className={styles.OuterContainer} onClick={onClick}>
@@ -32,7 +34,7 @@ const ScrapAlarmTitle = ({month,day,title, startTime, endTime, gaptime,colorSet,
           <p>+{count}</p>
         </div>
       </div>
-      <RightArrow color='white'/>
+      {isEdit ?<Minus color='white'/> : <RightArrow color='white'/> }
     </div>
   )
 }
