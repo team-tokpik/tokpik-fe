@@ -11,7 +11,7 @@ export const OuterContainer = style({
 
 export const InnerContainer = style({
   width: '100%',
-  height: '100%',
+  height: '80%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -49,11 +49,11 @@ export const Sub = style({
 export const relativeCardWrapper = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
-  gridGap: '1.8rem',
-//   gridColumnGap: '1rem',  //가로간격
+  gridGap: '1rem',
   justifyContent: 'center',
   alignItems: 'center',
   overflowY: 'auto',
+  transform: 'scale(1.1)',
 })
 
 export const ButtonContainer = style({
@@ -62,7 +62,7 @@ export const ButtonContainer = style({
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginTop: '3rem',
+  marginTop: '1.5rem',
   marginBottom: '4rem',
   paddingInline: '1.5rem',
 

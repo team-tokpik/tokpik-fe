@@ -7,11 +7,11 @@ export const Main = style({
   display: 'flex',
   flexDirection: 'column',
   paddingInline: '1.5rem',
+  justifyContent:'flex-start'
 })
 
 export const Header = style({
   width: '100%',
-  height: '100px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
@@ -30,7 +30,6 @@ export const Orange = style({
 
 export const TabBox = style({
   width: '100%',
-  height: '3.76rem',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -50,7 +49,8 @@ export const ButtonBox = recipe({
     display: 'flex',
     flexDirection: 'row',
     gap:'0.4rem',
-    alignItems:'center'
+    alignItems:'center',
+    justifyContent:'space-between'
   },
   variants: {
     type: {
@@ -69,5 +69,6 @@ export const ScrapTitleContainer = style({
   flexDirection:'column',
   gap:'0.94rem',
   overflowY:'auto',
-  paddingBottom:'70px'
+  paddingBottom:'70px',
+  borderRadius:'0.625rem'
 })
