@@ -24,8 +24,6 @@ export const SpinnerContainer = style({
   gap: '0.65rem',
 })
 
-
-
 // Square1,3,4 을 위한 애니메이션
 const bounceKeyframes = keyframes({
   '0%, 100%': { transform: 'translateY(0)' },
@@ -37,12 +35,13 @@ const bounce = style({
 })
 
 export const Square1 = style([
-  Square,
+  Square({ color: 'primary' }),
   bounce,
   {
     animationDelay: '0s',
   },
 ])
+
 // Square2 를 위한 애니메이션
 const bounceRotateKeyframes = keyframes({
   '0%, 100%': { transform: 'rotate(45deg) translateY(0)' },
@@ -54,7 +53,7 @@ const bounceRotate = style({
 })
 
 export const Square2 = style([
-  Square,
+  Square({ color: 'primary' }),
   bounceRotate,
   {
     animationDelay: '0.25s',
@@ -63,7 +62,7 @@ export const Square2 = style([
 ])
 
 export const Square3 = style([
-  Square,
+  Square({ color: 'primary' }),
   bounce,
   {
     animationDelay: '0.5s',
@@ -71,7 +70,7 @@ export const Square3 = style([
 ])
 
 export const Square4 = style([
-  Square,
+  Square({ color: 'primary' }),
   bounce,
   {
     animationDelay: '0.75s',
