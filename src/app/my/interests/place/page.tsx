@@ -58,7 +58,7 @@ const App = () => {
     }
     return (
         <>
-            <BackBar />
+            <BackBar isClose={true}/>
             <main className={styles.Main}> 
                 {/* 헤더 섹션 */}
                 <div className={styles.HeadContainer}>

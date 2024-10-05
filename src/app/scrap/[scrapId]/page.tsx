@@ -75,7 +75,7 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
       }}
   return (
     <>
-    <BackBar/>
+    <BackBar label='알림 설정'/>
     <div className={styles.OuterContainer}>
         <div className={styles.InnerContainer}>
         {/* header section */}

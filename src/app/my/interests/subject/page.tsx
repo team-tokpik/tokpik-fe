@@ -57,7 +57,7 @@ const App = () => {
 
     return (
         <>
-            <BackBar />
+            <BackBar isClose={true}/>
             <main className={styles.Main}> 
                 <div className={styles.HeadContainer}>
                     <p>어떤 대화 주제를</p>
