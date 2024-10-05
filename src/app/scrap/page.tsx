@@ -32,11 +32,11 @@ export default function Home() {
     useEffect(()=>{
       getUsersScraps().then((res)=>{
         setScraps(res.scraps)
-        console.log(res.scraps)
+        console.log('스크랩: ',res.scraps)
       })
       getUsersNotifications().then((res)=>{
         setNotifications(res.contents as Notification[])
-        console.log(res.contents)
+        console.log('예약: ',res.contents)
       })
     },[])
 
