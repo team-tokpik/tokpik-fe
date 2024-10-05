@@ -70,8 +70,7 @@ const Carousel = ({ items }: carousel) => {
 
   return (
     <div className={styles.OuterContainer} ref={carouselRef}>
-      <p style={{color:'white',position:'absolute',top:0,left:0}}>     {currentIndex}
-      </p>
+    
       {items.map((data, index) => (
       <Card
         key={index}
