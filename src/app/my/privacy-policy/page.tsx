@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <>
-      <BackBar />
+      <BackBar label='개인정보정책'/>
       <main className={styles.Main}>
         {data.map((policy, index) => (
           <div key={index} className={styles.TermContainer}>

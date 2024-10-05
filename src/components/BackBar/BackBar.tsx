@@ -10,9 +10,9 @@ type BackBarProps = {
 export default function BackBar({ isClose = false, label }: BackBarProps) {
   return (
     <div className={styles.wrapper}>
-      <Back />
-      {label && <p>{label}</p>}
-      {isClose && <Close />}
+      <div style={{ visibility: !isClose ? 'visible' : 'hidden' }}><Back /></div>
+      <p style={{ visibility: label ? 'visible' : 'hidden' }}>{label || ''}</p>
+      <div style={{ visibility: isClose ? 'visible' : 'hidden' }}><Close /></div>
     </div>
   )
 }

@@ -7,6 +7,7 @@ import Lettuce from '/public/images/card-images/lettuce.svg'
 import Pimento from '/public/images/card-images/pimento.svg'
 import Tomato from '/public/images/card-images/tomato.svg'
 import Sweet from '/public/images/card-images/sweet.svg'
+import BookMark from '/public/images/BookMark.svg'
 import * as styles from './Card.css'
 import { CardType } from '@/types/card'
 import { RecipeVariants } from '@vanilla-extract/recipes'
@@ -34,12 +35,12 @@ export default function Card({
   title,
   description,
   relativePosition,
+  onClick,
+  isAlarm,
+  alarmNumber,
 }: DynamicCardProps) {
   const CardImage = cardImages[type] as React.FC<React.SVGProps<SVGSVGElement>>
 
-  const handleClick = () => {
-    console.log('click')
-  }
 
   if (size === 'large') {
     return (
@@ -49,7 +50,7 @@ export default function Card({
           type,
           relativePosition,
         })}
-        onClick={handleClick}
+        onClick={onClick}
       >
         <Subtitle type={type} isSmall={false} isCard={true} />
 
@@ -62,9 +63,13 @@ export default function Card({
     )
   }
   return (
-    <div className={styles.cardRecipe({ size, type })}>
+    <div className={styles.cardRecipe({ size, type })} onClick={onClick}>
       <div className={styles.smallContentWrapper}>
-        <Subtitle type={type} isSmall={true} isCard={true} />
+        <div className={styles.smallTitleWrapper}>
+          <Subtitle type={type} isSmall={true} isCard={true} />
+          {isAlarm ==true && <div className={styles.alarmNumber({alarmNumber: alarmNumber === 0 ? 0 : undefined})}>{alarmNumber}</div>}
+          {isAlarm ==false && <BookMark/>}
+        </div>
         <h3 className={styles.smallTitle}>{title}</h3>
       </div>
     </div>

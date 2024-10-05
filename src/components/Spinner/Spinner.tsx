@@ -1,7 +1,6 @@
 import * as styles from './Spinner.css'
 import Square from '../Square/Square'
 import { SpinnerProps } from '@/types/spinnerProps'
-import { vars } from '@/app/globals.css'
 const Spinner = ({ text }: SpinnerProps) => {
   return (
     <div className={styles.OuterContainer}>

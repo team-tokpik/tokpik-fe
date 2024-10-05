@@ -2,12 +2,13 @@ import Card from '@/components/Card/Card'
 import * as styles from './Carousel.css'
 import { useState, useRef,useEffect } from 'react'
 import { carousel } from '@/types/carousel'
+import { useRouter } from 'next/navigation'
 
 const Carousel = ({ items }: carousel) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const carouselRef = useRef<HTMLDivElement>(null);
   const dragPointRef = useRef<number>(0);
-  
+  const router = useRouter()
   
   useEffect(() => {
     console.log('아이템:\n',typeof items.length,'\n',items.length,'\n',items)
@@ -70,8 +71,7 @@ const Carousel = ({ items }: carousel) => {
 
   return (
     <div className={styles.OuterContainer} ref={carouselRef}>
-      <p style={{color:'white',position:'absolute',top:0,left:0}}>     {currentIndex}
-      </p>
+    
       {items.map((data, index) => (
       <Card
         key={index}
@@ -86,7 +86,9 @@ const Carousel = ({ items }: carousel) => {
           if (diff === -1) return "-1";
           return "more";
         })()}
-        
+        onClick={() => {  
+          router.push(`/detail/${data.id}`)
+        }}
       />
       ))}
 

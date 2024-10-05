@@ -11,7 +11,7 @@ import { useMemo } from 'react'
 import SelectedFilter from '@/components/SelectedFilter/SelectedFilter'
 import { ItemType } from '@/types/card'
 import { postTopics } from '@/api/main/postTopics'
-import { TopicRequestBody } from '@/api/main/postTopics'  
+import { TopicRequestBody } from '@/types/topicRequestBody'
 import Spinner from '@/components/Spinner/Spinner'
 import { subject } from '@/constants/subject'
 export default function Home() {
@@ -37,8 +37,8 @@ export default function Home() {
       talkSituations: [],
       talkMoods: [],
       talkPartnerGender: false,
-      talkPartnerAgeLowerBound: 0,
-      talkPartnerAgeUpperBound: 100,
+      talkPartnerAgeLowerBound: null,
+      talkPartnerAgeUpperBound: null,
     }
 
     filterList.forEach(item => {
@@ -56,6 +56,7 @@ export default function Home() {
           if (item.value === '남성') {
             requestBody.talkPartnerGender = true
           }
+          break
         case '나이':
           const [lowerBound, upperBound] = item.value.split('-');
           requestBody.talkPartnerAgeLowerBound = parseInt(lowerBound);
@@ -63,6 +64,17 @@ export default function Home() {
           break
       }
     })
+    // requestBody에서 빈 항목 제거
+    Object.keys(requestBody).forEach((key) => {
+      if (Array.isArray((requestBody as any)[key]) && (requestBody as any)[key].length === 0) {
+        //빈 배열 제거
+        delete (requestBody as any)[key];
+      } else if ((requestBody as any)[key] === null) {
+        //null 제거
+        delete (requestBody as any)[key];
+      }
+    });
+    console.log('main - requestBody',requestBody)
 
     postTopics(requestBody)
       .then(response => {
@@ -70,10 +82,11 @@ export default function Home() {
         setCardContents(response.topics.map(topic => ({
           type: subject.find(item => item.label === topic.topicTag)?.eng as ItemType['type'],
           title: topic.title,
-          description: topic.subtitle
+          description: topic.subtitle,
+          id: topic.topicId
         })))
-        console.log(response.topics)
-        console.log(response.topics.map(topic => ({
+        console.log('response.topics',response.topics)
+        console.log('response.topics.map',response.topics.map(topic => ({
           type: subject.find(item => item.label === topic.topicTag)?.eng as ItemType['type'],
           title: topic.title,
           description: topic.subtitle
