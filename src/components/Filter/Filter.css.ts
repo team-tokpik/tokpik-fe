@@ -183,13 +183,23 @@ export const AgeSliderInput = style({
   },
 })
 
-export const AgeSliderTrack = style({
-  position: 'absolute',
-  height: '0.125rem',
-  background: vars.color.primary,
-  top: '50%',
-  transform: 'translateY(-50%)',
-  zIndex: 1, // 트랙을 슬라이더 입력 아래에 배치
+export const AgeSliderTrack  = recipe({
+  base: {
+    position: 'absolute',
+    height: '0.125rem',
+    background: vars.color.primary,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    zIndex: 1, // 트랙을 슬라이더 입력 아래에 배치
+  },
+  variants: {
+    front: {
+      true: { zIndex: 1 },
+      false: {  width: '100%',
+        zIndex: 0,
+        backgroundColor: vars.color.gray4, },
+    },
+  },
 })
 
 export const AgeSliderLabels = style({
