@@ -20,3 +20,5 @@ export const getUsersTags = async (): Promise<TalkTopicTag[]> => {
     throw error;
   }
 };
+
+

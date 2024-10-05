@@ -10,6 +10,7 @@ export const OuterContainer = recipe({
     borderRadius: '0.625rem',
     gap: '0.5rem',
     fontSize: '1.125rem',
+    cursor: 'pointer',
   },
   variants: {
     size: {
