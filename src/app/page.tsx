@@ -37,8 +37,8 @@ export default function Home() {
       talkSituations: [],
       talkMoods: [],
       talkPartnerGender: false,
-      talkPartnerAgeLowerBound: 20,
-      talkPartnerAgeUpperBound: 60,
+      talkPartnerAgeLowerBound: null,
+      talkPartnerAgeUpperBound: null,
     }
 
     filterList.forEach(item => {
@@ -64,13 +64,17 @@ export default function Home() {
           break
       }
     })
-    // requestBody에서 빈 배열 제거
+    // requestBody에서 빈 항목 제거
     Object.keys(requestBody).forEach((key) => {
       if (Array.isArray((requestBody as any)[key]) && (requestBody as any)[key].length === 0) {
+        //빈 배열 제거
+        delete (requestBody as any)[key];
+      } else if ((requestBody as any)[key] === null) {
+        //null 제거
         delete (requestBody as any)[key];
       }
     });
-    console.log('@@',requestBody)
+    console.log('main - requestBody',requestBody)
 
     postTopics(requestBody)
       .then(response => {

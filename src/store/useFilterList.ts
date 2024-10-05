@@ -5,7 +5,7 @@ import { create } from 'zustand'
 // 중복된 값이 들어가지 않는다.
 // 필터 아이템 타입 정의
 type FilterItem = {
-  tab: string;
+  tab?: string;
   value: string;
 }
 
@@ -53,7 +53,8 @@ const useFilterListStore = create<FilterListState & FilterListActions>(
       popList: (item) =>
         set((state) => {
           const tmpSet = new Set(state.list)
-          tmpSet.delete(Array.from(state.list).find(i => i.tab === item.tab && i.value === item.value)!)
+          if(item.tab === undefined) tmpSet.delete(Array.from(state.list).find(i => i.value === item.value)!)
+          else tmpSet.delete(Array.from(state.list).find(i => i.tab === item.tab && i.value === item.value)!)
           return { list: tmpSet }
         }),
       refleshList: () =>
@@ -61,6 +62,7 @@ const useFilterListStore = create<FilterListState & FilterListActions>(
           // Set 객체를 초기화합니다.
           return { list: new Set() }
         }),
+
     },
   })
 )

@@ -5,6 +5,6 @@ export interface TopicRequestBody  {
     talkSituations: string[],
     talkMoods: string[],
     talkPartnerGender: boolean,
-    talkPartnerAgeLowerBound: number,
-    talkPartnerAgeUpperBound: number,
+    talkPartnerAgeLowerBound: number|null,
+    talkPartnerAgeUpperBound: number|null,
   }

@@ -138,6 +138,7 @@ export const SubHead = style({
   width: '100%',
   padding: '0.62rem 1.5rem',
   color: vars.color.gray2,
+  
 })
 export const SubBody = style({
   width: '100%',
@@ -150,7 +151,7 @@ export const SubBody = style({
 
 export const AgeSlider = style({
   width: '100%',
-  padding: '0 1.5rem',
+  padding: '0rem 1.5rem',
   marginBottom: '1rem',
   position: 'relative',
 })
@@ -199,3 +200,11 @@ export const AgeSliderLabels = style({
   fontSize: '0.9375rem',
   gap:'0.3rem'
 })
+export const AgeButtonContainer = style({
+  padding: '0rem 1.8rem',
+  width: '100%',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: '0.9rem',
+})
+
