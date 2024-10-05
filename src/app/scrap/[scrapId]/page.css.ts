@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "@/app/globals.css";
+import { recipe } from "@vanilla-extract/recipes";
 export const OuterContainer = style({
   width: '100%',
   height: '100vh',
@@ -47,13 +48,13 @@ export const Sub = style({
 });
 
 export const relativeCardWrapper = style({
+  width: '100%',
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
   gridGap: '1rem',
   justifyContent: 'center',
   alignItems: 'center',
   overflowY: 'auto',
-  transform: 'scale(1.1)',
 })
 
 export const ButtonContainer = style({
@@ -65,7 +66,6 @@ export const ButtonContainer = style({
   marginTop: '1.5rem',
   marginBottom: '4rem',
   paddingInline: '1.5rem',
-
   paddingTop:'1.5rem',
   borderTop:`1px solid ${vars.color.gray4}`,
 })
@@ -92,3 +92,24 @@ export const ExportButton = style([ButtonBase, {
     color: vars.color.gray2,
     backgroundColor: vars.color.gray4 
   }])
+
+  export const AlarmSubmitButton = recipe({
+    base  : ButtonBase,
+    variants: {
+      on: {
+        true: {
+          color: vars.color.white,
+          backgroundColor: vars.color.primary,
+          width:'100%'
+        },
+        false: {
+          color: vars.color.gray2,
+          backgroundColor: vars.color.gray4,
+          width:'100%'
+        },
+      },
+    },
+    defaultVariants: {
+      on: false,
+    },
+  });

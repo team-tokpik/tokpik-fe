@@ -45,7 +45,7 @@ const App = () => {
 
   return (
     <>
-      <BackBar />
+      <BackBar label='이용약관'/>
       <main className={styles.Main}>
         {data.map((term, index) => (
           <div key={index} className={styles.TermContainer}>

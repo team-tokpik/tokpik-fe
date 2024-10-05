@@ -49,10 +49,10 @@ export default function DetailPage() {
       <div className={styles.relativeCardSection}>
         <p>You may also like</p>
         <div className={styles.relativeCardWrapper}>
-          <Card size="small" type="relation" title="관계" />
-          <Card size="small" type="issue" title="이슈" />
-          <Card size="small" type="love" title="사랑" />
-          <Card size="small" type="business" title="비즈니스" />
+          <Card size="small" type="relation" title="관계" isAlarm={false}/>
+          <Card size="small" type="issue" title="이슈" isAlarm={false}/>
+          <Card size="small" type="love" title="사랑" isAlarm={false}/>
+          <Card size="small" type="business" title="비즈니스" isAlarm={false}/>
         </div>
       </div>
     </div>

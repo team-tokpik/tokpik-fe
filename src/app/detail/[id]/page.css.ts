@@ -68,10 +68,13 @@ export const relativeCardSection = style({
 })
 
 export const relativeCardWrapper = style({
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  gap: '12px',
+  width: '100%',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gridGap: '1rem',
+  justifyContent: 'center',
+  alignItems: 'center',
+  overflowY: 'auto',
 })
 
 export const relativeCard = style({})
