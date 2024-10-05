@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import * as styles from './page.css'
 import BackBar from '@/components/BackBar/BackBar'
 import Card from '@/components/Card/Card'
+import { getUsersNotificationsNotificationIdTopics } from '@/api/scrap/getUsersNotificationsNotificationIdTopics'
 interface ScrapPageProps {
     params: {
       notificationId: string;
@@ -18,6 +19,9 @@ const ScrapNotificationDetail = ({ params }: ScrapPageProps) => {
 
     useEffect(() => {
       // 여기에 필요한 데이터 가져오는 로직 추가
+      getUsersNotificationsNotificationIdTopics(parseInt(notificationId)).then((res) => {
+        console.log(res)
+      })
     }, [notificationId])
 
     useEffect(() => {
