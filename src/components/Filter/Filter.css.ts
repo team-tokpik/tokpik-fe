@@ -31,7 +31,7 @@ export const MiddleContainer = recipe({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    zIndex: '999',
+    zIndex: 1000,
     backgroundColor: vars.color.black,
     borderRadius: '0.9375rem 0.9375rem 0rem 0rem',
     transition: 'height 0.3s ease-in-out',

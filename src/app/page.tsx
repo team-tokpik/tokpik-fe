@@ -26,11 +26,15 @@ export default function Home() {
   useEffect(()=>{
     setApiTrigger(!isFilterOn)
   },[isFilterOn])
-  //처음 렌더시 대화주제를 가져온다.
+ 
+
+  //대화주제를 가져온다.
   useEffect(() => {
     if(!isFilterOn || apiTrigger) 
     {
     setIsLoading(prev=>prev+1); // API 요청 시작 전 로딩 상태 설정
+    setCardContents([]) //이전의 카드들 삭제!
+
     const requestBody: TopicRequestBody = {
       includeFilterCondition: filterList.size > 0,
       talkPurposes: [],
@@ -125,10 +129,18 @@ export default function Home() {
   const filterButtonHandler = () => {
     setIsFilterOn((prev) => !prev)
   }
-
+  useEffect(()=>{
+    const visitCount = sessionStorage.getItem('visitCount');
+    if (visitCount === null) { //visitCount가 없으면 0으로 초기화
+      sessionStorage.setItem('visitCount', '0');
+    } else { //visitCount가 있으면 1 증가
+      const newCount = parseInt(visitCount) + 1;
+      sessionStorage.setItem('visitCount', newCount.toString());
+    }
+  },[])
   return (
     <>
-      {isLoading > 0 && <Spinner text={'내게 꼭 맞는 대화 주제\n톡픽이 만들어지고 있어요!'} />}
+      {sessionStorage.getItem('visitCount') === '0' && isLoading > 0 && <Spinner type='line' text={'내게 꼭 맞는 대화 주제\n톡픽이 만들어지고 있어요!'} size='full'/>}
       <Navigation />
       <main className={styles.Main({ isFilterOn })}>
         {/* header section */}
@@ -155,7 +167,9 @@ export default function Home() {
         {/* card section */}
 
         <div className={styles.CardBox}>
-          <Carousel items={cardContents} />
+        {sessionStorage.getItem('visitCount') !== '0' && isLoading > 0 && <Spinner type='square' sub={'열심히 대화주제를\n생성하고 있어요'} size='partial'/>}
+
+          {isLoading === 0 && <Carousel items={cardContents} />}
         </div>
       </main>
 
