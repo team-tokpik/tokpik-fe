@@ -31,7 +31,7 @@ export const MiddleContainer = recipe({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    zIndex: '100',
+    zIndex: '999',
     backgroundColor: vars.color.black,
     borderRadius: '0.9375rem 0.9375rem 0rem 0rem',
     transition: 'height 0.3s ease-in-out',
@@ -56,6 +56,7 @@ export const InnerContainer = style({
   display: 'flex',
   flexDirection: 'column',
   zIndex: '3',
+  alignItems: 'center',
 })
 
 export const HandleBox = style({
@@ -73,7 +74,7 @@ export const Handle = style({
   background: '#555',
 })
 export const TabBox = style({
-  width: '100%',
+  width: '90%',
   height: '3.76rem',
   display: 'flex',
   justifyContent: 'center',

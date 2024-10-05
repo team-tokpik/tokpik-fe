@@ -2,9 +2,9 @@ import axios from 'axios'
 
 const client = axios.create({
   // 현재 테스트 시 사용할 url
-  baseURL: 'http://tokpik.co.kr',
+  // baseURL: 'http://tokpik.co.kr',
   // 서비스 (프론트 배포 이후) 시 사용될 url
-  //   baseURL: 'https://api.tokpik.co.kr',
+    baseURL: 'https://api.tokpik.co.kr',
   headers: {
     'Content-Type': 'application/json',
   },
