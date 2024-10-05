@@ -82,10 +82,11 @@ export default function Home() {
         setCardContents(response.topics.map(topic => ({
           type: subject.find(item => item.label === topic.topicTag)?.eng as ItemType['type'],
           title: topic.title,
-          description: topic.subtitle
+          description: topic.subtitle,
+          id: topic.topicId
         })))
-        console.log(response.topics)
-        console.log(response.topics.map(topic => ({
+        console.log('response.topics',response.topics)
+        console.log('response.topics.map',response.topics.map(topic => ({
           type: subject.find(item => item.label === topic.topicTag)?.eng as ItemType['type'],
           title: topic.title,
           description: topic.subtitle
