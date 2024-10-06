@@ -87,7 +87,7 @@ const Carousel = ({ items }: carousel) => {
           return "more";
         })()}
         onClick={() => {  
-          router.push(`/detail/${data.id}`)
+          router.push(`/detail/${data.id}?type=${data.type}&title=${data.title}`)
         }}
       />
       ))}

@@ -20,17 +20,21 @@ export default function Home() {
   const [isFilterListEmpty, setIsFilterListEmpty] = useState(false) //필터 리스트 비었는지 여부
   const [isFilterOn, setIsFilterOn] = useState(false) // 필터 열림 여부
   const [isLoading, setIsLoading] = useState<number>(0);
-
+  const [visitCount, setVisitCount] = useState<number>(0);
   const [cardContents, setCardContents] = useState<ItemType[]>([])
   const [apiTrigger,setApiTrigger] = useState<boolean>(false);
   useEffect(()=>{
     setApiTrigger(!isFilterOn)
   },[isFilterOn])
-  //처음 렌더시 대화주제를 가져온다.
+ 
+
+  //대화주제를 가져온다.
   useEffect(() => {
     if(!isFilterOn || apiTrigger) 
     {
     setIsLoading(prev=>prev+1); // API 요청 시작 전 로딩 상태 설정
+    setCardContents([]) //이전의 카드들 삭제!
+    setVisitCount(prev=>prev+1)
     const requestBody: TopicRequestBody = {
       includeFilterCondition: filterList.size > 0,
       talkPurposes: [],
@@ -126,9 +130,25 @@ export default function Home() {
     setIsFilterOn((prev) => !prev)
   }
 
+   // 방문 횟수 체크 , 방문 횟수에 따라 다른 spinner 가 보입니다.
+   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const visitCount = sessionStorage.getItem('visitCount')
+      if (visitCount === null) {
+        sessionStorage.setItem('visitCount', '0')
+        setVisitCount(0)
+      } else {
+        const newCount = parseInt(visitCount) + 1
+        sessionStorage.setItem('visitCount', newCount.toString())
+        setVisitCount(newCount)
+      }
+    }
+  }, [])
+
+
   return (
     <>
-      {isLoading > 0 && <Spinner text={'내게 꼭 맞는 대화 주제\n톡픽이 만들어지고 있어요!'} />}
+      {visitCount === 0 && isLoading > 0 && <Spinner type='line' text={'내게 꼭 맞는 대화 주제\n톡픽이 만들어지고 있어요!'} size='full'/>}
       <Navigation />
       <main className={styles.Main({ isFilterOn })}>
         {/* header section */}
@@ -155,7 +175,9 @@ export default function Home() {
         {/* card section */}
 
         <div className={styles.CardBox}>
-          <Carousel items={cardContents} />
+        {visitCount > 0 && isLoading > 0 && <Spinner type='square' sub={'열심히 대화주제를\n생성하고 있어요'} size='partial'/>}
+
+          {isLoading === 0 && <Carousel items={cardContents} />}
         </div>
       </main>
 

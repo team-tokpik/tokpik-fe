@@ -145,13 +145,17 @@ const Filter = ({ isOn, filterHandler }: filter) => {
                   />
                   {(minAge !== null && maxAge !== null) && (
                     <div
-                      className={styles.AgeSliderTrack}
+                      className={styles.AgeSliderTrack({front:true})}
                       style={{
                         left: `${((minAge - 20) / 40) * 100}%`,
                         width: `${((maxAge - minAge) / 40) * 100}%`,
                       }}
                     />
                   )}
+                   <div
+                      className={styles.AgeSliderTrack({front:false})}
+                     
+                    />
                 </div>
               </div>
               <div className={styles.AgeButtonContainer}>
