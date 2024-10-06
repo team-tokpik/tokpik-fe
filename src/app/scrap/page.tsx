@@ -125,6 +125,7 @@ export default function Home() {
         </div>
         {/* scrap title section */}
         <div className={styles.ScrapTitleContainer}>
+
           {/* 스크랩 추가 버튼을 누르면 나타나는 UI */}
           {isAdding && <ScrapTitle 
             key={scraps.length}
@@ -138,6 +139,7 @@ export default function Home() {
             count={0}
             colorSet={Array(4).fill(undefined) as [string | undefined, string | undefined, string | undefined, string | undefined]}
           />}
+            
           {/* 스크랩 들 */}
           {scraps.map((scrap)=>{
             return <ScrapTitle 
