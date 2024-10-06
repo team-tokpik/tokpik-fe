@@ -1,5 +1,5 @@
 export interface CardType {
-  size: 'small' | 'large'
+  size: 'small' | 'medium' | 'large'
   type:
     | 'relation'
     | 'issue'

@@ -10,11 +10,10 @@ import Card from '@/components/Card/Card'
 import { getTopicsTopicIdDetails,  DetailItem } from '@/api/detail/getTopicsTopicIdDetails'
 import { getTopicsTopicIdRelated, RelatedTopic } from '@/api/detail/getTopicsTopicIdRelated'
 import { subject } from '@/constants/subject'
-import Spinner from '@/components/Spinner/Spinner'
 import ScrapModal from '@/components/ScrapModal/ScrapModal'
 import { useRouter } from 'next/navigation'
 import Toast from '@/components/Toast/Toast'
-
+import Skeleton from '@/components/Skeleton/Skeleton'
 export default function DetailPage({params}: {params: {id: string}}) {
   const { id } = params;
   const [isLoading, setIsLoading] = useState(false);
@@ -79,7 +78,6 @@ export default function DetailPage({params}: {params: {id: string}}) {
       setTimeout(() => {
         setShowToast(false);
       }, 1000);
-    
   };
 
   return (
@@ -88,7 +86,11 @@ export default function DetailPage({params}: {params: {id: string}}) {
       {showToast && <Toast text='스크랩 완료'/>}
       <div className={styles.titleSection}>
         <div className={styles.subtitleSection}>
-          <Subtitle type={type} isSmall={false} isCard={false} />
+          {isLoading ? (
+            <Skeleton width='100%' height='1.125rem' radius='full' />
+          ) : (
+            <Subtitle type={type} isSmall={false} isCard={false} />
+          )}
           {scrap ? (
             <Scrap_active color={COLOR_MAP[type as CardType['type']]} 
             onClick={() => {
@@ -101,7 +103,11 @@ export default function DetailPage({params}: {params: {id: string}}) {
             }}  />
           )}
         </div>
-        <h1 className={styles.title}>{title}</h1>
+        {isLoading ? (
+          <Skeleton width='100%' height='1.125rem' radius='full' />
+        ) : (
+          <h1 className={styles.title}>{title}</h1>
+        )}
       </div>
       {/* 본문 */}
       <div className={styles.contentSection}>
@@ -109,8 +115,12 @@ export default function DetailPage({params}: {params: {id: string}}) {
           이 대화를 어떻게 이어나갈 수 있을까요?
         </p>
         {isLoading ? (
-          <></>
-          // <Spinner type="square" size="partial" />
+          <>
+          <Skeleton width='100%' height='1.125rem' radius='full' />
+          <Skeleton width='100%' height='1.125rem' radius='full' />
+          <Skeleton width='70%' height='1.125rem' radius='full' />
+          <Skeleton width='20%' height='1.125rem' radius='full' />
+          </>
         ) : (
         <ul className={styles.contentList}>
           {detail.map((item, index) => (
@@ -125,21 +135,34 @@ export default function DetailPage({params}: {params: {id: string}}) {
       <div className={styles.relativeCardSection}>
         <p>You may also like</p>
         <div className={styles.relativeCardWrapper}>
-          {related && related.length > 0 ? (
-            related.map((item, index) => {
-              const matchedSubject = subject.find(s => s.label === item.type);
-              const topicTypeEng = matchedSubject ? matchedSubject.eng : item.type;
-              return (
-                <Card key={index} size="small" type={topicTypeEng as CardType['type']} title={item.title} isAlarm={false}
-                onClick={() => {
-                 router.push(`/detail/${item.topicId}?title=${item.title}&type=${topicTypeEng}`)
-                }}/>
-              );
-            })
-          ) : (
-            <p>관련된 카드가 없습니다.</p>
-          )}
-         
+        {isLoading ? (
+          <>
+              <Skeleton width='100%' height='106px' radius='half' />
+              <Skeleton width='100%' height='106px' radius='half' />
+              </>
+            ) : (
+              related && related.length > 0 ? (
+                related.map((item) => {
+                  const matchedSubject = subject.find(s => s.label === item.type);
+                  const topicTypeEng = matchedSubject ? matchedSubject.eng : item.type;
+                  return (
+                    <Card 
+                      key={item.topicId} 
+                      size="small" 
+                      type={topicTypeEng as CardType['type']} 
+                      title={item.title} 
+                      isAlarm={false}
+                      onClick={() => {
+                        router.push(`/detail/${item.topicId}?title=${item.title}&type=${topicTypeEng}`);
+                      }} 
+                    />
+                  );
+                })
+              ) : (
+                <p>관련된 카드가 없습니다.</p>
+              )
+            )}
+
         </div>
       </div>
     </div>

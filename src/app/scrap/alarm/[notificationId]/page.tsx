@@ -1,10 +1,13 @@
 'use client'
-import { useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import * as styles from './page.css'
 import BackBar from '@/components/BackBar/BackBar'
 import Card from '@/components/Card/Card'
-import { getUsersNotificationsNotificationIdTopics } from '@/api/scrap/getUsersNotificationsNotificationIdTopics'
+import { getUsersNotificationsNotificationIdDetails } from '@/api/scrap/getUsersNotificationsNotificationIdDetails'
+import { GetUsersNotificationsNotificationIdDetailsResponse } from '@/api/scrap/getUsersNotificationsNotificationIdDetails'
+import { subject } from '@/constants/subject'
+import Button from '@/components/Button/Button'
+import { useRouter } from 'next/navigation'
 interface ScrapPageProps {
     params: {
       notificationId: string;
@@ -12,21 +15,16 @@ interface ScrapPageProps {
 }
 
 const ScrapNotificationDetail = ({ params }: ScrapPageProps) => {
-    const searchParams = useSearchParams()
-    const [scrapName, setScrapName] = useState('')
-    const [length, setLength] = useState<number>(0)
+  const router = useRouter()
     const { notificationId } = params;
-
+    
+    const [notificationDetails, setNotificationDetails] = useState<GetUsersNotificationsNotificationIdDetailsResponse | null>(null);
     useEffect(() => {
-      // 여기에 필요한 데이터 가져오는 로직 추가
-      getUsersNotificationsNotificationIdTopics(parseInt(notificationId)).then((res) => {
+      getUsersNotificationsNotificationIdDetails(notificationId).then((res) => {
         console.log(res)
+        setNotificationDetails(res)
       })
     }, [notificationId])
-
-    useEffect(() => {
-      // 여기에 searchParams 관련 로직 추가
-    }, [searchParams])
 
     return (
         <>
@@ -36,21 +34,31 @@ const ScrapNotificationDetail = ({ params }: ScrapPageProps) => {
                 {/* header section */}
                 <div className={styles.Header}>
                   <div className={styles.Head}>
-                  <p>제목</p>
+                  <p>{notificationDetails?.notificationName}</p>
                   </div>
-                  <p className={styles.Sub}>{length} Tokpiks</p>
+                  <p className={styles.Sub}>{notificationDetails?.notificationTalkTopics.length} Tokpiks</p>
                 </div>
                 {/* content section */}
                 <div className={styles.relativeCardWrapper}>
-                  <Node position='start' title='시작' content='00:00부터 00분 간격으로'/>
-                  <Node position='middle'  content='00:00부터 00분 간격으로'/>
-                  <Node position='middle'  content='00:00부터 00분 간격으로'/>
-
-                  <Node position='end' title='종료' content='00:00까지'/>
+                  <Node position='start' title='시작' timeContent={`${notificationDetails?.notificationStartTime}부터 ${notificationDetails?.notificationIntervalMinutes}분 간격으로`}/>
+                  {notificationDetails?.notificationTalkTopics.map((topic, index) => (
+                    <Node 
+                    key={index} 
+                    number={index + 1}
+                    position='middle'  
+                    timeContent={topic.noticeTime}
+                    talkTopicTitle={topic.talkTopicTitle}
+                    talkTopicTypeId={topic.talkTopicTypeId}
+                    />
+                  ))}
+                  <Node position='end' title='종료' timeContent={`${notificationDetails?.notificationEndTime}까지`}/>
                 </div>
             </div>
             {/* button section */}
             <div className={styles.ButtonContainer}>
+              <Button size='large' label='편집' active={true} onClick={() => {
+                router.push(`/alarm/${notificationId}`)
+              }}/>
             </div>
         </div>
         </>
@@ -58,17 +66,28 @@ const ScrapNotificationDetail = ({ params }: ScrapPageProps) => {
 }
 
 export default ScrapNotificationDetail;
-const Node= ({position,title,content}:{position:'start' |'middle'| 'end',title?:string,content:string}) => {
+
+interface NodeProps { 
+  position: 'start' | 'middle' | 'end';
+  title?: string;
+  timeContent: string;
+  talkTopicTitle?: string;
+  talkTopicTypeId?: number;
+  number?: number;
+}
+const Node= ({number,position,title,timeContent,talkTopicTitle,talkTopicTypeId}:NodeProps) => {
   return (
     <div className={styles.Node({position})}>
-      <p className={styles.NodeTitle({position})}>{title}</p>
-        {position === 'middle' ? 
+<p className={styles.NodeTitle({position})} style={number !== undefined ? { '--before-content': `"${number}"` } as React.CSSProperties : undefined}>
+      {title}
+    </p>        
+    {position === 'middle' ? 
         <div className={styles.NodeMiddle}> 
-        <Card size='small' type='issue' title='중간'/>
-        <p>00:00</p>
+        <Card size='medium' type={subject[talkTopicTypeId || 0].eng as "love" | "business" | "ice-breaker" | "humor" | "issue" | "hobby" | "self-development" | "relation"} title={talkTopicTitle || ''}/>
+        <p>{timeContent}</p>
         </div>
         :
-        <p className={styles.NodeContent}>{content}</p>
+        <p className={styles.NodeContent}>{timeContent}</p>
         }
   </div>
   )

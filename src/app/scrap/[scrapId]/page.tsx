@@ -10,7 +10,7 @@ import Bell from '/public/images/Bell.svg'
 import Pencil from '/public/images/Pencil.svg'
 import { getUsersScrapsScrapIdTopics } from '@/api/scrap/getUsersScrapsScrapIdTopics'
 import { useRouter } from 'next/navigation'
-
+import { patchUsersScrapsScrapIdTitles } from '@/api/scrap/patchUsersScrapsScrapIdTitles'
 interface ScrapPageProps {
     params: {
       scrapId: string;
@@ -34,7 +34,7 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
     const [scrapTopics, setScrapTopics] = useState<Topic[]>([]) // 스크랩 카드들 세부 정보
     const [isAlarmSet, setIsAlarmSet] = useState<boolean>(false) // 알림 중인지 체크
     const [alarmArr, setAlarmArr] = useState<number[]>([]) // 알림 배열
-
+  const [isEditHead, setIsEditHead] = useState<boolean>(false) // 헤드 수정 여부
     useEffect(() => {
       if (scrapId) {
         getUsersScrapsScrapIdTopics(Number(scrapId))
@@ -73,6 +73,15 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
       }else{
         router.push(`/detail/${topicId}`)
       }}
+      const editHeadHandler = async () => {
+        try {
+          await patchUsersScrapsScrapIdTitles(Number(scrapId), scrapName)
+          console.log('스크랩 제목 업데이트 성공')
+        } catch (error) {
+          console.error('스크랩 제목 업데이트 실패:', error)
+        }
+        setIsEditHead(false);
+      }
   return (
     <>
     <BackBar label='알림 설정'/>
@@ -81,8 +90,24 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
         {/* header section */}
       <div className={styles.Header}>
         <div className={styles.Head}>
-        <p>{scrapName}</p>
-        <Pencil/>
+          {isEditHead ? 
+          <input
+          style={{all: 'unset', width: '100%'}}
+          autoFocus
+          type="text" 
+          value={scrapName} 
+          onChange={(e) => setScrapName(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+               editHeadHandler();
+            }
+          }}
+          />
+           : <><p>{scrapName}</p>
+           <Pencil onClick={() => {
+            setIsEditHead(true);
+          }}/></>}
+     
         </div>
         <p className={styles.Sub}>{scrapTopics.length} Tokpiks</p>
       </div>

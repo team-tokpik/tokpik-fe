@@ -12,7 +12,7 @@ export const OuterContainer = style({
 
 export const InnerContainer = style({
   width: '100%',
-  height: '100%',
+  height: '85%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -49,6 +49,7 @@ export const Sub = style({
 
 export const relativeCardWrapper = style({
   width: '100%',
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start', 
@@ -67,7 +68,7 @@ export const Node = recipe({
     paddingLeft: '2rem',
     position: 'relative',
   },
-  variants: {
+  variants: {// 선
     position: {
       start: {
         ':before': {
@@ -76,7 +77,7 @@ export const Node = recipe({
           top: '0',
           left: '0.48rem',
           width: '1px',
-          height: '80%',
+          height: '90%',
           transform: 'translateY(25px)',
           backgroundColor: vars.color.gray2,
           zIndex: '5',
@@ -89,7 +90,7 @@ export const Node = recipe({
           top: '0',
           left: '0.48rem',
           width: '1px',
-          height: '90%',
+          height: '100%',
           transform: 'translateY(25px)',
           backgroundColor: vars.color.gray2,
           zIndex: '5',
@@ -116,8 +117,8 @@ export const NodeTitle = recipe({
   fontSize: '1.125rem',
   fontWeight: 'bold',
   color: vars.color.primary,
-  ':before':{
-    content:'',
+  ':before':{ //공
+    content: 'var(--before-content, "")',
     position:'absolute',
     top:'0.65rem',
     left:'0',
@@ -138,6 +139,13 @@ variants: {
     middle: {
       ':before':{
         backgroundColor: vars.color.white,
+        transform: 'translateY(0.5rem)',
+        color: vars.color.black,
+        textAlign: 'center',
+        fontSize: '0.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }    },
     end: {
       ':before':{
@@ -157,17 +165,18 @@ export const NodeMiddle = style({
   alignItems: 'flex-end',
   gap: '1rem',
   color: vars.color.white,
+  width: '100%',
 })
 
 
 
 export const ButtonContainer = style({
   width: '100%',
+  height: '30%',
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginTop: '3rem',
   marginBottom: '4rem',
   paddingInline: '1.5rem',
 
