@@ -20,6 +20,10 @@ export const cardRecipe = recipe({
         position: 'absolute',
         transition: 'transform 0.1s ease-in-out',
       },
+      medium: {
+        width: '100%',
+        padding: '0.88rem 1rem',
+      },
       small: {
         width: '100%',
         height: '106px',
@@ -80,6 +84,15 @@ export const largeContentWrapper = style({
   flexDirection: 'column',
   width: '285px',
   gap: 16,
+})
+
+export const mediumContentWrapper = style({
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  gap: '0.5rem',
 })
 
 export const smallContentWrapper = style({

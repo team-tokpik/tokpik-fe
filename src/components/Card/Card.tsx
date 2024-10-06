@@ -62,8 +62,22 @@ export default function Card({
       </div>
     )
   }
-  return (
-    <div className={styles.cardRecipe({ size, type })} onClick={onClick}>
+  else if(size === 'medium'){
+    return (
+      <div className={styles.cardRecipe({ size, type })} onClick={onClick}>
+        <div className={styles.smallContentWrapper}>
+        <div className={styles.smallTitleWrapper}>
+          <Subtitle type={type} isSmall={true} isCard={true} />
+        
+        </div>
+        <h3 className={styles.smallTitle}>{title}</h3>
+      </div>
+      </div>
+    )
+  }
+  else if(size === 'small'){
+    return (
+      <div className={styles.cardRecipe({ size, type })} onClick={onClick}>
       <div className={styles.smallContentWrapper}>
         <div className={styles.smallTitleWrapper}>
           <Subtitle type={type} isSmall={true} isCard={true} />
@@ -73,5 +87,6 @@ export default function Card({
         <h3 className={styles.smallTitle}>{title}</h3>
       </div>
     </div>
-  )
+    )
+  }
 }
