@@ -1,6 +1,6 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import * as styles from './page.css'
 import Card from '@/components/Card/Card'
 import { subject } from '@/constants/subject'

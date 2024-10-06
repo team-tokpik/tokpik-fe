@@ -5,8 +5,10 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   color: vars.color.white,
-  height: 'none',
+  width: '100%',
+  height: '100vh',
   paddingBottom: '60px',
+  overflowY: 'auto',
 })
 
 export const titleSection = style({
