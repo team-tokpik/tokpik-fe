@@ -21,14 +21,63 @@ export default function Home() {
   const [isFilterOn, setIsFilterOn] = useState(false) // 필터 열림 여부
   const [isLoading, setIsLoading] = useState<number>(0);
   const [visitCount, setVisitCount] = useState<number>(0);
-  const [cardContents, setCardContents] = useState<ItemType[]>([])
+  const [cardContents, setCardContents] = useState<ItemType[]>([ ])
+  // 테스트 코드 - 카드 예시
+  // {
+  //   id: 1,
+  //   type: 'relation',
+  //   title: '가장 친한 친구와의 추억',
+  //   description: '어릴 적 함께 놀았던 기억'
+  // },
+  // {
+  //   id: 2,
+  //   type: 'issue',
+  //   title: '최근 뉴스 헤드라인',
+  //   description: '세계 정세에 대한 의견 나누기'
+  // },
+  // {
+  //   id: 3,
+  //   type: 'love',
+  //   title: '첫사랑에 대한 이야기',
+  //   description: '첫 데이트의 설렘'
+  // },
+  // {
+  //   id: 4,
+  //   type: 'business',
+  //   title: '성공적인 프로젝트 경험',
+  //   description: '팀워크의 중요성'
+  // },
+  // {
+  //   id: 5,
+  //   type: 'hobby',
+  //   title: '새로 시작한 취미',
+  //   description: '요리 클래스 참여 후기'
+  // },
+  // {
+  //   id: 6,
+  //   type: 'humor',
+  //   title: '가장 웃겼던 순간',
+  //   description: '친구들과의 재미있는 에피소드'
+  // },
+  // {
+  //   id: 7,
+  //   type: 'ice-breaker',
+  //   title: '처음 만난 사람과의 대화',
+  //   description: '공통점 찾기'
+  // },
+  // {
+  //   id: 8,
+  //   type: 'self-development',
+  //   title: '최근 읽은 자기계발서',
+  //   description: '책에서 배운 교훈'
+  // }
   const [apiTrigger,setApiTrigger] = useState<boolean>(false);
   useEffect(()=>{
     setApiTrigger(!isFilterOn)
   },[isFilterOn])
  
 
-  //대화주제를 가져온다.
+  // 대화주제를 가져온다.
   useEffect(() => {
     if(!isFilterOn || apiTrigger) 
     {
@@ -154,7 +203,7 @@ export default function Home() {
         {/* header section */}
         <header className={styles.Header}>
           {/* text section */}
-          <div>
+          <div className={styles.adjustSpace}>
             <p className={styles.HeaderText}>Explore</p>
             <p className={styles.HeaderText}>
               Today’s <span className={styles.HeaderText2}>Tokpiks!</span>
