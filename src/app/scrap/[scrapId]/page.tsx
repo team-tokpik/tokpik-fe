@@ -10,7 +10,6 @@ import Sandwich from '/public/images/Sandwich.svg'
 import Bell from '/public/images/Bell.svg'
 import Pencil from '/public/images/Pencil.svg'
 import { getUsersScrapsScrapIdTopics } from '@/api/scrap/getUsersScrapsScrapIdTopics'
-import { useRouter } from 'next/navigation'
 import { patchUsersScrapsScrapIdTitles } from '@/api/scrap/patchUsersScrapsScrapIdTitles'
 
 interface ScrapPageProps {
