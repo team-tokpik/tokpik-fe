@@ -10,16 +10,16 @@ export interface Topic {
 
 export interface GetUsersScrapsScrapIdTopicsResponse {
   contents: Topic[];
-  lastContentId: number;
+  nextCursorId: number;
   first: boolean;
   last: boolean;
 }
 
-export const getUsersScrapsScrapIdTopics = async (scrapId: number, lastContentId: number = 0, size: number = 10): Promise<GetUsersScrapsScrapIdTopicsResponse> => {
+export const getUsersScrapsScrapIdTopics = async (scrapId: number, nextCursorId: number = 0, size: number = 10): Promise<GetUsersScrapsScrapIdTopicsResponse> => {
   try {
     const response = await client.get<GetUsersScrapsScrapIdTopicsResponse>(`/users/scraps/${scrapId}/topics`, {
       params: {
-        lastContentId,
+        nextCursorId,
         size
       }
     });
