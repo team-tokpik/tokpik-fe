@@ -102,6 +102,15 @@ export const mediumContentWrapper = style({
   gap: '0.5rem',
 })
 
+export const mediumContentWrapper = style({
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  gap: '0.5rem',
+})
+
 export const smallContentWrapper = style({
   width: '100%',
   height: '100%',

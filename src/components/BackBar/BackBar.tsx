@@ -3,6 +3,7 @@ import React from 'react'
 import * as styles from './BackBar.css'
 import Back from '/public/images/Back.svg'
 import Close from '/public/images/Close.svg'
+import { useRouter } from 'next/navigation'
 type BackBarProps = {
   isClose?: boolean
   label?: string
