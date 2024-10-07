@@ -11,7 +11,7 @@ const Carousel = ({ items }: carousel) => {
   const router = useRouter()
   
   useEffect(() => {
-    console.log('아이템:\n',typeof items.length,'\n',items.length,'\n',items)
+    console.log('케루셀아이템:\n',typeof items.length,'\n',items.length,'\n',items)
     
   },[items])
 
