@@ -38,6 +38,16 @@ export const buttonRecipe = recipe({
         color: vars.color.gray2,
       },
     },
+    color: {
+      primary: {
+        backgroundColor: vars.color.primary,
+        color: vars.color.white,
+      },
+      secondary: {
+        backgroundColor: vars.color.gray4,
+        color: vars.color.gray1,
+      },
+    },
   },
   defaultVariants: {
     size: 'large',

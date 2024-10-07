@@ -8,10 +8,11 @@ export default function Button({
   active,
   onClick,
   disabled,
+  color = 'primary',
 }: ButtonType) {
   return (
     <button
-      className={styles.buttonRecipe({ size, active })}
+      className={styles.buttonRecipe({ size, active, color })}
       onClick={onClick}
       disabled={disabled}
     >
