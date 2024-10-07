@@ -17,7 +17,7 @@ const skeletonBgAnimation = keyframes({
 export const Skeleton = recipe({
   base: {
     backgroundColor: vars.color.gray3,
-    animation: `${skeletonBgAnimation} 2s ease-in-out infinite`,
+    animation: `${skeletonBgAnimation} 1.5s ease-in-out infinite`,
   },
   variants: {
     radius: {
