@@ -11,7 +11,7 @@ export const Container = style({
   backgroundColor: '#333333',
   height: '60px',
   borderRadius: '15px 15px 0 0',
-  zIndex:'998'
+  zIndex: '998',
 })
 
 export const ButtonWrapper = style({

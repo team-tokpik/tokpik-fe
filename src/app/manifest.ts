@@ -7,8 +7,8 @@ const manifest = (): MetadataRoute.Manifest => {
     description: '톡픽 테스트',
     start_url: '/',
     display: 'standalone',
-    background_color: '#000',
-    theme_color: '#000',
+    background_color: '#212121',
+    theme_color: '#212121',
     icons: [
       {
         src: '/favicons/android-chrome-192x192.png',

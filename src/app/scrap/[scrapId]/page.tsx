@@ -1,5 +1,6 @@
 'use client'
-import { useSearchParams } from 'next/navigation'
+
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import * as styles from './page.css'
 import Card from '@/components/Card/Card'
@@ -9,23 +10,24 @@ import Sandwich from '/public/images/Sandwich.svg'
 import Bell from '/public/images/Bell.svg'
 import Pencil from '/public/images/Pencil.svg'
 import { getUsersScrapsScrapIdTopics } from '@/api/scrap/getUsersScrapsScrapIdTopics'
-import { useRouter } from 'next/navigation'
 import { patchUsersScrapsScrapIdTitles } from '@/api/scrap/patchUsersScrapsScrapIdTitles'
+
 interface ScrapPageProps {
-    params: {
-      scrapId: string;
-    };
+  params: {
+    scrapId: string
   }
+}
 
 interface Topic {
-  scrapTopicId: number;
-  topicId: number;
-  topicTitle: string;
-  topicType: string;
-  scraped: boolean;
+  scrapTopicId: number
+  topicId: number
+  topicTitle: string
+  topicType: string
+  scraped: boolean
 }
 
 const ScrapDetail = ({ params }: ScrapPageProps) => {
+
     const router = useRouter()
     const searchParams = useSearchParams()
     const [scrapName, setScrapName] = useState('')//스크랩 이름 제목
@@ -82,6 +84,12 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
         }
         setIsEditHead(false);
       }
+      
+  const handleExport = () => {
+    router.push(
+      `/scrap/${scrapId}/export?scrapTopics=${encodeURIComponent(JSON.stringify(scrapTopics))}&scrapName=${encodeURIComponent(scrapName)}`
+    )
+  }
   return (
     <>
     <BackBar label='알림 설정'/>
@@ -128,10 +136,11 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
                     />
                 );
             })}
+          </div>
         </div>
-        </div>
-            {/* button section */}
+        {/* button section */}
         <div className={styles.ButtonContainer}>
+
           {isAlarmSet ? <button className={styles.AlarmSubmitButton({on:alarmArr.length>0})}
           onClick={() => {
             if(alarmArr.length===0){
@@ -144,7 +153,7 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
                 다음
             </button> : (
             <>
-            <button className={styles.ExportButton}>
+            <button className={styles.ExportButton} onClick={handleExport}>
                 <Sandwich/>
                 내보내기
             </button>
@@ -155,9 +164,9 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
             </>
           )}
         </div>
-    </div>
+      </div>
     </>
   )
 }
 
-export default ScrapDetail;
+export default ScrapDetail
