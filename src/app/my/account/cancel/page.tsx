@@ -29,7 +29,7 @@ const App = () => {
   }, []);
   return (
     <>
-      <BackBar />
+      <BackBar label='회원탈퇴'/>
       <main className={styles.Main}>
         {/* header section*/}
         <div className={styles.HeadContainer}>

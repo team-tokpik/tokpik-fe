@@ -20,10 +20,14 @@ export const cardRecipe = recipe({
         position: 'absolute',
         transition: 'transform 0.1s ease-in-out',
       },
+      medium: {
+        width: '100%',
+        padding: '0.88rem 1rem',
+      },
       small: {
-        width: '165px',
+        width: '100%',
         height: '106px',
-        padding: '14px 16px',
+        padding: '0.88rem 1rem',
       },
     },
     type: {
@@ -82,10 +86,52 @@ export const largeContentWrapper = style({
   gap: 16,
 })
 
-export const smallContentWrapper = style({
+export const mediumContentWrapper = style({
+  width: '100%',
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: 6,
+  justifyContent: 'flex-start',
+  gap: '0.5rem',
+})
+
+export const smallContentWrapper = style({
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  gap: '0.5rem',
+})
+
+export const smallTitleWrapper = style({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+})
+
+export const alarmNumber = recipe({
+  base: {
+    fontSize: '0.75rem',
+    width: '1.25rem',
+    height: '1.25rem',
+    borderRadius: '50%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: vars.color.primary,
+    color: vars.color.white,
+  },
+  variants: {
+    alarmNumber: {
+      0: {
+        backgroundColor: vars.color.gray1,
+        color: vars.color.gray1,
+      },
+    },
+  },
+
 })
 
 export const cardImage = style({

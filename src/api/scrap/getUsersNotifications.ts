@@ -11,7 +11,7 @@ export interface Notification {
   notificationStartTime: string;
   notificationEndTime: string;
   notificationInterval: number;
-  scrapName: string;
+  notificationName: string;
   notificationTopicTotal: number;
   notificationTalkTopicTypes: NotificationTopicType[];
 }

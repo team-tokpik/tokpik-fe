@@ -1,5 +1,5 @@
 export interface CardType {
-  size: 'small' | 'large'
+  size: 'small' | 'medium' | 'large'
   type:
     | 'relation'
     | 'issue'
@@ -12,8 +12,12 @@ export interface CardType {
   title: string
   description?: string
   relativePosition?: '0' | '1' | '-1' | 'more'
+  onClick?: () => void
+  isAlarm?: boolean
+  alarmNumber?: number
 }
 export interface ItemType {
+  id: number,
   type:
     | 'relation'
     | 'issue'

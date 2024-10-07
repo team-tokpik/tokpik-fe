@@ -15,7 +15,7 @@ const App = () => {
   }
   return (
     <>
-      <BackBar />
+      <BackBar label='내 계정'/>
       <main className={styles.Main}>
         <button
           className={styles.Button}

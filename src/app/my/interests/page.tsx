@@ -30,7 +30,7 @@ const App = () => {
     }, [])
   return (
     <>
-      <BackBar />
+      <BackBar label='관심 주제 설정'/>
       <main className={styles.Main}>
         {/* 장소 섹션 */}
         <InterestTabButton

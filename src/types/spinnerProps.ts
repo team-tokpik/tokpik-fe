@@ -1,4 +1,7 @@
 export interface SpinnerProps {
-    text?: string // text를 선택적 prop으로 변경
+  type: 'square' | 'line'
+    sub?: string 
+    text?: string 
+    size: 'full' | 'partial'
   }
   

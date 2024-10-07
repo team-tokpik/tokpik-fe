@@ -15,14 +15,16 @@ import { useRouter } from 'next/navigation'
 import ScrapAlarmTitle from '@/components/ScrapAlarmTitle/ScrapAlarmTitle'
 import { deleteUsersNotifications } from '@/api/scrap/deleteUsersNotifications'
 import { deleteUsersScrapsScrapId } from '@/api/scrap/deleteUsersScrapsScrapId'
+import { postUsersScrap } from '@/api/scrap/postUsersScraps'
 export default function Home() {
     // 선택된 탭
     const [selectedTab, setSelectedTab] = useState<string>('스크랩')
     const [scraps,setScraps] = useState<Scrap[]>([])
     const [notifications,setNotifications] = useState<Notification[]>([])
     const router = useRouter() //라우터
-    const [isEdit,setIsEdit] = useState<boolean>(false)
-
+    const [isEdit,setIsEdit] = useState<boolean>(false) // 편집 중을 나타냄
+    const [isAdding,setIsAdding] = useState<boolean>(false) // 추가 중을 나타냄
+    
     // 탭 클릭시 클릭된 버튼의 텍스트를 상태로 저장
     const handleTabSelect = (text: string) => {
       setSelectedTab(text)
@@ -32,11 +34,11 @@ export default function Home() {
     useEffect(()=>{
       getUsersScraps().then((res)=>{
         setScraps(res.scraps)
-        console.log(res.scraps)
+        console.log('스크랩: ',res.scraps)
       })
       getUsersNotifications().then((res)=>{
         setNotifications(res.contents as Notification[])
-        console.log(res.contents)
+        console.log('예약: ',res.contents)
       })
     },[])
 
@@ -57,6 +59,38 @@ export default function Home() {
         console.error('알림 삭제 중 오류 발생:', error);
       }
     }
+
+    const addFunction = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+        const target = e.target as HTMLInputElement; // 타입 안전성 강화-target에 value가 없다는 에러를 해결해준다
+        if (target.value.trim()) { // 빈 값 확인 (공백 제외)
+          try {
+              const res = await postUsersScrap(target.value); // 값을 서버로 전송하는 함수
+              console.log(res, target.value);
+              
+              // 새로운 스크랩 객체 생성
+              const newScrap = {
+                scrapId: res.scrapId,
+                scrapName: target.value,
+                recentTopicTypes: []
+              };
+              
+              console.log('새로운 스크랩:', newScrap);
+              
+              setScraps(prevScraps => {
+                const updatedScraps = [newScrap, ...prevScraps];
+                console.log('업데이트된 스크랩 목록:', updatedScraps);
+                return updatedScraps;
+              });
+            setIsAdding(false); //추가 중인 상태를 해제
+            target.value = ''; // 입력 필드 초기화
+          } catch (error) {
+            console.error('스크랩 추가 중 오류 발생:', error);
+            // 사용자에게 오류 메시지 표시 (예: 알림 또는 상태 업데이트)
+          }
+        }
+      }
+    };
 
   return (
     <>
@@ -81,7 +115,8 @@ export default function Home() {
         <>
         {/* 추가, 편집 버튼  */}
         <div className={styles.FuncButtonContainer}>
-          <div className={styles.ButtonBox({type:'plus'})}><Plus/><p>추가</p></div>
+          <div className={styles.ButtonBox({type:'plus'})}
+        onClick={()=>{setIsAdding(true)}}><Plus/><p>추가</p></div>
           <div 
           className={styles.ButtonBox({type:'minus'})} 
         onClick={()=>{setIsEdit(!isEdit)}}>
@@ -90,6 +125,22 @@ export default function Home() {
         </div>
         {/* scrap title section */}
         <div className={styles.ScrapTitleContainer}>
+
+          {/* 스크랩 추가 버튼을 누르면 나타나는 UI */}
+          {isAdding && <ScrapTitle 
+            key={scraps.length}
+            isEdit={isEdit}
+            title={'새 스크랩'}
+            onClick={() => {
+              setIsAdding(false);
+            }}
+            isAdding={isAdding}
+            addFunction={addFunction}
+            count={0}
+            colorSet={Array(4).fill(undefined) as [string | undefined, string | undefined, string | undefined, string | undefined]}
+          />}
+            
+          {/* 스크랩 들 */}
           {scraps.map((scrap)=>{
             return <ScrapTitle 
               key={scrap.scrapId}
@@ -123,7 +174,7 @@ export default function Home() {
               key={notification.notificationId}
               month={notification.noticeDate.slice(5,7)}
               day={notification.noticeDate.slice(8,10)}
-              title={notification.scrapName} 
+              title={notification.notificationName} 
               startTime={notification.notificationStartTime} 
               endTime={notification.notificationEndTime} 
               gaptime={notification.notificationInterval.toString()} 

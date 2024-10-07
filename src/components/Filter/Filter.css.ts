@@ -31,7 +31,7 @@ export const MiddleContainer = recipe({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    zIndex: '999',
+    zIndex: 1000,
     backgroundColor: vars.color.black,
     borderRadius: '0.9375rem 0.9375rem 0rem 0rem',
     transition: 'height 0.3s ease-in-out',
@@ -138,6 +138,7 @@ export const SubHead = style({
   width: '100%',
   padding: '0.62rem 1.5rem',
   color: vars.color.gray2,
+  
 })
 export const SubBody = style({
   width: '100%',
@@ -150,7 +151,7 @@ export const SubBody = style({
 
 export const AgeSlider = style({
   width: '100%',
-  padding: '0 1.5rem',
+  padding: '0rem 1.5rem',
   marginBottom: '1rem',
   position: 'relative',
 })
@@ -182,13 +183,23 @@ export const AgeSliderInput = style({
   },
 })
 
-export const AgeSliderTrack = style({
-  position: 'absolute',
-  height: '0.125rem',
-  background: vars.color.primary,
-  top: '50%',
-  transform: 'translateY(-50%)',
-  zIndex: 1, // 트랙을 슬라이더 입력 아래에 배치
+export const AgeSliderTrack  = recipe({
+  base: {
+    position: 'absolute',
+    height: '0.125rem',
+    background: vars.color.primary,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    zIndex: 1, // 트랙을 슬라이더 입력 아래에 배치
+  },
+  variants: {
+    front: {
+      true: { zIndex: 1 },
+      false: {  width: '100%',
+        zIndex: 0,
+        backgroundColor: vars.color.gray4, },
+    },
+  },
 })
 
 export const AgeSliderLabels = style({
@@ -199,3 +210,11 @@ export const AgeSliderLabels = style({
   fontSize: '0.9375rem',
   gap:'0.3rem'
 })
+export const AgeButtonContainer = style({
+  padding: '0rem 1.8rem',
+  width: '100%',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: '0.9rem',
+})
+

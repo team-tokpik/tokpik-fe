@@ -4,7 +4,8 @@ export const Main = style({
   width: '100%',
   height: '100vh',
   paddingTop:'55px',
-  color: vars.color.white
+  color: vars.color.white,
+  overflowY: 'auto',
 })
 export const TermContainer = style({
   padding: '20px',
