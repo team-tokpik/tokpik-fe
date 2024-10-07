@@ -12,7 +12,7 @@ export const Main = recipe({
     isFilterOn: {
       true: {
         ':before': {
-          content: '""', // 필수 content 속성
+          content: '""',
           position: 'absolute',
           bottom: 0,
           left: 0,
@@ -25,13 +25,15 @@ export const Main = recipe({
     },
   },
 })
+export const adjustSpace = style({
+})
 
 export const Header = style({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: '2rem',
-  padding: '4rem 1.5rem 2rem',
+  gap: 'calc(max(1rem, 2rem + min(0px, 100vh - 815px)))',
+  padding: `calc(max(2rem, 16% + min(0px, 100vh - 815px))) ${vars.size.paddingInline} 8%`,
 })
 
 export const HeaderText = style({
@@ -81,7 +83,7 @@ export const CardBox = style({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  paddingInline: '1.5rem',
+  paddingInline: vars.size.paddingInline,
   width: '100%',
   height: '65%',
 })

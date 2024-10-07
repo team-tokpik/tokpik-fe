@@ -7,6 +7,8 @@ export const cardBase = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around',
+  alignItems: 'center',
+  overflow: 'hidden',
 })
 
 export const cardRecipe = recipe({
@@ -14,9 +16,11 @@ export const cardRecipe = recipe({
   variants: {
     size: {
       large: {
-        width: '345px',
-        height: '483px',
-        padding: '0 24px',
+        width: '100%',
+        // height: '140%',
+        aspectRatio: 343/483,
+        
+        // padding: '0 24px',
         position: 'absolute',
         transition: 'transform 0.1s ease-in-out',
       },
@@ -41,14 +45,16 @@ export const cardRecipe = recipe({
       'self-development': { background: vars.color.pimento, color: vars.color.pimentoFont },
     },
     relativePosition: {
-      '0': {zIndex: 1,transform: 'scale(1.1)'},
+      '0': {zIndex: 1,
+        // transform: 'scale(1.1)'
+      },
       '1': {
         opacity: 0.3,
-        transform: 'scale(1) translateY(11%)',
+        transform: 'scale(0.9) translateY(13%)',
       },
       '-1': {
         opacity: 0.3,
-        transform: 'scale(1) translateY(-11%)',
+        transform: 'scale(0.9) translateY(-13%)',
       },
       'more': {
         opacity: 0, // 투명하게
@@ -82,8 +88,9 @@ export const smallTitle = style([
 export const largeContentWrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  width: '285px',
+  width: '100%',
   gap: 16,
+  padding: '0 24px',
 })
 
 export const mediumContentWrapper = style({
@@ -111,6 +118,13 @@ export const smallTitleWrapper = style({
   alignItems: 'center',
 })
 
+
+export const cardImage = style({
+  width: '100%',
+  aspectRatio: '345 / 190',
+  // margin: '0 0 0 24px',
+  // transform: 'scale(1.1)',
+})
 export const alarmNumber = recipe({
   base: {
     fontSize: '0.75rem',
@@ -134,6 +148,3 @@ export const alarmNumber = recipe({
 
 })
 
-export const cardImage = style({
-  margin: '0 0 0 -24px',
-})

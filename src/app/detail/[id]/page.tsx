@@ -87,24 +87,33 @@ export default function DetailPage({params}: {params: {id: string}}) {
       <div className={styles.titleSection}>
         <div className={styles.subtitleSection}>
           {isLoading ? (
-            <Skeleton width='100%' height='1.125rem' radius='full' />
+            <Skeleton width='30%' height='1.125rem' radius='full' />
           ) : (
-            <Subtitle type={type} isSmall={false} isCard={false} />
+            <>
+              <Subtitle type={type} isSmall={false} isCard={false} />
+              {scrap ? (
+                <Scrap_active 
+                  color={COLOR_MAP[type as CardType['type']]} 
+                  onClick={() => {
+                    setScrap(false)
+                  }}
+                />
+              ) : (
+                <Scrap_inactive 
+                  color={COLOR_MAP[type as CardType['type']]} 
+                  onClick={() => {
+                    setIsScrap(true)
+                  }}
+                />
+              )}
+            </>
           )}
-          {scrap ? (
-            <Scrap_active color={COLOR_MAP[type as CardType['type']]} 
-            onClick={() => {
-              setScrap(false)
-            }}/>
-          ) : (
-            <Scrap_inactive color={COLOR_MAP[type as CardType['type']]} 
-            onClick={() => {
-              setIsScrap(true)
-            }}  />
-          )}
+
+          
+
         </div>
         {isLoading ? (
-          <Skeleton width='100%' height='1.125rem' radius='full' />
+          <Skeleton width='100%' height='2.125rem' radius='full' />
         ) : (
           <h1 className={styles.title}>{title}</h1>
         )}

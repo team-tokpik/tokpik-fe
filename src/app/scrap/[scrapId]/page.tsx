@@ -11,7 +11,6 @@ import Bell from '/public/images/Bell.svg'
 import Pencil from '/public/images/Pencil.svg'
 import { getUsersScrapsScrapIdTopics } from '@/api/scrap/getUsersScrapsScrapIdTopics'
 import { patchUsersScrapsScrapIdTitles } from '@/api/scrap/patchUsersScrapsScrapIdTitles'
-
 interface ScrapPageProps {
   params: {
     scrapId: string
@@ -36,7 +35,8 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
     const [scrapTopics, setScrapTopics] = useState<Topic[]>([]) // 스크랩 카드들 세부 정보
     const [isAlarmSet, setIsAlarmSet] = useState<boolean>(false) // 알림 중인지 체크
     const [alarmArr, setAlarmArr] = useState<number[]>([]) // 알림 배열
-  const [isEditHead, setIsEditHead] = useState<boolean>(false) // 헤드 수정 여부
+    const [isEditHead, setIsEditHead] = useState<boolean>(false) // 헤드 수정 여부
+
     useEffect(() => {
       if (scrapId) {
         getUsersScrapsScrapIdTopics(Number(scrapId))
@@ -49,13 +49,14 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
           })
       }
     }, [scrapId])
+
     useEffect(() => {
       console.log('alarmArr: ',alarmArr)
     }, [alarmArr])
+
     useEffect(() => {
       const scrapNameParam = searchParams.get('scrapName')
       const lengthParam = searchParams.get('length')
-    
       if (scrapNameParam) setScrapName(scrapNameParam)
       if (lengthParam) setLength(Number(lengthParam))
     }, [searchParams])

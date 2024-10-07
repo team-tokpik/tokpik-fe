@@ -11,7 +11,7 @@ export const OuterContainer = recipe({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: vars.color.black,
+    // backgroundColor: vars.color.black,
     zIndex: 999,
   },
   variants: {

@@ -26,7 +26,14 @@ export const vars = createGlobalTheme(':root', {
     pimento: '#42a121',
     pimentoFont: '#0F3A00',
   },
+  size:{
+    paddingInline: '5%',
+    // paddingInline: 'calc(max(5%, min(10%, 5% + max(5%, (815px - 100vh)))))',
+  }
 })
+
+
+
 globalStyle('*', {
   textDecoration: 'none',
   boxSizing: 'border-box',

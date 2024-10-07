@@ -10,7 +10,6 @@ type BackBarProps = {
 }
 
 export default function BackBar({ isClose = false, label }: BackBarProps) {
-
   const clickHandler = () => {
     if (typeof window !== 'undefined') {
       window.history.back();
