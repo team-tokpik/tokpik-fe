@@ -159,6 +159,7 @@ export default function DetailPage({params}: {params: {id: string}}) {
                     <Card 
                       key={item.topicId} 
                       id={item.topicId}
+                      isScraped={item.scraped}
                       size="small" 
                       type={topicTypeEng as CardType['type']} 
                       title={item.title} 

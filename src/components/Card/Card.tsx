@@ -16,6 +16,7 @@ import ScrapModal from '../ScrapModal/ScrapModal'
 import Toast from '../Toast/Toast'
 import Scrap_active from '/public/images/Scrap_active.svg'
 import Scrap_inactive from '/public/images/Scrap_inactive.svg'
+import { usePathname } from 'next/navigation'
 const cardImages: Record<
   CardType['type'],
   React.FC<React.SVGProps<SVGSVGElement>>
@@ -61,16 +62,19 @@ export default function Card({
   onClick,
   isAlarm,
   alarmNumber,
+  isScraped,
+  handleScrapDelete,
 }: DynamicCardProps) {
 
- 
+  const pathname = usePathname(); // useRouter 대신 usePathname 사용
+
   const CardImage = cardImages[type] as React.FC<React.SVGProps<SVGSVGElement>>
 
   //화면 높이에 따라 카드의 비율 조절
   const aspectRatio = 
     Math.max(343/483,343 / 483 + Math.max(0,815 - window.innerHeight) / 483)
   const [isScrap, setIsScrap] = useState<boolean>(false)  
-  const [scrap, setScrap] = useState<boolean>(false)
+  const [scrap, setScrap] = useState<boolean>(isScraped as boolean)
   const [showToast, setShowToast] = useState<boolean>(false)
 
     // 스크랩 완료 후 모달창이 닫힐때,
@@ -160,8 +164,12 @@ export default function Card({
           <Subtitle type={type} isSmall={true} isCard={true} />
           {isAlarm ==true && <div className={styles.alarmNumber({alarmNumber: alarmNumber === 0 ? 0 : undefined})}>{alarmNumber}</div>}
           {isAlarm === false && scrap === false && <Scrap_inactive onClick={handleScrapClick}/>}
-          {isAlarm === false && scrap === true && <Scrap_active />}
-
+          {isAlarm === false && scrap === true && <Scrap_active onClick={(e:React.MouseEvent)=>{
+            e.stopPropagation(); // 클릭 이벤트 전파 방지
+            if (handleScrapDelete && pathname.startsWith('/scrap')) {//스크랩 상세 페이지에서만 작동
+              handleScrapDelete(id as number);
+            }
+          }}/>}
         </div>
         <h3 className={styles.smallTitle}>{title}</h3>
       </div>

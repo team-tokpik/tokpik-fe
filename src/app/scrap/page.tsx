@@ -24,7 +24,8 @@ export default function Home() {
     const router = useRouter() //라우터
     const [isEdit,setIsEdit] = useState<boolean>(false) // 편집 중을 나타냄
     const [isAdding,setIsAdding] = useState<boolean>(false) // 추가 중을 나타냄
-    
+    const [nextCursorId,setNextCursorId] = useState<number>(0)
+    const [last,setLast] = useState<boolean>(false)
     // 탭 클릭시 클릭된 버튼의 텍스트를 상태로 저장
     const handleTabSelect = (text: string) => {
       setSelectedTab(text)
@@ -36,9 +37,13 @@ export default function Home() {
         setScraps(res.scraps)
         console.log('스크랩: ',res.scraps)
       })
-      getUsersNotifications().then((res)=>{
+      getUsersNotifications(nextCursorId !== 0 ? nextCursorId : undefined).then((res)=>{
         setNotifications(res.contents as Notification[])
+        setNextCursorId(res.nextCursorId)
+        setLast(res.last)
         console.log('예약: ',res.contents)
+        console.log('nextCursorId: ',res.nextCursorId)
+        console.log('last: ',res.last)
       })
     },[])
 

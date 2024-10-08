@@ -23,11 +23,13 @@ export interface GetUsersNotificationsResponse {
   last: boolean;
 }
 
-export const getUsersNotifications = async (): Promise<GetUsersNotificationsResponse> => {
+export const getUsersNotifications = async (nextCursorId?: number): Promise<GetUsersNotificationsResponse> => {
   try {
-    const response = await client.get<GetUsersNotificationsResponse>('/users/notifications'
-    
-    );
+    const response = await client.get<GetUsersNotificationsResponse>('/users/notifications', {
+      params: {
+        nextCursorId
+      }
+    });
     return response.data;
   } catch (error) {
     console.error('알림 정보 가져오기 오류:', error);

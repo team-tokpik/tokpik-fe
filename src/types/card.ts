@@ -1,5 +1,6 @@
 export interface CardType {
   id?: number,
+  isScraped?: boolean,
   size: 'small' | 'medium' | 'large'
   type:
     | 'relation'
@@ -16,6 +17,7 @@ export interface CardType {
   onClick?: () => void
   isAlarm?: boolean
   alarmNumber?: number
+  handleScrapDelete?: (scrapTopicId: number) => void
 }
 export interface ItemType {
   id: number,
