@@ -19,7 +19,25 @@ export default function DetailPage({params}: {params: {id: string}}) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter()
   const [showToast, setShowToast] = useState(false);
+  const [related, setRelated] = useState<RelatedTopic[]>([])
+  const [title, setTitle] = useState<string>('')
+  const [type, setType] = useState<CardType['type']>('relation')
+  const [scrap, setScrap] = useState<boolean>(false)
+  const [detail, setDetail] = useState<DetailItem[]>([])
+  const [isScrap, setIsScrap] = useState<boolean>(false)
+  const COLOR_MAP: Record<CardType['type'], string> = {
+    relation: vars.color.egg,
+    issue: vars.color.tomato,
+    love: vars.color.sweet,
+    business: vars.color.ham,
+    hobby: vars.color.cheese,
+    humor: vars.color.lettuce,
+    'ice-breaker': vars.color.avocado,
+    'self-development': vars.color.pimento,
+  }
 
+  
+  // 디테일 내용 가져오기
   useEffect(() => {
     (async () => {
       try {
@@ -43,7 +61,7 @@ export default function DetailPage({params}: {params: {id: string}}) {
       })();
     }, [id]);
     
-
+  // 쿼리 파라미터 추출
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const titleFromQuery = searchParams.get('title');
@@ -52,32 +70,18 @@ export default function DetailPage({params}: {params: {id: string}}) {
     if (typeFromQuery) setType(typeFromQuery);
   }, []);
 
-  const [related, setRelated] = useState<RelatedTopic[]>([])
-  const [title, setTitle] = useState<string>('')
-  const [type, setType] = useState<CardType['type']>('relation')
-  const [scrap, setScrap] = useState<boolean>(false)
-  const [detail, setDetail] = useState<DetailItem[]>([])
-  const COLOR_MAP: Record<CardType['type'], string> = {
-    relation: vars.color.egg,
-    issue: vars.color.tomato,
-    love: vars.color.sweet,
-    business: vars.color.ham,
-    hobby: vars.color.cheese,
-    humor: vars.color.lettuce,
-    'ice-breaker': vars.color.avocado,
-    'self-development': vars.color.pimento,
-  }
-  const [isScrap, setIsScrap] = useState<boolean>(false)
 
+  
   // 스크랩 완료 후 모달창이 닫힐때,
   // 토스트 메시지 출력 , 스크랩 상태 변경
   const handleScrapModalClose = () => {
     setIsScrap(false);
     setScrap(true);
-      setShowToast(true);
-      setTimeout(() => {
-        setShowToast(false);
-      }, 1000);
+    //1초 동안 토스트 메세지 보여주기
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 1000); 
   };
 
   return (
