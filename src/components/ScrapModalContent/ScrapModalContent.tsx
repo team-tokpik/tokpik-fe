@@ -6,11 +6,11 @@ interface ScrapModalContentProps {
     colorSet: [string | undefined, string | undefined, string | undefined, string | undefined];
     title: string;
     isAdding?: boolean;
-    onClick: () => void;
-    handleClick?: (title:string) => void;
+    onClick: (e: React.MouseEvent) => void;
+    handleEnter?: (title:string) => void;
   }
 
-const ScrapModalContent = ({isInput,colorSet,title, isAdding, onClick, handleClick}: ScrapModalContentProps) => {
+const ScrapModalContent = ({isInput,colorSet,title, isAdding, onClick, handleEnter}: ScrapModalContentProps) => {
 
   return (
     <div className={styles.Container} onClick={onClick}>
@@ -21,12 +21,13 @@ const ScrapModalContent = ({isInput,colorSet,title, isAdding, onClick, handleCli
             </div>
             {!isAdding ? <p style={{color:'#777777'}}>{title}</p> : 
             <input 
-              style={{all:'unset'}}
+              style={{all:'unset',color:'#fafafa'}}
               type='text' 
               autoFocus
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && handleClick && e.currentTarget instanceof HTMLInputElement) {
-                  handleClick(e.currentTarget.value);
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                if (e.key === 'Enter' && handleEnter && e.currentTarget instanceof HTMLInputElement) {
+                  handleEnter(e.currentTarget.value);
+                 
                 }
               }}
             />}
@@ -39,7 +40,7 @@ const ScrapModalContent = ({isInput,colorSet,title, isAdding, onClick, handleCli
                 <Square color={colorSet[2]} />
                 <Square color={colorSet[3]} />
                 </div>
-                <p>{title}</p>
+                <p style={{color:'#fafafa'}}>{title}</p>
             </>
         )}
     

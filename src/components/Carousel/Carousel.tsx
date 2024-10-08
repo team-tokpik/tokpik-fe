@@ -11,7 +11,7 @@ const Carousel = ({ items }: carousel) => {
   const router = useRouter()
   
   useEffect(() => {
-    console.log('아이템:\n',typeof items.length,'\n',items.length,'\n',items)
+    console.log('케루셀아이템:\n',typeof items.length,'\n',items.length,'\n',items)
     
   },[items])
 
@@ -78,6 +78,7 @@ const Carousel = ({ items }: carousel) => {
         size="large"
         type={data.type}
         title={data.title}
+        id={data.id}
         description={data.description}
         relativePosition={(() => {
           const diff = index - currentIndex;

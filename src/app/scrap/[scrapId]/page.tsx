@@ -11,6 +11,7 @@ import Bell from '/public/images/Bell.svg'
 import Pencil from '/public/images/Pencil.svg'
 import { getUsersScrapsScrapIdTopics } from '@/api/scrap/getUsersScrapsScrapIdTopics'
 import { patchUsersScrapsScrapIdTitles } from '@/api/scrap/patchUsersScrapsScrapIdTitles'
+import { deleteUsersScrapsScrapIdTopicsScrapTopicId } from '@/api/scrap/deleteUsersScrapsScrapIdTopicsScrapTopicId'
 interface ScrapPageProps {
   params: {
     scrapId: string
@@ -91,9 +92,29 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
       `/scrap/${scrapId}/export?scrapTopics=${encodeURIComponent(JSON.stringify(scrapTopics))}&scrapName=${encodeURIComponent(scrapName)}`
     )
   }
+
+  const handleScrapDelete = async (Id: number) => {
+    
+    // scrapTopics 배열에서 해당 ID를 가진 항목 제거
+    setScrapTopics(prevScrapTopics => 
+      prevScrapTopics.filter(topic => topic.topicId !== Id)
+    );
+
+    //서버에 삭제 요청 보내기
+    try {
+      console.log('토픽 삭제 시동 scrapId: ',scrapId,Id)
+      await deleteUsersScrapsScrapIdTopicsScrapTopicId(scrapId,Id.toString());
+      console.log('스크랩 토픽 삭제 성공');
+    } catch (error) {
+      console.error('스크랩 토픽 삭제 실패:', error);
+      // 삭제 실패 시 원래 상태로 되돌리기
+      setScrapTopics(scrapTopics);
+    }
+  }
+  
   return (
     <>
-    <BackBar label='알림 설정'/>
+    <BackBar label=''/>
     <div className={styles.OuterContainer}>
         <div className={styles.InnerContainer}>
         {/* header section */}
@@ -129,11 +150,14 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
                     <Card 
                         key={index} 
                         size="small" 
+                        isScraped={data.scraped}
+                        id={data.topicId}
                         type={topicTypeEng as "relation" | "issue" | "love" | "business" | "hobby" | "humor" | "ice-breaker" | "self-development"} 
                         title={data.topicTitle} 
                         isAlarm={isAlarmSet}
                         alarmNumber={alarmArr.findIndex(id => id === data.topicId)+1}
                         onClick={() => {cardClickHandler(data.topicId)}}
+                        handleScrapDelete={handleScrapDelete}
                     />
                 );
             })}
