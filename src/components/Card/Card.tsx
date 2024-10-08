@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Avocado from '/public/images/card-images/avocado.svg'
 import Egg from '/public/images/card-images/egg.svg'
 import Ham from '/public/images/card-images/ham.svg'
@@ -7,12 +7,15 @@ import Lettuce from '/public/images/card-images/lettuce.svg'
 import Pimento from '/public/images/card-images/pimento.svg'
 import Tomato from '/public/images/card-images/tomato.svg'
 import Sweet from '/public/images/card-images/sweet.svg'
-import BookMark from '/public/images/BookMark.svg'
 import * as styles from './Card.css'
 import { CardType } from '@/types/card'
 import { RecipeVariants } from '@vanilla-extract/recipes'
 import Subtitle from '../Subtitle/Subtitle'
 import {vars} from '@/app/globals.css'
+import ScrapModal from '../ScrapModal/ScrapModal'
+import Toast from '../Toast/Toast'
+import Scrap_active from '/public/images/Scrap_active.svg'
+import Scrap_inactive from '/public/images/Scrap_inactive.svg'
 const cardImages: Record<
   CardType['type'],
   React.FC<React.SVGProps<SVGSVGElement>>
@@ -51,6 +54,7 @@ export type DynamicCardProps = CardType &
 export default function Card({
   size,
   type,
+  id,
   title,
   description,
   relativePosition,
@@ -65,10 +69,37 @@ export default function Card({
   //화면 높이에 따라 카드의 비율 조절
   const aspectRatio = 
     Math.max(343/483,343 / 483 + Math.max(0,815 - window.innerHeight) / 483)
-  
+  const [isScrap, setIsScrap] = useState<boolean>(false)  
+  const [scrap, setScrap] = useState<boolean>(false)
+  const [showToast, setShowToast] = useState<boolean>(false)
+
+    // 스크랩 완료 후 모달창이 닫힐때,
+  // 토스트 메시지 출력 , 스크랩 상태 변경
+  const handleScrapModalClose = () => {
+    setIsScrap(false);
+    setScrap(true);
+    //1초 동안 토스트 메세지 보여주기
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 1000); 
+  };
+
+  const handleScrapClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); //이벤트 버블링 방지
+    setIsScrap(true);
+  };
+
+  const handleScrapClickX = (e: React.MouseEvent) => {
+    e.stopPropagation(); //이벤트 버블링 방지
+    setIsScrap(false);
+  };
 
   if (size === 'large') {
     return (
+      <>
+       {isScrap && <ScrapModal onClickX={handleScrapClickX} onClick={handleScrapModalClose} id={id as number}/>}
+       {showToast && <Toast text='스크랩 완료'/>}
       <div
         className={styles.cardRecipe({
           size,
@@ -78,10 +109,20 @@ export default function Card({
         onClick={onClick}
         style={{aspectRatio: aspectRatio}}
       >
+       
         <div style={{padding: '0 24px',width: '100%',display: 'flex',justifyContent: 'space-between',alignItems: 'center'}}>
         <Subtitle type={type} isSmall={false} isCard={true} />
         <div style={{width: '2rem', height: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '50%', backgroundColor: `${colorMap[`${type}Font`]}`}}>
-          <BookMark color={`${colorMap[type]}`}/>
+          
+          {scrap ? 
+          <Scrap_active 
+          color='white'
+          style={{transform: 'scale(0.6)'}}/> : 
+          <Scrap_inactive 
+          color='white'
+          style={{transform: 'scale(0.6)'}}
+          onClick={handleScrapClick}
+          />}
         </div>
         </div>
 
@@ -92,6 +133,7 @@ export default function Card({
           <p className={styles.description}>{description}</p>
         </div>
       </div>
+      </>
     )
   }
   else if(size === 'medium'){
@@ -109,16 +151,22 @@ export default function Card({
   }
   else if(size === 'small'){
     return (
+      <>
+      {isScrap && <ScrapModal onClickX={handleScrapClickX} onClick={handleScrapModalClose} id={id as number}/>}
+      {showToast && <Toast text='스크랩 완료'/>}
       <div className={styles.cardRecipe({ size, type })} onClick={onClick}>
       <div className={styles.smallContentWrapper}>
         <div className={styles.smallTitleWrapper}>
           <Subtitle type={type} isSmall={true} isCard={true} />
           {isAlarm ==true && <div className={styles.alarmNumber({alarmNumber: alarmNumber === 0 ? 0 : undefined})}>{alarmNumber}</div>}
-          {isAlarm ==false && <BookMark/>}
+          {isAlarm === false && scrap === false && <Scrap_inactive onClick={handleScrapClick}/>}
+          {isAlarm === false && scrap === true && <Scrap_active />}
+
         </div>
         <h3 className={styles.smallTitle}>{title}</h3>
       </div>
     </div>
+    </>
     )
   }
 }

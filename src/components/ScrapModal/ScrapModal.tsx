@@ -9,7 +9,7 @@ import { postUsersScrapsScrapIdTopicsTopicId } from '@/api/scrap/postUsersScraps
 interface ScrapModalProps {
 
   onClick: (isCompleted?: boolean) => void
-  onClickX: () => void
+  onClickX: (e: React.MouseEvent) => void
   id:number
 }
 
@@ -24,15 +24,16 @@ const ScrapModal = ({onClick,onClickX,id}: ScrapModalProps) => {
     })
   }, [])
 
-  const handleClickAdd = async (title:string) => {
+  const handleEnter = async (title:string) => {
     if (isAdding) {
       const response = await postUsersScrap(title);
       setScraps([ {scrapId: response.scrapId, scrapName: title, recentTopicTypes: []},...scraps])
+      setIsAdding(false);
     }
-    setIsAdding(false);
-  };
+  }
 
-  const handleClickScrap = async (scrapId:number,topicId:number) => {
+  const handleClickScrap = async (e: React.MouseEvent, scrapId:number,topicId:number) => {
+    e.stopPropagation(); // 이벤트 버블링 방지
     await postUsersScrapsScrapIdTopicsTopicId(scrapId,topicId);
     setIsCompleted(prev=>true)
     onClick(isCompleted)
@@ -48,10 +49,10 @@ const ScrapModal = ({onClick,onClickX,id}: ScrapModalProps) => {
 
         </div>
         <div className={styles.Content}>
-        <ScrapModalContent title='스크랩 리스트 추가' handleClick={handleClickAdd} isAdding={isAdding} onClick={()=>{setIsAdding(prev=>!prev)}} isInput={true} colorSet={Array(4).fill(undefined) as [string | undefined, string | undefined, string | undefined, string | undefined]}/>
+        <ScrapModalContent title='스크랩 리스트 추가' handleEnter={handleEnter} isAdding={isAdding} onClick={()=>{setIsAdding(prev=>!prev)}} isInput={true} colorSet={Array(4).fill(undefined) as [string | undefined, string | undefined, string | undefined, string | undefined]}/>
         {scraps.map((scrap,index) => (
             <ScrapModalContent 
-            onClick={()=>{handleClickScrap(scrap.scrapId,id)}}
+            onClick={(e: React.MouseEvent)=>{handleClickScrap(e,scrap.scrapId,id)}}
             title={scrap.scrapName}
             key={index}
             isInput={false}            

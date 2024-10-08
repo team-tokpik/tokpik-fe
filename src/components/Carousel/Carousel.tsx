@@ -78,6 +78,7 @@ const Carousel = ({ items }: carousel) => {
         size="large"
         type={data.type}
         title={data.title}
+        id={data.id}
         description={data.description}
         relativePosition={(() => {
           const diff = index - currentIndex;

@@ -1,4 +1,5 @@
 export interface CardType {
+  id?: number,
   size: 'small' | 'medium' | 'large'
   type:
     | 'relation'

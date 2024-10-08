@@ -97,10 +97,7 @@ export default function DetailPage({params}: {params: {id: string}}) {
               <Subtitle type={type} isSmall={false} isCard={false} />
               {scrap ? (
                 <Scrap_active 
-                  color={COLOR_MAP[type as CardType['type']]} 
-                  onClick={() => {
-                    setScrap(false)
-                  }}
+                  color={COLOR_MAP[type as CardType['type']]}
                 />
               ) : (
                 <Scrap_inactive 
@@ -161,6 +158,7 @@ export default function DetailPage({params}: {params: {id: string}}) {
                   return (
                     <Card 
                       key={item.topicId} 
+                      id={item.topicId}
                       size="small" 
                       type={topicTypeEng as CardType['type']} 
                       title={item.title} 
