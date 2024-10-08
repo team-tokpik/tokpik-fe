@@ -10,19 +10,21 @@ export const Main = style({
 export const TermContainer = style({
   padding: '20px',
   marginBottom: '20px',
-  borderBottom: '1px solid #e0e0e0',
 })
 
 export const TermTitle = style({
-  fontSize: '18px',
-  fontWeight: 'bold',
+  fontSize: '0.9375rem',
   marginBottom: '10px',
+  borderBottom: `0.5px solid ${vars.color.gray1}`,
+  paddingBlock: '1.1rem',
+
 })
 
 export const TermContent = style({
-  fontSize: '14px',
-  lineHeight: '1.5',
+  fontSize: '0.75rem',
+  lineHeight: '140%',
   whiteSpace: 'pre-wrap',
+  color: vars.color.gray1,
 })
 
 export const SectionContainer = style({
