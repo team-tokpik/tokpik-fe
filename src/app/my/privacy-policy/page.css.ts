@@ -9,7 +9,6 @@ export const Main = style({
 })
 export const TermContainer = style({
   padding: '20px',
-  marginBottom: '20px',
 })
 
 export const TermTitle = style({
@@ -23,6 +22,6 @@ export const TermTitle = style({
 export const TermContent = style({
   fontSize: '0.75rem',
   lineHeight: '140%',
-  whiteSpace: 'pre-wrap',
+  whiteSpace: 'normal',
   color: vars.color.gray1,
 })

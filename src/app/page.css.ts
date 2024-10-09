@@ -33,7 +33,7 @@ export const Header = style({
   display: 'flex',
   flexDirection: 'column',
   gap: 'calc(max(1rem, 2rem + min(0px, 100vh - 815px)))',
-  padding: `calc(max(2rem, 16% + min(0px, 100vh - 815px))) ${vars.size.paddingInline} 8%`,
+  padding: `calc(max(2rem, 16% + min(0px, 100vh - 815px)) - 17px) ${vars.size.paddingInline} calc(8% - 17px)`,
 })
 
 export const HeaderText = style({

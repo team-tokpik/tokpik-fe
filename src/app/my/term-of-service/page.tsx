@@ -4,41 +4,16 @@ import { useState, useEffect } from 'react'
 import { getTerms, Term } from '@/api/my/getTerms'
 import BackBar from '@/components/BackBar/BackBar'
 
-interface Section {
-  mainCategory: string;
-  subCategory: string;
-  contentTitle: string;
-  content: string;
-}
-
-interface TermData {
-  title: string;
-  content: string;
-  sections: Section[];
-}
 
 const App = () => {
-  const [data, setData] = useState<TermData[]>([]);
+  const [data, setData] = useState<Term[]>([]);
 
+ 
   useEffect(() => {
     const fetchTerms = async () => {
-      try {
-        const terms = await getTerms();
-        const formattedTerms: TermData[] = terms.map((term: Term) => ({
-          title: term.title,
-          content: term.content,
-          sections: [{
-            mainCategory: '',
-            subCategory: '',
-            contentTitle: '',
-            content: term.content
-          }]
-        }));
-        setData(formattedTerms);
-        console.log(formattedTerms)
-      } catch (error) {
-        console.error('약관 정보 가져오기 오류:', error);
-      }
+      const terms = await getTerms();
+      setData(terms);
+      console.log(terms)
     };
     fetchTerms();
   }, []);
@@ -52,7 +27,7 @@ const App = () => {
             <h2 className={styles.TermTitle}>{term.title}</h2>
             {term.sections.map((section, sectionIndex) => (
               <div key={sectionIndex} className={styles.SectionContainer}>
-                <h3 className={styles.ContentTitle}>{section.contentTitle}</h3>
+                <h3 className={styles.ContentTitle}>{section.mainCategory}.{section.subCategory}. {section.contentTitle}</h3>
                 <p className={styles.Content}>{section.content}</p>
               </div>
             ))}

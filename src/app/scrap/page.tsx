@@ -103,7 +103,7 @@ export default function Home() {
       <main className={styles.Main}>
        {/* header */}
        <div className={styles.Header}>
-        <p className={styles.Head}>My <span className={styles.Orange}>TokPik</span></p>
+        <p className={styles.Head}>My <span className={styles.Orange}>Tokpik</span></p>
        </div>
         {/* tab section - 스크랩 , 예약 톡픽 */}
         <div className={styles.TabBox}>
