@@ -5,7 +5,7 @@ import { useAuthStore } from '@/store/useAuth'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { Suspense, useEffect } from 'react'
 
-export default function KakaoCallback() {
+function KakaoCallback() {
   const searchParams = useSearchParams()
   const authCode = searchParams.get('code')
   const router = useRouter()
@@ -30,9 +30,13 @@ export default function KakaoCallback() {
     }
   }, [])
 
+  return <div>page</div>
+}
+
+export default function KakaoCallbackPage() {
   return (
     <Suspense fallback={<div>loading...</div>}>
-      <div>page</div>
+      <KakaoCallback />
     </Suspense>
   )
 }
