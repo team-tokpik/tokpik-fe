@@ -1,20 +1,23 @@
 import axios from 'axios'
 
 const client = axios.create({
-  // 현재 테스트 시 사용할 url
-  // baseURL: 'http://tokpik.co.kr',
-  // 서비스 (프론트 배포 이후) 시 사용될 url
-    baseURL: 'https://api.tokpik.co.kr',
+  baseURL: 'https://api.tokpik.co.kr',
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-// 추후 토큰 스토리지 추가 후 보충 및 작성 예정
-// client.interceptors.request.use((config) => {
-//   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-//   return config
-// })
+client.interceptors.request.use((config) => {
+  const authData = localStorage.getItem('auth-storage')
+  if (authData) {
+    const parsedData = JSON.parse(authData)
+    const accessToken = parsedData.state.accessToken
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`
+    }
+  }
+  return config
+})
 
 // 에러 처리 interceptor
 client.interceptors.response.use(
@@ -22,7 +25,7 @@ client.interceptors.response.use(
   async (error) => {
     if (error.response) {
       if (error.response.status === 401) {
-        // 추후 토큰 스토리지 추가 후 작성
+        // 추후 토큰 갱신 로직 추가
         return
       }
     } else {
