@@ -103,7 +103,7 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
     //서버에 삭제 요청 보내기
     try {
       console.log('토픽 삭제 시동 scrapId: ',scrapId,Id)
-      await deleteUsersScrapsScrapIdTopicsScrapTopicId(scrapId,Id.toString());
+      await deleteUsersScrapsScrapIdTopicsScrapTopicId(scrapId,scrapTopics.find(topic => topic.topicId === Id)?.scrapTopicId.toString() as string);
       console.log('스크랩 토픽 삭제 성공');
     } catch (error) {
       console.error('스크랩 토픽 삭제 실패:', error);
