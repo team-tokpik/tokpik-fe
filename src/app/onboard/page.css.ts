@@ -3,8 +3,7 @@ import { vars } from '../globals.css'
 
 export const container = style({
   width: '100%',
-  minHeight: '100vh',
-  paddingBottom: '30px',
+  height: '100vh',
 })
 
 export const wrapper = style({
