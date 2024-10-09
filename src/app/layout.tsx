@@ -7,6 +7,11 @@ const pretendard = localFont({
   display: 'swap',
 })
 
+const musticaPro = localFont({
+  src: '../../public/fonts/MusticaPro-SemiBold.otf',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'Tokpik',
   description: 'Tokpik',
@@ -19,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={pretendard.className}>{children}</body>
+      <body className={`${pretendard.className} ${musticaPro.className}`}>{children}</body>
     </html>
   )
 }

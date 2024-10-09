@@ -8,7 +8,7 @@ export const OuterContainer = style({
   display: 'grid', 
   gridTemplateRows: '1fr 1fr', 
   gridTemplateColumns: '1fr 1fr',
-  fontSize: '1.5rem',
+  fontSize: '1.75rem',
   fontWeight: '700',
   lineHeight: '2rem',   
   alignItems: 'center',
