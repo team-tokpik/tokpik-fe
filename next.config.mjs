@@ -2,6 +2,16 @@ import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
 const withVanillaExtract = createVanillaExtractPlugin()
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/onboard',
+        permanent: true,
+      },
+    ]
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
