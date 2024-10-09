@@ -4,14 +4,14 @@ export const Container = style({
   position: 'fixed',
   bottom: '0',
   width: '100%',
-  maxWidth: '467px',
   display: 'flex',
   justifyContent: 'space-around',
   alignItems: 'center',
   backgroundColor: '#333333',
-  height: '60px',
+  height: '94px',
   borderRadius: '15px 15px 0 0',
   zIndex: '998',
+  paddingBottom: '34px',
 })
 
 export const ButtonWrapper = style({

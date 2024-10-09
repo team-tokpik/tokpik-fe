@@ -102,10 +102,11 @@ export const ContentBox = style({
 })
 export const ButtonBox = style({
   width: '100%',
+  height:'calc(80px + 34px)',
   display: 'flex',
   gap: '5px',
   justifyContent: 'space-around',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   padding: '0.94rem 1rem',
   borderTop: `1px solid ${vars.color.gray4}`,
 })
