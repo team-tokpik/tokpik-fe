@@ -6,6 +6,9 @@ import Image from 'next/image'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Button from '@/components/Button/Button'
+import InstallPrompt from '@/components/InstallPrompt/InstallPrompt'
+import { useAlert } from '@/hooks/useAlert'
+import { useRouter } from 'next/navigation'
 
 type CustomSlideProps = {
   image: string
@@ -33,6 +36,8 @@ function CustomSlide({ image, alt, title, subTitle }: CustomSlideProps) {
 }
 
 export default function OnboardPage() {
+  useAlert()
+  const router = useRouter()
   const settings = {
     dots: true,
     infinite: true,
@@ -73,18 +78,30 @@ export default function OnboardPage() {
         </Slider>
         <div className={styles.loginWrapper}>
           <div className={styles.buttonWrapper}>
+            {/* <Button
+              size="large"
+              label="Kakao로 시작하기"
+              active={true}
+              onClick={() => {
+                window.location.href =
+                  'https://kauth.kakao.com/oauth/authorize?client_id=16e98ca20ea01f100d108a0814854c35&redirect_uri=http://localhost:3000/kakao/callback&response_type=code&scope=account_email,profile_image,openid'
+              }}
+            /> */}
             <Button
               size="large"
               label="Kakao로 시작하기"
               active={true}
               onClick={() => {
-                console.log('click')
+                router.push('/survey/gender-birth')
               }}
             />
           </div>
-          <p className={styles.withNoLogin}>가입 없이 써볼래요</p>
+          <p className={styles.withNoLogin} onClick={() => router.push('/')}>
+            가입 없이 써볼래요
+          </p>
         </div>
       </div>
+      <InstallPrompt />
     </div>
   )
 }
