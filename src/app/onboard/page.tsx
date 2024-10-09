@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Suspense } from 'react'
 import Slider from 'react-slick'
 import * as styles from './page.css'
 import Image from 'next/image'
@@ -48,37 +48,38 @@ export default function OnboardPage() {
     swipeToSlide: true,
   }
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <Slider {...settings}>
-          <CustomSlide
-            image="/images/onboard-1.png"
-            alt="onboard1"
-            title="좋아하는 톡픽을 탐색하세요"
-            subTitle="좋아하는 톡픽을 탐색하세요"
-          />
-          <CustomSlide
-            image="/images/onboard-2.png"
-            alt="onboard2"
-            title="필터 설정으로 내게 딱 맞는 톡픽을 추천받아요"
-            subTitle="대화 주제 고민 없이, 상황에 적합하게!"
-          />
-          <CustomSlide
-            image="/images/onboard-3.png"
-            alt="onboard3"
-            title="다시 보고싶은 톡픽을 스크랩하세요"
-            subTitle="토핑을 스크랩하면 톡픽만의 샌드위치를 드려요!"
-          />
-          <CustomSlide
-            image="/images/onboard-4.png"
-            alt="onboard4"
-            title="원하는 시간과 순서로 톡픽을 알려줄게요!"
-            subTitle="걱정했던 그 대화자리, 톡픽과 함께 준비하세요"
-          />
-        </Slider>
-        <div className={styles.loginWrapper}>
-          <div className={styles.buttonWrapper}>
-            {/* <Button
+    <Suspense fallback={<div>loading...</div>}>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <Slider {...settings}>
+            <CustomSlide
+              image="/images/onboard-1.png"
+              alt="onboard1"
+              title="좋아하는 톡픽을 탐색하세요"
+              subTitle="좋아하는 톡픽을 탐색하세요"
+            />
+            <CustomSlide
+              image="/images/onboard-2.png"
+              alt="onboard2"
+              title="필터 설정으로 내게 딱 맞는 톡픽을 추천받아요"
+              subTitle="대화 주제 고민 없이, 상황에 적합하게!"
+            />
+            <CustomSlide
+              image="/images/onboard-3.png"
+              alt="onboard3"
+              title="다시 보고싶은 톡픽을 스크랩하세요"
+              subTitle="토핑을 스크랩하면 톡픽만의 샌드위치를 드려요!"
+            />
+            <CustomSlide
+              image="/images/onboard-4.png"
+              alt="onboard4"
+              title="원하는 시간과 순서로 톡픽을 알려줄게요!"
+              subTitle="걱정했던 그 대화자리, 톡픽과 함께 준비하세요"
+            />
+          </Slider>
+          <div className={styles.loginWrapper}>
+            <div className={styles.buttonWrapper}>
+              {/* <Button
               size="large"
               label="Kakao로 시작하기"
               active={true}
@@ -87,21 +88,22 @@ export default function OnboardPage() {
                   'https://kauth.kakao.com/oauth/authorize?client_id=16e98ca20ea01f100d108a0814854c35&redirect_uri=http://localhost:3000/kakao/callback&response_type=code&scope=account_email,profile_image,openid'
               }}
             /> */}
-            <Button
-              size="large"
-              label="Kakao로 시작하기"
-              active={true}
-              onClick={() => {
-                router.push('/survey/gender-birth')
-              }}
-            />
+              <Button
+                size="large"
+                label="Kakao로 시작하기"
+                active={true}
+                onClick={() => {
+                  router.push('/survey/gender-birth')
+                }}
+              />
+            </div>
+            <p className={styles.withNoLogin} onClick={() => router.push('/')}>
+              가입 없이 써볼래요
+            </p>
           </div>
-          <p className={styles.withNoLogin} onClick={() => router.push('/')}>
-            가입 없이 써볼래요
-          </p>
         </div>
+        <InstallPrompt />
       </div>
-      <InstallPrompt />
-    </div>
+    </Suspense>
   )
 }

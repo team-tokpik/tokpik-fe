@@ -3,7 +3,7 @@
 import { postKakaoLogin } from '@/api/auth/postKakaoLogin'
 import { useAuthStore } from '@/store/useAuth'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 
 export default function KakaoCallback() {
   const searchParams = useSearchParams()
@@ -30,5 +30,9 @@ export default function KakaoCallback() {
     }
   }, [])
 
-  return <div>page</div>
+  return (
+    <Suspense fallback={<div>loading...</div>}>
+      <div>page</div>
+    </Suspense>
+  )
 }
