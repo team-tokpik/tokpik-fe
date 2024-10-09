@@ -175,7 +175,7 @@ export const ButtonContainer = style({
   height: '30%',
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   alignItems: 'center',
   marginBottom: '4rem',
   paddingInline: '1.5rem',
