@@ -36,7 +36,7 @@ function CustomSlide({ image, alt, title, subTitle }: CustomSlideProps) {
 }
 
 export default function OnboardPage() {
-  useAlert()
+  // useAlert()
   const router = useRouter()
   const settings = {
     dots: true,
