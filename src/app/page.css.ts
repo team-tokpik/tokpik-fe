@@ -60,6 +60,10 @@ export const FilterButton = recipe({
   base: {
     width: '2rem',
     height: '2rem',
+    maxWidth: '2rem',
+    maxHeight: '2rem',
+    minWidth: '2rem',
+    minHeight: '2rem',
     border: `0.5px ${vars.color.gray2} solid`,
     backgroundColor: vars.color.gray4,
     borderRadius: '50%',

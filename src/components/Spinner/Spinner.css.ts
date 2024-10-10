@@ -28,6 +28,13 @@ export const OuterContainer = recipe({
         height: '100%',
       },
     },
+    type: {
+      line: {
+        backgroundColor: vars.color.black,
+      },
+      square: {
+      },
+    }
   },
 })
 
@@ -143,4 +150,5 @@ export const Text = style({
   whiteSpace: 'pre-line',
   textAlign: 'center',
   fontWeight: 'bold',
+  lineHeight: '140%',
 })

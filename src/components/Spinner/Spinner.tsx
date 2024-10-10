@@ -5,7 +5,7 @@ import { SpinnerProps } from '@/types/spinnerProps'
 const Spinner = ({ type, sub, text, size }: SpinnerProps) => {
   return (
     <div 
-      className={styles.OuterContainer({size})}
+      className={styles.OuterContainer({size, type})}
     >
       <div className={styles.SpinnerContainer({type})}>
         <Square className={styles.Square1({type})} color="primary"/>
