@@ -80,8 +80,6 @@ export default function Home() {
     setApiTrigger(!isFilterOn)
   }, [isFilterOn])
 
-
-
   // 대화주제를 가져온다.
   useEffect(() => {
     if (!isFilterOn || apiTrigger) {
@@ -193,6 +191,19 @@ export default function Home() {
     setIsFilterOn((prev) => !prev)
   }
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const visitCount = sessionStorage.getItem('visitCount')
+      if (visitCount === null) {
+        sessionStorage.setItem('visitCount', '1')
+        window.location.href = '/onboard'
+      } else {
+        const newCount = parseInt(visitCount) + 1
+        sessionStorage.setItem('visitCount', newCount.toString())
+      }
+    }
+  }, [])
+
   // 방문 횟수 체크 , 방문 횟수에 따라 다른 spinner 가 보입니다.
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -233,13 +244,22 @@ export default function Home() {
             <div
               className={styles.FilterButton({ isFilterListEmpty })}
               onClick={filterButtonHandler}
-            
             >
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' ,display:'flex', justifyContent:'center', alignItems:'center'}}>
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
                 {isFilterListEmpty ? (
-                  <FilterSVG color='white' />
+                  <FilterSVG color="white" />
                 ) : (
-                  <FilterSVG color='#777777' />
+                  <FilterSVG color="#777777" />
                 )}
               </div>
             </div>
