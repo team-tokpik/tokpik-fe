@@ -213,6 +213,7 @@ export default function Home() {
       {visitCount === 0 && isLoading > 0 && (
         <Spinner
           type="line"
+          sub={'조금만 기다려주세요'}
           text={'내게 꼭 맞는 대화 주제\n톡픽이 만들어지고 있어요!'}
           size="full"
         />

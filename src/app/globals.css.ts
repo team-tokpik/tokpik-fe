@@ -33,7 +33,6 @@ export const vars = createGlobalTheme(':root', {
   }
 })
 
-
 globalFontFace('Pretendard', {
   src: "url('/fonts/PretendardVariable.woff2') format('woff2')",
   fontDisplay: 'swap',
@@ -44,7 +43,6 @@ globalFontFace('Mustica Pro', {
   fontDisplay: 'swap',
 });
 
-
 globalStyle('*', {
   textDecoration: 'none',
   boxSizing: 'border-box',
@@ -54,6 +52,7 @@ globalStyle('*', {
 globalStyle('::-webkit-scrollbar', {
   display: 'none', // Chrome, Safari에서 스크롤바 숨기기
 })
+
 globalStyle('html', {
   display: 'flex',
   justifyContent: 'center',
