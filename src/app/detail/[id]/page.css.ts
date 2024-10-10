@@ -44,9 +44,9 @@ export const contentSection = style({
 export const contentList = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: '1.25rem',
   margin: '0',
-  padding: '0 18px',
+  padding: '0 18px ',
   listStyleImage: 'url(/images/list_style.svg)',
 })
 

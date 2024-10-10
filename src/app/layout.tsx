@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${pretendard.className} ${musticaPro.className}`}>
+      <body className={`${pretendard.className}`}>
         {children}
         <FCMManager />
       </body>

@@ -39,6 +39,8 @@ export const Head = style({
   flexDirection: 'row',
   alignItems: 'center',
   gap: '1.2rem',
+  lineHeight: '140%',
+
 });
 
 

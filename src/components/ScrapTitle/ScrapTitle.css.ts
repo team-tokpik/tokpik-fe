@@ -21,8 +21,10 @@ export const TextContainer = style({
 export const SubContainer = style({
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
     gap: '0.03rem',
-  
+    fontFamily: 'Pretendard',
+    fontSize: '12px',
 })
 
 const square = style({

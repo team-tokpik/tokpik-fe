@@ -12,13 +12,15 @@ export const Container = style({
   borderRadius: '15px 15px 0 0',
   zIndex: '998',
   paddingBottom: '34px',
+  fontFamily: 'Mustica Pro',
 })
 
 export const ButtonWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '4px',
+  gap: '0px',
+  lineHeight: '100%',
 })
 
 export const ButtonText = style({

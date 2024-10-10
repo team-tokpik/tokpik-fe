@@ -17,11 +17,13 @@ export const Header = style({
   justifyContent: 'flex-start',
   color: vars.color.white,
   marginTop: '4rem',
+  marginBottom:'1rem'
 })
 
 export const Head = style({
   fontSize: '1.75rem',
   fontWeight: 'bold',
+  fontFamily: 'Mustica Pro',
 })
 
 export const Orange = style({

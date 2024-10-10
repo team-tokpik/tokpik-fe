@@ -67,6 +67,8 @@ export const title = style({
   fontWeight: 'bold',
   color: vars.color.black,
   wordBreak: 'break-all',
+  // lineHeight: '140%',
+  lineHeight: '150%', // 행간을 늘리기 위해 160%로 설정
 })
 
 export const description = style({

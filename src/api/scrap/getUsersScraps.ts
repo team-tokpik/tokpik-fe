@@ -18,7 +18,7 @@ export interface GetUsersScrapsResponse {
 
 export const getUsersScraps = async (): Promise<GetUsersScrapsResponse> => {
   try {
-    const response = await client.get<GetUsersScrapsResponse>('/users/scraps');
+    const response = await client.get<GetUsersScrapsResponse>('ex/users/scraps');
     return response.data;
   } catch (error) {
     console.error('사용자 스크랩 정보 가져오기 오류:', error);
