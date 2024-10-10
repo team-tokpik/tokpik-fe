@@ -32,7 +32,7 @@ export default function Subject() {
   const handleNext = () => {
     setTopicTags(selectedSubject)
     postProfile()
-    router.push('/survey/location')
+    router.push('/')
   }
 
   return (
