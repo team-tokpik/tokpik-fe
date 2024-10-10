@@ -192,15 +192,10 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const visitCount = sessionStorage.getItem('visitCount')
-      if (visitCount === null) {
-        sessionStorage.setItem('visitCount', '1')
-        window.location.href = '/onboard'
-      } else {
-        const newCount = parseInt(visitCount) + 1
-        sessionStorage.setItem('visitCount', newCount.toString())
-      }
+    const isFirstVisit = localStorage.getItem('visited')
+    if (!isFirstVisit) {
+      localStorage.setItem('visited', 'true')
+      router.push('/onboard')
     }
   }, [])
 

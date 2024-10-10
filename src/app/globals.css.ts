@@ -1,5 +1,5 @@
 import { createGlobalTheme, globalStyle } from '@vanilla-extract/css'
-import { globalFontFace } from '@vanilla-extract/css';
+import { globalFontFace } from '@vanilla-extract/css'
 
 export const vars = createGlobalTheme(':root', {
   color: {
@@ -27,28 +27,27 @@ export const vars = createGlobalTheme(':root', {
     pimento: '#42a121',
     pimentoFont: '#0F3A00',
   },
-  size:{
+  size: {
     paddingInline: '5%',
     // paddingInline: 'calc(max(5%, min(10%, 5% + max(5%, (815px - 100vh)))))',
-  }
+  },
 })
-
 
 globalFontFace('Pretendard', {
   src: "url('/fonts/PretendardVariable.woff2') format('woff2')",
   fontDisplay: 'swap',
-});
+})
 
 globalFontFace('Mustica Pro', {
   src: "url('/fonts/MusticaPro-SemiBold.otf') format('opentype')",
   fontDisplay: 'swap',
-});
-
+})
 
 globalStyle('*', {
   textDecoration: 'none',
   boxSizing: 'border-box',
   scrollbarWidth: 'none', // Firefox에서 스크롤바 숨기기
+  lineHeight: '140%',
 })
 
 globalStyle('::-webkit-scrollbar', {
@@ -71,7 +70,6 @@ globalStyle('body', {
   position: 'relative',
   backgroundColor: vars.color.black,
   letterSpacing: '2.5%',
-  lineHeight: '140%',
   fontFamily: 'Pretendard, Mustica Pro',
   wordBreak: 'keep-all',
 })
