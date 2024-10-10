@@ -35,6 +35,7 @@ export const Header = style({
   gap: 'calc(max(1rem, 1rem + min(0px, 100vh - 815px)))',
   padding: `calc(max(2rem, 16% + min(0px, 100vh - 815px)) - 17px) ${vars.size.paddingInline} calc(max(1rem, 1rem + min(0px, 100vh - 815px)))`,
   marginBottom: 'calc(max(1rem, 1rem + min(0px, 100vh - 815px)))',
+  fontFamily: 'Mustica Pro',
 })
 
 export const HeaderText = style({

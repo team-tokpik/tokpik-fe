@@ -30,7 +30,10 @@ export const SubContainer = style({
     display: 'flex',
     flexDirection: 'row',
     gap: '0.03rem',
-  
+    fontFamily: 'Pretendard',
+    fontSize: '12px',
+    alignItems: 'center',
+
 })
 
 const square = style({

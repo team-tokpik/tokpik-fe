@@ -9,6 +9,7 @@ export const OuterContainer = style({
   gridTemplateRows: '1fr 1fr', 
   gridTemplateColumns: '1fr 1fr',
   fontSize: '1.75rem',
+  fontFamily: 'Mustica Pro',
   fontWeight: '700',
   lineHeight: '2rem',   
   alignItems: 'center',
