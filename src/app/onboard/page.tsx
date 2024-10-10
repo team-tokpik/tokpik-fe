@@ -57,7 +57,7 @@ export default function OnboardPage() {
               image="/images/onboard-1.png"
               alt="onboard1"
               title="좋아하는 톡픽을 탐색하세요"
-              subTitle="좋아하는 톡픽을 탐색하세요"
+              subTitle="8가지 대화 토핑으로 풍성해진 톡픽!"
             />
             <CustomSlide
               image="/images/onboard-2.png"

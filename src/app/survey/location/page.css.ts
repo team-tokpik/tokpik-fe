@@ -34,6 +34,8 @@ export const buttonWrapper = style({
   position: 'absolute',
   bottom: '56px',
   width: 'calc(100% - 48px)',
+  display: 'flex',
+  justifyContent: 'center',
 })
 
 export const locationBox = style({
