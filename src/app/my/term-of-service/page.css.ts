@@ -33,13 +33,11 @@ export const SectionContainer = style({
 
 export const ContentTitle = style({
   fontSize: '16px',
-  fontWeight: 'bold',
-  marginBottom: '10px',
 })
 
 export const Content = style({
   fontSize: '14px',
   lineHeight: '1.5',
-  whiteSpace: 'pre-wrap',
+  whiteSpace: 'normal' 
 })
 

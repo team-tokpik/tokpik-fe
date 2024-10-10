@@ -5,6 +5,6 @@ import { NavItemType } from '../types/navigation'
 
 export const NAV_ITEMS: NavItemType[] = [
   { Icon: Home, text: 'Home', path: '/' },
-  { Icon: MyTokpik, text: 'MyTokpik', path: '/scrap' },
+  { Icon: MyTokpik, text: 'My Tokpik', path: '/scrap' },
   { Icon: System, text: 'System', path: '/my' },
 ]

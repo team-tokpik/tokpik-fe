@@ -1,8 +1,15 @@
 import client from '../client'
 
+export interface Section {
+  mainCategory: string;
+  subCategory: string;
+  contentTitle: string | null;
+  content: string;
+}
+
 export interface Term {
   title: string;
-  content: string;
+  sections: Section[];
 }
 
 export const getTerms = async (): Promise<Term[]> => {
@@ -14,4 +21,3 @@ export const getTerms = async (): Promise<Term[]> => {
     throw error;
   }
 }
-

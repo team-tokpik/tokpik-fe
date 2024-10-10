@@ -7,5 +7,5 @@ export const OuterContainer = style({
   justifyContent: 'center',
   alignItems: 'center',
   position: 'relative',
-
+  // transform: 'translateY(-34px)',
 })
