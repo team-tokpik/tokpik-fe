@@ -3,10 +3,17 @@ import React, { useEffect, useState } from 'react'
 import * as styles from './page.css'
 import BackBar from '@/components/BackBar/BackBar'
 import NormalInputField from '@/components/NormalInputField/NormalInputField'
-import { vars } from '../globals.css'
+import { vars } from '../../../globals.css'
 import Button from '@/components/Button/Button'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import { postAlarm } from '@/api/scrap/postAlarm'
 
-export default function Alarm() {
+export default function SetAlarmPage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const { scrapId } = useParams()
+  const notificationTalkTopicIds = searchParams.get('alarmArr')
+  const notificationName = searchParams.get('scrapName')
   const [date, setDate] = useState('')
   const [displayDate, setDisplayDate] = useState('')
   const [startTime, setStartTime] = useState('')
@@ -47,6 +54,22 @@ export default function Alarm() {
     return {
       color: focusedInput === input ? vars.color.white : vars.color.gray2,
     }
+  }
+
+  const handleSubmit = async () => {
+    const response = await postAlarm({
+      notificationName: notificationName || '',
+      notificationTalkTopicIds: notificationTalkTopicIds
+        ? notificationTalkTopicIds.split(',').map(Number)
+        : [],
+      scrapId: Number(scrapId),
+      noticeDate: date,
+      notificationStartTime: startTime,
+      notificationEndTime: endTime,
+      notificationIntervalMinutes: Number(term),
+    })
+    console.log(response)
+    router.push(`/scrap`)
   }
 
   return (
@@ -102,7 +125,7 @@ export default function Alarm() {
           <Button
             size="large"
             label="완료"
-            onClick={() => {}}
+            onClick={handleSubmit}
             active={isActive}
             disabled={!isActive}
           />

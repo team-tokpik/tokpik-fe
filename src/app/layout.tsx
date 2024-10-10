@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import localFont from 'next/font/local'
+import dynamic from 'next/dynamic'
 
 const pretendard = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
@@ -17,6 +18,10 @@ export const metadata: Metadata = {
   description: 'Tokpik',
 }
 
+const FCMManager = dynamic(() => import('@/components/FCMManager/FCMManager'), {
+  ssr: false,
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,7 +29,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${pretendard.className} ${musticaPro.className}`}>{children}</body>
+      <body className={`${pretendard.className} ${musticaPro.className}`}>
+        {children}
+        <FCMManager />
+      </body>
     </html>
   )
 }
