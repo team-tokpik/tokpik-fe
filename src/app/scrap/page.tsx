@@ -25,27 +25,44 @@ export default function Home() {
     const [isEdit,setIsEdit] = useState<boolean>(false) // 편집 중을 나타냄
     const [isAdding,setIsAdding] = useState<boolean>(false) // 추가 중을 나타냄
     const [nextCursorId,setNextCursorId] = useState<number>(0)
-    const [last,setLast] = useState<boolean>(false)
+    const [notificationLast,setNotificationLast] = useState<boolean>(false)
     // 탭 클릭시 클릭된 버튼의 텍스트를 상태로 저장
     const handleTabSelect = (text: string) => {
       setSelectedTab(text)
     }
 
-    //화면이 마운트될 때, 스크랩 리스트 들을 가져옵니다!
+    //마지막 페이지가 아니라면, 예약 데이터 가져오기
     useEffect(()=>{
-      getUsersScraps().then((res)=>{
-        setScraps(res.scraps)
-        console.log('스크랩: ',res.scraps)
-      })
-      getUsersNotifications(nextCursorId !== 0 ? nextCursorId : undefined).then((res)=>{
-        setNotifications(res.contents as Notification[])
-        setNextCursorId(res.nextCursorId)
-        setLast(res.last)
-        console.log('예약: ',res.contents)
-        console.log('nextCursorId: ',res.nextCursorId)
-        console.log('last: ',res.last)
-      })
-    },[])
+      if(!notificationLast){
+        getUsersNotifications(nextCursorId !== 0 ? nextCursorId : undefined).then((res)=>{
+          setNotifications(res.contents as Notification[])
+          setNextCursorId(res.nextCursorId)
+          setNotificationLast(res.last)
+          console.log('res',res)
+        })
+      }
+    },[notificationLast,notifications])
+    
+    //화면이 마운트될 때, 스크랩 리스트 들을 가져옵니다!
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          //스크랩 데이터 가져오기
+          const scrapsRes = await getUsersScraps();
+          setScraps(scrapsRes.scraps);
+          console.log('scrapsRes', scrapsRes);
+          //예약 데이터 가져오기
+          const notificationsRes = await getUsersNotifications(nextCursorId !== 0 ? nextCursorId : undefined);
+          setNotifications(notificationsRes.contents as Notification[]);
+          setNextCursorId(notificationsRes.nextCursorId);
+          setNotificationLast(notificationsRes.last);
+          console.log('notificationsRes', notificationsRes);
+        } catch (error) {
+          console.error('데이터 가져오기 오류:', error);
+        }
+      };
+      fetchData();
+    }, []);
 
     const deleteHandler = async (Id:number,scrapName:string)=>{
       try {

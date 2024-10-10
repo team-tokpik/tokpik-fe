@@ -16,15 +16,22 @@ interface ScrapPageProps {
 
 const ScrapNotificationDetail = ({ params }: ScrapPageProps) => {
   const router = useRouter()
-    const { notificationId } = params;
-    
-    const [notificationDetails, setNotificationDetails] = useState<GetUsersNotificationsNotificationIdDetailsResponse | null>(null);
-    useEffect(() => {
-      getUsersNotificationsNotificationIdDetails(notificationId).then((res) => {
-        console.log(res)
-        setNotificationDetails(res)
-      })
-    }, [notificationId])
+  const { notificationId } = params;
+  const [notificationDetails, setNotificationDetails] = useState<GetUsersNotificationsNotificationIdDetailsResponse | null>(null);
+  
+  useEffect(() => {
+    const fetchNotificationDetails = async () => {
+      try {
+        const data = await getUsersNotificationsNotificationIdDetails(notificationId);
+        console.log('data',data)
+        setNotificationDetails(data);
+      } catch (error) {
+        console.error('알림 세부 정보를 가져오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchNotificationDetails();
+  }, [notificationId]);
 
     return (
         <>

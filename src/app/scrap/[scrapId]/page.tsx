@@ -36,13 +36,33 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
   const [isAlarmSet, setIsAlarmSet] = useState<boolean>(false) // 알림 중인지 체크
   const [alarmArr, setAlarmArr] = useState<number[]>([]) // 알림 배열
   const [isEditHead, setIsEditHead] = useState<boolean>(false) // 헤드 수정 여부
+  const [isLastPage, setIsLastPage] = useState<boolean>(false) // 마지막 페이지 여부
 
+  //마지막 페이지가 아니라면 스크랩을 10개씩 계속 가져온다.
+  useEffect(()=>{
+   if(!isLastPage){
+    getUsersScrapsScrapIdTopics(Number(scrapId))
+    .then((response) => {
+      setScrapTopics(prev=>[...prev,...response.contents])
+      setIsLastPage(response.last)
+    })
+    .catch((error) => {
+      console.error('스크랩 토픽 정보 가져오기 실패:', error)
+    })
+   }else{
+    console.log('마지막 페이지입니다.')
+   }
+  },[isLastPage,scrapTopics])
+
+  //처음 스크랩 페이지 로드 시 스크랩 가져오기
   useEffect(() => {
     if (scrapId) {
       getUsersScrapsScrapIdTopics(Number(scrapId))
         .then((response) => {
           setScrapTopics(response.contents)
           console.log('스크랩 [scrapId]: ', response.contents)
+          console.log('response: ', response)
+          setIsLastPage(response.last)
         })
         .catch((error) => {
           console.error('스크랩 토픽 정보 가져오기 실패:', error)
@@ -50,10 +70,12 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
     }
   }, [scrapId])
 
+  //알림을 만들기위한 배열 감시
   useEffect(() => {
     console.log('alarmArr: ', alarmArr)
   }, [alarmArr])
 
+  //처음에 Params에서 스크랩 이름과 스크랩 카드 개수 가져오기
   useEffect(() => {
     const scrapNameParam = searchParams.get('scrapName')
     const lengthParam = searchParams.get('length')
@@ -61,6 +83,7 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
     if (lengthParam) setLength(Number(lengthParam))
   }, [searchParams])
 
+  //카드 클릭 시 알림 설정 및 토픽 이동
   const cardClickHandler = (topicId: number) => {
     if (isAlarmSet) {
       const index = alarmArr.indexOf(topicId)
@@ -77,6 +100,8 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
       router.push(`/detail/${topicId}`)
     }
   }
+
+  //스크랩 제목 수정
   const editHeadHandler = async () => {
     try {
       await patchUsersScrapsScrapIdTitles(Number(scrapId), scrapName)
@@ -87,21 +112,21 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
     setIsEditHead(false)
   }
 
+  //내보내기 버튼 클릭 시 행동
   const handleExport = () => {
     router.push(
       `/scrap/${scrapId}/export?scrapTopics=${encodeURIComponent(JSON.stringify(scrapTopics))}&scrapName=${encodeURIComponent(scrapName)}`
     )
   }
 
+  //카드 삭제
   const handleScrapDelete = async (Id: number) => {
     // scrapTopics 배열에서 해당 ID를 가진 항목 제거
     setScrapTopics((prevScrapTopics) =>
       prevScrapTopics.filter((topic) => topic.topicId !== Id)
     )
-
     //서버에 삭제 요청 보내기
     try {
-
       console.log('토픽 삭제 시동 scrapId: ',scrapId,Id)
       await deleteUsersScrapsScrapIdTopicsScrapTopicId(scrapId,scrapTopics.find(topic => topic.topicId === Id)?.scrapTopicId.toString() as string);
       console.log('스크랩 토픽 삭제 성공');
@@ -144,7 +169,7 @@ const ScrapDetail = ({ params }: ScrapPageProps) => {
                 </>
               )}
             </div>
-            <p className={styles.Sub}>{scrapTopics.length} Tokpiks</p>
+            <p className={styles.Sub}>{length} Tokpiks</p>
           </div>
           {/* card section */}
           <div className={styles.relativeCardWrapper}>
