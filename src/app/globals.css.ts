@@ -73,6 +73,7 @@ globalStyle('body', {
   letterSpacing: '2.5%',
   lineHeight: '140%',
   fontFamily: 'Pretendard, Mustica Pro',
+  wordBreak: 'keep-all',
 })
 
 globalStyle('h1, h2, h3, h4, h5, h6, p', {

@@ -79,6 +79,8 @@ export const description = style({
 
 export const subtitle = style({
   fontSize: 16,
+  wordBreak: 'keep-all',
+
 })
 
 export const smallTitle = style([
