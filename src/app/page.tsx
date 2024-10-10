@@ -15,6 +15,7 @@ import { TopicRequestBody } from '@/types/topicRequestBody'
 import Spinner from '@/components/Spinner/Spinner'
 import { subject } from '@/constants/subject'
 import { useRouter } from 'next/navigation'
+import { getExTopics } from '@/api/main/getExTopics'
 export default function Home() {
   const filterList = useFilterListState() // 전역 상태: 필터 리스트
   const { popList } = useFilterListActions() // 전역 액션
@@ -23,6 +24,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<number>(0)
   const [visitCount, setVisitCount] = useState<number>(0)
   const [cardContents, setCardContents] = useState<ItemType[]>([])
+
   const router = useRouter()
   // 테스트 코드 - 카드 예시
   // {
@@ -78,14 +80,7 @@ export default function Home() {
     setApiTrigger(!isFilterOn)
   }, [isFilterOn])
 
-  useEffect(() => {
-    const isFirstVisit = localStorage.getItem('visited')
 
-    if (!isFirstVisit) {
-      localStorage.setItem('visited', 'true')
-      router.push('/onboard')
-    }
-  }, [router])
 
   // 대화주제를 가져온다.
   useEffect(() => {
@@ -141,7 +136,8 @@ export default function Home() {
       })
       console.log('main - requestBody', requestBody)
 
-      postTopics(requestBody)
+      // postTopics(requestBody)
+      getExTopics()
         .then((response) => {
           // 여기서 응답 처리
           setCardContents(
@@ -234,12 +230,19 @@ export default function Home() {
           </div>
           {/* filter button section */}
           <div className={styles.FilterBox}>
-            <button
+            <div
               className={styles.FilterButton({ isFilterListEmpty })}
               onClick={filterButtonHandler}
+            
             >
-              {isFilterListEmpty ? <FilterWhite /> : <FilterSVG />}
-            </button>
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' ,display:'flex', justifyContent:'center', alignItems:'center'}}>
+                {isFilterListEmpty ? (
+                  <FilterSVG color='white' />
+                ) : (
+                  <FilterSVG color='#777777' />
+                )}
+              </div>
+            </div>
             <div className={styles.FilterList}>{selectedFilterList}</div>
           </div>
         </header>

@@ -59,6 +59,8 @@ globalStyle('body', {
   margin: '0',
   position: 'relative',
   backgroundColor: vars.color.black,
+  letterSpacing: '2.5%',
+  lineHeight: '140%',
 })
 
 globalStyle('h1, h2, h3, h4, h5, h6, p', {

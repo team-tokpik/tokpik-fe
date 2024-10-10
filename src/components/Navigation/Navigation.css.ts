@@ -18,7 +18,8 @@ export const ButtonWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '4px',
+  gap: '0px',
+  lineHeight: '100%',
 })
 
 export const ButtonText = style({
