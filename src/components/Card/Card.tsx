@@ -72,7 +72,8 @@ export default function Card({
 
   //화면 높이에 따라 카드의 비율 조절
   const aspectRatio = 
-    Math.max(343/483,343 / 483 + Math.max(0,815 - window.innerHeight) / 483)
+    Math.max(343/483, 343 / 483 + Math.max(0, 815 - window.innerHeight) / 483 * (2 - (343/483)))
+    
   const [isScrap, setIsScrap] = useState<boolean>(false)  
   const [scrap, setScrap] = useState<boolean>(isScraped as boolean)
   const [showToast, setShowToast] = useState<boolean>(false)
