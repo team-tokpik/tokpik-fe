@@ -69,6 +69,7 @@ export default function SetAlarmPage() {
       notificationIntervalMinutes: Number(term),
     })
     console.log(response)
+    router.push(`/scrap`)
   }
 
   return (

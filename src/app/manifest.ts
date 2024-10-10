@@ -9,6 +9,7 @@ const manifest = (): MetadataRoute.Manifest => {
     display: 'standalone',
     background_color: '#212121',
     theme_color: '#212121',
+    gcm_sender_id: '103953800507',
     icons: [
       {
         src: '/favicons/android-chrome-192x192.png',
