@@ -32,6 +32,8 @@ export const inputWrapper = style({
 
 export const buttonWrapper = style({
   position: 'absolute',
+  display: 'flex',
+  justifyContent: 'center',
   bottom: '56px',
   width: 'calc(100% - 48px)',
 })
