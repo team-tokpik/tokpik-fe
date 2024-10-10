@@ -66,7 +66,8 @@ export const title = style({
   fontSize: 28,
   fontWeight: 'bold',
   color: vars.color.black,
-  wordBreak: 'break-all',
+  wordBreak: 'keep-all',
+  
   // lineHeight: '140%',
   lineHeight: '150%', // 행간을 늘리기 위해 160%로 설정
 })
@@ -78,6 +79,8 @@ export const description = style({
 
 export const subtitle = style({
   fontSize: 16,
+  wordBreak: 'keep-all',
+
 })
 
 export const smallTitle = style([

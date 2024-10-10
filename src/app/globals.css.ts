@@ -1,4 +1,5 @@
 import { createGlobalTheme, globalStyle } from '@vanilla-extract/css'
+import { globalFontFace } from '@vanilla-extract/css';
 
 export const vars = createGlobalTheme(':root', {
   color: {
@@ -33,6 +34,16 @@ export const vars = createGlobalTheme(':root', {
 })
 
 
+globalFontFace('Pretendard', {
+  src: "url('/fonts/PretendardVariable.woff2') format('woff2')",
+  fontDisplay: 'swap',
+});
+
+globalFontFace('Mustica Pro', {
+  src: "url('/fonts/MusticaPro-SemiBold.otf') format('opentype')",
+  fontDisplay: 'swap',
+});
+
 
 globalStyle('*', {
   textDecoration: 'none',
@@ -61,6 +72,8 @@ globalStyle('body', {
   backgroundColor: vars.color.black,
   letterSpacing: '2.5%',
   lineHeight: '140%',
+  fontFamily: 'Pretendard, Mustica Pro',
+  wordBreak: 'keep-all',
 })
 
 globalStyle('h1, h2, h3, h4, h5, h6, p', {

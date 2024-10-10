@@ -71,8 +71,13 @@ export default function Card({
   const CardImage = cardImages[type] as React.FC<React.SVGProps<SVGSVGElement>>
 
   //화면 높이에 따라 카드의 비율 조절
-  const aspectRatio = 
-    Math.max(343/483,343 / 483 + Math.max(0,815 - window.innerHeight) / 483)
+  const aspectRatio = Math.max(343/483, 343 / 483 + Math.max(0, 815 - window.innerHeight) / 483 * (2 - (343/483)))
+    // window.innerHeight > 915 ? 343/483 :
+    // window.innerHeight > 815 ? 343/483 * 1.01 :
+    // window.innerHeight > 700 ? 343/483 * 1.15 :
+    // 343/483
+  
+    
   const [isScrap, setIsScrap] = useState<boolean>(false)  
   const [scrap, setScrap] = useState<boolean>(isScraped as boolean)
   const [showToast, setShowToast] = useState<boolean>(false)
