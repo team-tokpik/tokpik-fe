@@ -28,6 +28,7 @@ export const title = style({
   color: vars.color.white,
   padding: '0 2.8rem',
   wordBreak: 'keep-all',
+  lineHeight: '140%',
 })
 
 export const subTitle = style({
