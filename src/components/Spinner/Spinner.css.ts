@@ -11,8 +11,8 @@ export const OuterContainer = recipe({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: vars.color.black,
     zIndex: 999,
+    pointerEvents: 'none',// 이벤트 무시 - 터치,드래그 등 어떤 상호작용도 안되도록
   },
   variants: {
     size: {
