@@ -26,16 +26,7 @@
 
 
 ## 🪡사용한 기술
-* ### LANGUAGE
-    <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-
-* ### Tech
-  <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white">
- 
-* ### COMMUNICATION
-  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-
+![사용한 기술](https://github.com/user-attachments/assets/09ec8f12-a2ab-484a-89ab-cf291d472936)
 ## 👯팀소개
 <table>
   <tr>
