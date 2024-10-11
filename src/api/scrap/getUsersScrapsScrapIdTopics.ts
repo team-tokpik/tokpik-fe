@@ -17,7 +17,7 @@ export interface GetUsersScrapsScrapIdTopicsResponse {
 
 export const getUsersScrapsScrapIdTopics = async (scrapId: number, nextCursorId: number = 0, size: number = 10): Promise<GetUsersScrapsScrapIdTopicsResponse> => {
   try {
-    const response = await client.get<GetUsersScrapsScrapIdTopicsResponse>(`ex/users/scraps/${scrapId}/topics`, {
+    const response = await client.get<GetUsersScrapsScrapIdTopicsResponse>(`/users/scraps/${scrapId}/topics`, {
       params: {
         nextCursorId,
         size

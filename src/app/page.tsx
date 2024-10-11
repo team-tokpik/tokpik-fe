@@ -15,7 +15,6 @@ import { TopicRequestBody } from '@/types/topicRequestBody'
 import Spinner from '@/components/Spinner/Spinner'
 import { subject } from '@/constants/subject'
 import { useRouter } from 'next/navigation'
-import { getExTopics } from '@/api/main/getExTopics'
 export default function Home() {
   const filterList = useFilterListState() // 전역 상태: 필터 리스트
   const { popList } = useFilterListActions() // 전역 액션
@@ -134,8 +133,7 @@ export default function Home() {
       })
       console.log('main - requestBody', requestBody)
 
-      // postTopics(requestBody)
-      getExTopics()
+      postTopics(requestBody)
         .then((response) => {
           // 여기서 응답 처리
           setCardContents(
