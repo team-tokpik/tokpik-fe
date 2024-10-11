@@ -12,7 +12,7 @@ interface TopicDetailsResponse {
 
 export const getTopicsTopicIdDetails = async (topicId: number): Promise<TopicDetailsResponse> => {
   try {
-    const response = await client.get<TopicDetailsResponse>(`ex/topics/${topicId}/details`);
+    const response = await client.get<TopicDetailsResponse>(`/topics/${topicId}/details`);
     return response.data;
   } catch (error) {
     console.error('토픽 상세 정보 가져오기 오류:', error);
